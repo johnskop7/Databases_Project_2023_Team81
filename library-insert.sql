@@ -14,7 +14,7 @@ ALTER TABLE `user` auto_increment =1 ;
 INSERT INTO user(username, full_name, PASSWORD, date_of_birth) VALUES
    ('johnli7','Giannis Litsos','12345','2001-06-27'),                               #1           
    ('pipis', 'Thanasis Remoundos','12345678','2001-11-29'),                         #2
-   ('chrikra', 'Xristos Kranias', '1T5@9OqS$Q#D', '1970-05-06'),                    #3
+   ('chrikran', 'Xristos Kranias', '1T5@9OqS$Q#D', '2001-10-11'),                    #3
    ('eMengaLI', 'Vasilis Spanoulis', '7HWKe*9y0fY9', '1981-04-12'),                 #4
    ('sWescoLK', 'Giorgos Printzis', 'Mw%94Lj6UWEq', '1959-06-26'),                  #5
    ('chessknight', 'Tasos Bougas', '0E*RcJ31aKfd', '1950-08-30'),                   #6
