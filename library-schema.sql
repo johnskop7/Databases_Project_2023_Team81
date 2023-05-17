@@ -74,6 +74,28 @@ CREATE TABLE school_unit(
 );
 
 --
+-- Table structure for table 'school_unit_phone_number'
+--
+
+CREATE TABLE school_unit_phone_number(
+	phone_number VARCHAR(15) NOT NULL,
+	school_id SMALLINT UNSIGNED NOT NULL,
+	PRIMARY KEY(phone_number, school_id),
+	CONSTRAINT fk_school_unit_phone_number_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+--
+-- Table structure for table 'school_unit_email'
+--
+
+CREATE TABLE school_unit_email(
+	email VARCHAR(45) NOT NULL,
+	school_id SMALLINT UNSIGNED NOT NULL,
+	PRIMARY KEY(email, school_id),
+	CONSTRAINT fk_school_unit_email_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+--
 -- Table structure for table 'operator'
 --
 
