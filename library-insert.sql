@@ -4,6 +4,9 @@ USE library;
 DELETE FROM user;
 DELETE FROM user_phone_number;
 DELETE FROM user_email;
+Delete FROM Book;
+Delete FROM Books Thematic Categories;
+Delete FROM Books Key words;
 ALTER TABLE `user` auto_increment =1 ;
 
 
@@ -14,7 +17,7 @@ ALTER TABLE `user` auto_increment =1 ;
 INSERT INTO user(username, full_name, PASSWORD, date_of_birth) VALUES
    ('johnli7','Giannis Litsos','12345','2001-06-27'),                               #1           
    ('pipis', 'Thanasis Remoundos','12345678','2001-11-29'),                         #2
-   ('chrikran', 'Xristos Kranias', '1T5@9OqS$Q#D', '2001-10-11'),                    #3
+   ('chrikran', 'Xristos Kranias', '1T5@9OqS$Q#D', '2001-10-11'),                   #3
    ('eMengaLI', 'Vasilis Spanoulis', '7HWKe*9y0fY9', '1981-04-12'),                 #4
    ('sWescoLK', 'Giorgos Printzis', 'Mw%94Lj6UWEq', '1959-06-26'),                  #5
    ('chessknight', 'Tasos Bougas', '0E*RcJ31aKfd', '1950-08-30'),                   #6
@@ -222,14 +225,47 @@ INSERT INTO user_email (email, user_id) VALUES
    ('edmond.blick@yahoo.com', 59),                                                  #68
    ('dibbert.mellie@hotmail.com', 60);                                              #69
 				
-								
+--
+-- Insert 3 Book Data
+--
 
+INSERT INTO Book (Title,Publisher,ISBN,Number of pages,Summary,Available Copies,Image,Language,School_ID) VALUES								
+('O xamenos Thisavros','Patakis',978-618-02-5040-4,120,'Perilipsi',10,'Eikona','Ellinika',1)
+('Harry Potter 1', 'Kedros', 441-610-02-0510-5,200,'Perilipsi',15,'Eikona','Ellinika',1)
+('Harry Potter 1', 'Kedros', 441-610-02-0510-5,200,'Perilipsi',5,'Eikona','Ellinika',2)
 
+--
+-- Insert 20 Book's Thematic Categories
+--
 
+INSERT INTO Books Thematic Categories (Book_ID,Thematic Category) VALUES								
+	(1,'Comedy')																	
+    (2,'Comedy')
+    (3,'Horror')
+    (4,'Mystery')
+    (5,'Thriller')
+    (6,'Thriller')
+    (7,'Drama')
+    (8,'Romance')
+    (9,'Horror')
+    (10,'Romance')
+    (11,'Science Fiction')
+    (12,'Science Fiction')
+    (13,'Fantasy')
+    (14,'Science Fiction')
+    (15,'Fantasy')
+    (16,'Historical')
+    (17,'Comedy')
+    (18,'Mystery')
+    (19,'Drama')
+    (20,'Romance')
 
+--
+-- Insert 20 Book's Thematic Categories
+--
 
-
-
+INSERT INTO Books Key words (Book_ID,key words) VALUES								
+(1,'Voitheia' 'Trexa')
 
 
 
