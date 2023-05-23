@@ -4,9 +4,9 @@ USE library;
 DELETE FROM user;
 DELETE FROM user_phone_number;
 DELETE FROM user_email;
-Delete FROM Book;
-Delete FROM Books Thematic Categories;
-Delete FROM Books Key words;
+Delete FROM book;
+Delete FROM book_thematic_categories;
+Delete FROM book_key_words;
 ALTER TABLE `user` auto_increment =1 ;
 
 
@@ -264,7 +264,7 @@ INSERT INTO Books Thematic Categories (Book_ID,Thematic Category) VALUES
 -- Insert 20 Book's Thematic Categories
 --
 
-INSERT INTO Books Key words (Book_ID,key words) VALUES								
+INSERT INTO book_key_words (book_id,key_words) VALUES								
 (1,'Voitheia' 'Trexa')
 
 
