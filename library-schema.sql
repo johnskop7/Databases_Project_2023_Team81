@@ -125,7 +125,7 @@ CREATE TABLE student_professor(
 );
 
 --
--- Table structure for tble 'borrower_card'
+-- Table structure for table 'borrower_card'
 --
 
 CREATE TABLE borrower_card(
@@ -138,3 +138,118 @@ CREATE TABLE borrower_card(
 	CONSTRAINT fk_borrower_card_student_professor FOREIGN KEY(stud_prof_user_id) REFERENCES student_professor(stud_prof_user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	CONSTRAINT fk_borrower_card_operator FOREIGN KEY(operator_user_id) REFERENCES operator(operator_user_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+--
+-- Table structure for table 'book'
+--
+
+CREATE TABLE book (
+  book_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  school_id SMALLINT UNSIGNED NOT NULL,
+  title VARCHAR(255),
+  publisher VARCHAR(255),
+  ISBN VARCHAR(13),
+  number_of_pages INT,
+  image VARCHAR(255),
+  language VARCHAR(50),
+  available_copies INT,
+  summary TEXT,
+  PRIMARY KEY (book_id),
+  CONSTRAINT fk_book_school_unit FOREIGN KEY (school_id) REFERENCES school_unit(school_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+--
+-- Table structure for table 'book_thematic_categories'
+--
+
+CREATE TABLE book_thematic_categories (
+  book_id SMALLINT UNSIGNED NOT NULL,
+  thematic_category VARCHAR(255) NOT NULL,
+  PRIMARY KEY (book_id, thematic_category),
+  FOREIGN KEY (book_id) REFERENCES book(book_id)
+);
+
+--
+-- Table structure for table 'book_authors'
+--
+
+CREATE TABLE book_authors (
+  book_id SMALLINT UNSIGNED NOT NULL,
+  author VARCHAR(255) NOT NULL,
+  PRIMARY KEY (book_id, author),
+  FOREIGN KEY (book_id) REFERENCES book(book_id)
+);
+
+--
+-- Table structure for table 'book_key_words'
+--
+
+CREATE TABLE book_key_words (
+  book_id SMALLINT UNSIGNED NOT NULL,
+  key_word VARCHAR(255) NOT NULL,
+  PRIMARY KEY (book_id, key_word),
+  FOREIGN KEY (book_id) REFERENCES book(book_id)
+);
+
+--
+-- Table structure for table 'reviews'
+--
+
+CREATE TABLE reviews (
+  review_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  book_id SMALLINT UNSIGNED NOT NULL,
+  stud_prof_user_id SMALLINT UNSIGNED NOT NULL,
+  operator_user_id SMALLINT UNSIGNED NOT NULL,
+  rating INT,
+  review_date DATE,
+  review_text VARCHAR(255),
+  Status ENUM('approved', 'not yet approved', 'denied'),
+  PRIMARY KEY (review_id, book_id, stud_prof_user_id),
+  FOREIGN KEY (book_id) REFERENCES book(book_id),
+  FOREIGN KEY (stud_prof_user_id) REFERENCES studen_professor(stud_prof_user_id),
+  FOREIGN KEY (operator_user_id) REFERENCES operator(operator_user_id)
+);
+
+--
+-- Table structure for table 'reservations'
+--
+
+CREATE TABLE reservations (
+  reservation_id SMALLINT UNSIGNED NOT NULL auto_increment,
+  book_id SMALLINT UNSIGNED NOT NULL,
+  stud_prof_user_id SMALLINT UNSIGNED NOT NULL,
+  operator_user_id SMALLINT UNSIGNED NOT NULL,
+  reservation_date DATE,
+  expiry_date DATE,
+  status ENUM('expired', 'active'),
+  PRIMARY KEY (reservation_id, book_id, stud_prof_user_id),
+  FOREIGN KEY (book_id) REFERENCES book(book_id),
+  FOREIGN KEY (stud_prof_user_id) REFERENCES student_professor(stud_prof_user_id),
+  FOREIGN KEY (operator_user_id) REFERENCES operator(operator_user_id)
+);
+
+--
+-- Table structure for table 'book-borrowing'
+--
+
+CREATE TABLE book_borrowing (
+  borrowing_id SMALLINT UNSIGNED NOT NULL auto_increment,
+  book_id SMALLINT UNSIGNED NOT NULL,
+  stud_prof_user_id SMALLINT UNSIGNED NOT NULL,
+  operator_user_id SMALLINT UNSIGNED NOT NULL,
+  borrowing_date DATE,
+  return_date DATE,
+  actual_return_date DATE,
+  status ENUM('active', 'delayed_return', 'returned_on_time'),
+  PRIMARY KEY (borrowing_id, book_id, stud_prof_user_id),
+  FOREIGN KEY (book_id) REFERENCES book(book_id),
+  FOREIGN KEY (stud_prof_user_id) REFERENCES student_professor(stud_prof_user_id),
+  FOREIGN KEY (operator_user_id) REFERENCES operator(operator_user_id)
+);
+
+
+
+
+
+
+
