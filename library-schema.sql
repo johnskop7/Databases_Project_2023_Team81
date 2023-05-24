@@ -9,8 +9,8 @@ SET
     SQL_MODE = 'TRADITIONAL';
 DROP
     SCHEMA IF EXISTS library;
-CREATE SCHEMA library; USE
-    library;
+CREATE SCHEMA library; 
+USE library;
     
     --
     -- Table structure for table 'users'
@@ -165,7 +165,7 @@ CREATE TABLE book (
 CREATE TABLE book_thematic_categories (
   book_id SMALLINT UNSIGNED NOT NULL,
   thematic_category VARCHAR(255) NOT NULL,
-  PRIMARY KEY (book_id, thematic_category),
+  PRIMARY KEY (thematic_category,book_id),
   CONSTRAINT fk_book_thematic_categories_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
