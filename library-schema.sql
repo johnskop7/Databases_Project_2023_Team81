@@ -53,7 +53,7 @@ CREATE TABLE school_unit(
     phone_number VARCHAR(45) NOT NULL,
     administrator_id SMALLINT UNSIGNED NOT NULL,
     PRIMARY KEY(school_id),
-    CONSTRAINT fk_school_unit_administrator FOREIGN KEY(administrator_id) REFERENCES administrator(administrator_id) ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT fk_school_unit_administrator FOREIGN KEY(administrator_id) REFERENCES administrator(administrator_id) ON UPDATE CASCADE
 );
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE operator(
     school_id SMALLINT UNSIGNED NOT NULL,
     PRIMARY KEY(operator_user_id),
     CONSTRAINT fk_operator_user FOREIGN KEY(operator_user_id) REFERENCES user(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT fk_operator_administrator FOREIGN KEY(administrator_id) REFERENCES administrator(administrator_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_operator_administrator FOREIGN KEY(administrator_id) REFERENCES administrator(administrator_id) ON UPDATE CASCADE,
     CONSTRAINT fk_operator_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -200,6 +200,25 @@ CREATE TABLE book_borrowing (
   CONSTRAINT fk_book_borrowing_student_professor_book FOREIGN KEY (stud_prof_user_id) REFERENCES student_professor(stud_prof_user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT fk_book_borrowing_operator FOREIGN KEY (operator_user_id) REFERENCES operator(operator_user_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+
+-- QUERIES
+-- 3.1.7) Find all the authors that have written five or less books than the author with the most books
+CREATE VIEW authors_with_five_or_less AS
+SELECT ba.author, COUNT(b.book_id) AS book_count
+FROM book_authors ba
+JOIN book b ON ba.book_id = b.book_id
+GROUP BY ba.author
+HAVING COUNT(b.book_id) <= (
+    SELECT MAX(book_count) - 5
+    FROM (
+        SELECT COUNT(b.book_id) AS book_count
+        FROM book_authors ba
+        JOIN book b ON ba.book_id = b.book_id
+        GROUP BY ba.author
+    ) AS subquery
+);
+
 
 
 
