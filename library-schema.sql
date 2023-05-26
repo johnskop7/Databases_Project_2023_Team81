@@ -20,31 +20,11 @@ CREATE TABLE user(
     user_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(45) NOT NULL,
     full_name VARCHAR(45) NOT NULL,
-    PASSWORD VARCHAR(45) NOT NULL,
-    date_of_birth DATE NOT NULL,
-    PRIMARY KEY(user_id)
-);
-
---
--- Table structure for table 'users_phone_number'
---
-
-CREATE TABLE user_phone_number(
-    phone_number VARCHAR(15) NOT NULL,
-    user_id SMALLINT UNSIGNED NOT NULL,
-    PRIMARY KEY(phone_number, user_id),
-    CONSTRAINT fk_user_phone_number_user FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
---
--- Table structure for table 'users_email'
---
-
-CREATE TABLE user_email(
+    PASSWORD VARCHAR(20) NOT NULL,
+    date_of_birth DATE NOT NULL CHECK (date_of_birth < '2017-01-01'),
     email VARCHAR(45) NOT NULL,
-    user_id SMALLINT UNSIGNED NOT NULL,
-    PRIMARY KEY(email, user_id),
-    CONSTRAINT fk_user_email_user FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+    phone_number VARCHAR(45),
+    PRIMARY KEY(user_id)
 );
 
 --
@@ -52,10 +32,11 @@ CREATE TABLE user_email(
 --
 
 CREATE TABLE administrator(
-    admin_user_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY(admin_user_id),
-    CONSTRAINT fk_administrator_user FOREIGN KEY(admin_user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
+    administrator_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    username VARCHAR(45) NOT NULL, 
+    password VARCHAR(20) NOT NULL,
+    PRIMARY KEY(administrator_id)
+    );
 
 --
 -- Table structure for tabel 'school_unit'
@@ -68,31 +49,11 @@ CREATE TABLE school_unit(
     city VARCHAR(45) NOT NULL,
     school_director_full_name VARCHAR(45) NOT NULL,
     library_operator_full_name VARCHAR(45) NOT NULL,
-    admin_user_id SMALLINT UNSIGNED NOT NULL,
+    email VARCHAR(45) NOT NULL,
+    phone_number VARCHAR(45) NOT NULL,
+    administrator_id SMALLINT UNSIGNED NOT NULL,
     PRIMARY KEY(school_id),
-    CONSTRAINT fk_school_unit_administrator FOREIGN KEY(admin_user_id) REFERENCES administrator(admin_user_id) ON DELETE RESTRICT ON UPDATE CASCADE
-);
-
---
--- Table structure for table 'school_unit_phone_number'
---
-
-CREATE TABLE school_unit_phone_number(
-	phone_number VARCHAR(15) NOT NULL,
-	school_id SMALLINT UNSIGNED NOT NULL,
-	PRIMARY KEY(phone_number, school_id),
-	CONSTRAINT fk_school_unit_phone_number_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
---
--- Table structure for table 'school_unit_email'
---
-
-CREATE TABLE school_unit_email(
-	email VARCHAR(45) NOT NULL,
-	school_id SMALLINT UNSIGNED NOT NULL,
-	PRIMARY KEY(email, school_id),
-	CONSTRAINT fk_school_unit_email_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT fk_school_unit_administrator FOREIGN KEY(administrator_id) REFERENCES administrator(administrator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 --
@@ -101,11 +62,11 @@ CREATE TABLE school_unit_email(
 
 CREATE TABLE operator(
     operator_user_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    admin_user_id SMALLINT UNSIGNED NOT NULL,
+    administrator_id SMALLINT UNSIGNED NOT NULL,
     school_id SMALLINT UNSIGNED NOT NULL,
     PRIMARY KEY(operator_user_id),
     CONSTRAINT fk_operator_user FOREIGN KEY(operator_user_id) REFERENCES user(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT fk_operator_administrator FOREIGN KEY(admin_user_id) REFERENCES administrator(admin_user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_operator_administrator FOREIGN KEY(administrator_id) REFERENCES administrator(administrator_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT fk_operator_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -119,9 +80,12 @@ CREATE TABLE student_professor(
 	active_status VARCHAR(15) NOT NULL,
 	approval_status VARCHAR(15) NOT NULL,
 	operator_user_id SMALLINT UNSIGNED NOT NULL, 
+    school_id SMALLINT UNSIGNED NOT NULL,
 	PRIMARY KEY(stud_prof_user_id),
 	CONSTRAINT fk_student_professor_user FOREIGN KEY(stud_prof_user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT fk_student_professor_operator FOREIGN KEY(operator_user_id) REFERENCES operator(operator_user_id) ON DELETE RESTRICT ON UPDATE CASCADE
+	CONSTRAINT fk_student_professor_operator FOREIGN KEY(operator_user_id) REFERENCES operator(operator_user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT fk_student_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE CASCADE ON UPDATE CASCADE
+
 );
 
 --
@@ -154,6 +118,7 @@ CREATE TABLE book (
   language VARCHAR(50) NOT NULL,
   available_copies SMALLINT UNSIGNED,
   summary TEXT,
+  key_words TEXT,
   PRIMARY KEY (book_id),
   CONSTRAINT fk_book_school_unit FOREIGN KEY (school_id) REFERENCES school_unit(school_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -181,17 +146,6 @@ CREATE TABLE book_authors (
 );
 
 --
--- Table structure for table 'book_key_words'
---
-
-CREATE TABLE book_key_words (
-  book_id SMALLINT UNSIGNED NOT NULL,
-  key_word VARCHAR(255) NOT NULL,
-  PRIMARY KEY (book_id, key_word),
-  CONSTRAINT fk_book_key_words_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE
-);
-
---
 -- Table structure for table 'reviews'
 --
 
@@ -200,7 +154,7 @@ CREATE TABLE reviews (
   book_id SMALLINT UNSIGNED NOT NULL,
   stud_prof_user_id SMALLINT UNSIGNED NOT NULL,
   operator_user_id SMALLINT UNSIGNED NOT NULL,
-  rating SMALLINT UNSIGNED NOT NULL,
+  rating DECIMAL(1,0) CHECK(rating>0 AND rating<6 ),
   review_date DATE,
   review_text TEXT,
   status ENUM('approved', 'not yet approved', 'denied'),
