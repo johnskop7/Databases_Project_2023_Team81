@@ -2,91 +2,24 @@ USE library;
 
 -- DELETE data
 DELETE FROM administrator;
-DELETE FROM user;
 DELETE FROM school_unit;
 DELETE FROM book;
 DELETE FROM book_thematic_categories;
 DELETE FROM book_authors ;
-ALTER TABLE `user` auto_increment = 1 ;
+DELETE FROM operator;
+DELETE FROM student_professor;
 ALTER TABLE `administrator` auto_increment = 1;
 ALTER TABLE `school_unit` auto_increment =1; 
 ALTER TABLE `book` auto_increment = 1;
 ALTER TABLE `book_thematic_categories` auto_increment =1;
 ALTER TABLE `book_authors` auto_increment = 1;
-
+ALTER TABLE `operator` auto_increment = 1;
+ALTER TABLE `student_professor` auto_increment = 1;
 
 --
--- Insert 60 users
+-- Insert 8 school_units
 --
-
-INSERT INTO user(username, full_name, PASSWORD, date_of_birth,phone_number,email) VALUES
-   
-   
-   ('johnli7','Giannis Litsos','12345','2001-06-27','690-555-4012','pystunka@creahobby.it'),                                 #1           
-   ('pipis', 'Thanasis Remoundos','12345678','2001-11-29','690-555-6827','bailey.benton@hackett.com'),                       #2
-   ('chrikran', 'Xristos Kranias', '1T5@9OqS$Q#D', '2001-10-11','694-555-1206','ara75@gmail.com'),                   		 #3
-   ('eMengaLI', 'Vasilis Spanoulis', '7HWKe*9y0fY9', '1981-04-12','693-555-6281','mhansen@gmail.com'),                       #4
-   ('sWescoLK', 'Giorgos Printzis', 'Mw%94Lj6UWEq', '1959-06-26','695-555-4249','jerel09@cruickshank.com'),                  #5
-   ('chessknight', 'Tasos Bougas', '0E*RcJ31aKfd', '1950-08-30','699-555-3794','ephraim.kunze@gutmann.com'),                 #6
-   ('1a2a3a', 'Gianoulis Laretzakis', '1%&ZI2CREf1u', '1951-08-04','690-555-0774','schmitt.otha@lebsack.biz'),               #7
-   ('tipaki1908', 'Antonis Remos', '6crQ7xJQ!g1N', '1950-11-19','690-555-0208','whitney.crooks@bartoletti.net'),             #8
-   ('GoToHell', 'Sasha Vezenkov', 'tP4d34yz##x0', '1970-08-30','690-555-2450','walsh.helmer@hotmail.com'),                   #9
-   ('Repainer', 'Thodoris Kolokotronis', 'gJ0w18@93J*k', '1948-11-19','694-555-7247','pink82@marquardt.com'),                #10
-   ('Mantroskylo', 'Giorgos Karaiskakis', 'ucDmT68@1C2j', '1990-11-19','693-555-4518','rippin.mireya@hotmail.com'),          #11
-   ('BlackLand', 'Nikos Matsoblokos', 'IRbs4*qV7j0$', '1989-10-10','690-555-8707','xhammes@stracke.info'),                   #12
-   ('sofiaada', 'Xristos Fysalidas', '88KR8s@8vK$K', '1968-11-19','693-555-9624','zena.haley@gmail.com'),                    #13
-   ('filologos', 'Bob Marley', '!3d$YEU3T725', '1987-11-19','695-555-8152','tberge@bartell.com'),                            #14
-   ('epitafios', 'Xristoforos Kolomvos', 'CF7Th^Gz06dR', '1960-01-01','693-278-6670','rafael.carter@stracke.org'),           #15
-   ('killer4', 'Petros Maggelanos', '79&yLL#WQ9nQ', '1974-10-10','696-251-8964','jesse.hickle@nader.org'),                   #16
-   ('alekao46', 'Giannis Ioustinianos', 'fIQ^1366$b6q', '1970-11-19','698-475-5888','remington.bauch@lang.com'),             #17
-   ('imicraision.', 'Lena Zevgara', '88KWM7dk@X7^', '1968-11-19','691-208-5311','sframi@wintheiser.com'),                    #18
-   ('Noobakos eimai', 'Despoina Vandi', '^2w66f@!JWee', '1993-09-07','690-951-6873','lockman.fatima@hotmail.com'),           #19
-   ('ARRION', 'Jennifer Lawrence', 'woU^6ne^@r43', '1989-09-14','697-644-1682','trenton.braun@trantow.net'),                 #20
-   ('bekos', 'Stavroula Paparouna', '35iw#f!pVtJ2', '2008-09-07','696-497-6356','einar.von@cartwright.org'),                 #21
-   ('TOP10', 'Evi Koutsomitrou', '3#2DXmh!tir9', '2010-05-30','698-481-3224','tyler44@durgan.biz'),                          #22
-   ('topg', 'Maria Labrogianni', 'jY9#g33z4TWd', '2009-01-30','693-441-2040','ryley.zulauf@doyle.com'),                      #23
-   ('st-thea', 'Evi Stamatolamprou', '1sL8#369', '2015-12-06','699-651-2714','heller.erna@hotmail.com'),                     #24
-   ('Τhe Κing','Natasha Papadopoulou','74mn%3B2','2012-04-21','690-113-4165','uriah22@yahoo.com'),                  		 #25
-   ('jtboss', 'Vasiliki Eustathiou', 'sW4!3ru4', '2012-12-02','692-716-9366','lamar.quigley@yahoo.com'),                     #26
-   ('pretty woman', 'Alexandra Apergi', '$KHgh666', '2012-02-25','692-429-5064','orin.gorczany@gmail.com'),                  #27
-   ('BAKER1', 'Katia Dandoulaki', '52895427', '2011-05-29','699-909-3288','kasandra.murray@grimes.net'),                     #28
-   ('Eisvoleas85', 'Lebron James', '73522954', '2013-05-27','697-886-8899','stiedemann.ariane@spinka.biz'),                  #29
-   ('petros888', 'Nikos Fousekis', '36569!5!', '2006-02-22','698-017-6620','ohodkiewicz@hotmail.com'),                       #30
-   ('poisonman', 'Mixalis Kenteris', '^&5%4276', '2008-05-02','696-317-5781','darren.quigley@gmail.com'),                    #31
-   ('minaras11', 'Nikos Evaggelatos', '@$659!76', '2012-04-21','694-946-4877','xbernhard@jaskolski.com'),                    #32
-   ('ALEKOS PAOKI', 'Andreas Papandreou', '49&89$6#', '2007-03-23','692-626-6401','krista.strosin@connelly.com'),            #33
-   ('pantelis 22', 'Pantelis Pantelidis', '$7!3*829', '2009-06-30','694-240-3697','ibrahim.bradtke@hotmail.com'),            #34
-   ('Mix74', 'Mixalis Loutzis', '2*7@9&&%', '2006-04-27','696-181-2993','praynor@gmail.com'),                          		 #35
-   ('mikeous', 'Eleni Poulimenou', '55!5#5^!', '2007-01-19','697-023-7048','ruecker.selmer@gmail.com'),                      #36
-   ('Giota47', 'Giota Kalavrou', '7&926^63', '2006-05-23','699-070-3729','cmorar@yahoo.com'),                                #37
-   ('wolf-woman', 'Anastasia Papadopoulou', '%$26934*', '2008-05-02','691-991-7682','oreilly.chloe@hotmail.com'),            #38
-   ('NIKOS5777', 'Nikos Oikonomopoulos', '7#&^@2@2', '2009-01-30','691-427-6146','anastasia.wolff@hotmail.com'),             #39
-   ('kwstas007', 'Konstantinos Karamanlis', '3&96^3@#', '2005-01-21','692-223-6648','ydenesik@hotmail.com'),              	 #40
-   ('orani', 'Ourania Kalapothaki', 'z69h4d68g', '2009-06-30','694-712-6333','wyman58@schamberger.info'),                    #41
-   ('lastef', 'Stefania Krania', 'w6h7jx93a', '2010-02-01','695-664-2236','nitzsche.westley@gmail.com'),                     #42
-   ('iliaskosto', 'Ilias Kostopoulos', '5e47g24dr', '2012-02-25','691-004-7171','ccole@runte.info'),                         #43
-   ('kaffetzakis', 'Argyris Kafetzakis', '992athtfa', '2011-05-29','698-435-4263','larkin.amina@ernser.info'),               #44
-   ('SOTIRIS14121968', 'Sotiris Tsafoulias', '9a7az6vdt', '2010-02-01','693-485-6274','sean05@gmail.com'),                   #45
-   ('stan21', 'Stratos Antipariotis', 'n79446t6y', '2013-11-29','697-597-0683','klocko.elissa@yahoo.com'),                   #46
-   ('gwgw', 'Gogo Tsampa', '9j99h5dpr', '2009-12-01','691-287-7544','alene.blick@carter.org'),                               #47
-   ('tommy369', 'Thomas Walkupopoulos', 'j8ds885e2', '2008-05-02','695-073-9099','lubowitz.sydnie@ledner.biz'),              #48
-   ('mantiso', 'Evgenios Trivizas', 'sm7x682g6', '2006-02-22','699-712-4222','pouros.earline@jacobson.com'),                 #49
-   ('Zagorakis 1', 'Thodoris Zagorakis', '3s3dxx87p', '2012-12-02','691-493-1819','halvorson.kenyatta@olson.com'),           #50
-   ('Leon300', 'Leonidas Sakelaropoulos', 'ev3349an4', '2013-05-27','693-243-7682','isai03@yahoo.com'),                      #51
-   ('mp365', 'Mpampis Remos', 'zg86p2y7s', '2011-01-12','692-095-4176','bradtke.lacey@bartell.biz'),                         #52
-   ('elpl2', 'Elina Plita', 'y5fz854rz', '2009-06-30','690-196-7263','cristina.hilpert@gmail.com'),                          #53
-   ('mariakkks', 'Maria Merkouri', 'p6z289xqg', '2012-12-06','695-685-6614','alexa.johns@hotmail.com'),                      #54
-   ('jojo', 'Josephine Karava', 'n5jxr484j', '2012-02-25','691-075-5971','lindgren.ayla@bogisich.com'),                      #55
-   ('tzouli36', 'Tzoulia Douvli', 'kv7b62caa', '2011-05-29','691-339-0242','jenkins.ruthie@yahoo.com'),                      #56
-   ('doukdouk', 'Doukisa Nomikou', 'k248aj2yn', '2013-05-27','698-869-9135','nhahn@hotmail.com'),                            #57
-   ('katerina69', 'Katerina Stikoudi', 'c7s869y47', '2010-02-01','697-213-1570','buckridge.royce@bode.com'),                 #58
-   ('mary1', 'Maria Anamaterou', 'h83f6ggkm', '2012-02-25','696-678-7179','edmond.blick@yahoo.com'),                         #59
-   ('KOSTAS3', 'Konstantinos Papanikolaou', 'c38z397zb', '2011-05-29','694-877-9497','dibbert.mellie@hotmail.com');          #60
-
-    --
-    -- Insert 10 school_units
-    --
-    INSERT INTO school_unit(school_name, address, city , school_director_full_name , library_operator_full_name, email , phone_number,administrator_id ) VALUES
+INSERT INTO school_unit(school_name, address, city , school_director_full_name , library_operator_full_name, email , phone_number,administrator_id ) VALUES
     ('Peparithio','Doulidou 3','Skopelos','Philipos Lemonis','Karagkounis Panagiotis','apro56@otenet.gr' ,'2424022172',1 ),       	#1
     ('Dimokrito' , 'Ermou 2', 'Drama' , 'Samaras Giorgos','Katsouranis Dimos','aktel@gmail.com', '2421023567' ,1),	        		#2
     ('Krifo Sxolio' , 'Georgiou 25', 'Kastoria' ,'Efthimiou Nikos','Pasxalis Terzis' ,'atp@yahoo.gr','2467086595' ,1),     			#3
@@ -96,18 +29,127 @@ INSERT INTO user(username, full_name, PASSWORD, date_of_birth,phone_number,email
     ('UCLA','Filis 21','Tinos','Pipis Remoundos','Velalopoulos Michael','pip@otenet.gr','2423028953',1),							#7
     ('Princeton','Papagou 7','Ioannina','Charitos Giorgos','Ntatsis Alexandros','ntats@gmail.com','2521057430',1);					#8	
     
+
+-- 
+-- Insert 8 school_operators
 --
--- Insert 100 Book Data
+INSERT INTO operator(fullname,username,password,email,phone_number,school_id,administrator_id) VALUES
+    ('Dora Panteli', 'kristin60', 'e8MKFdow%E', 'romerolance@example.org','(870)747-9717','1','1'),
+	('Panagiotis Giadikiaroglou', 'jhill', '(4f!Rxc+Ff', 'dennisrusso@example.com','9671127828','2','1'),
+	('Alexandros Emmanouilidis', 'eatonjonathan', '@0_I%ywv7T', 'kristiadams@example.net','342-283-3779x424','3','1'),
+	('Thomas Walkup', 'qfernandez', 'r+QKo2wP*0', 'msanders@example.com','349-301-8402x47751','4','1'),
+	('Nikitas Ionitsa', 'patelbrad', 'J$$kD1WBDp', 'bennettreginald@example.org','(327)763-2867x2635','5','1'),
+	('Kaiti Provia', 'kristin93', '$A9eYCi@r9', 'danielgregory@example.org','948.817.1472','6','1'),
+	('Alec Peters', 'brendan21', 'L8rZU*Gz_d', 'tinawong@example.com','(459)206-5360x5928','7','1'),
+	('Beril Mckissic', 'jclark', '!@VaDTqC2z', 'danielruiz@example.org','077.982.3338','8','1');
+
+--
+-- Insert 24 professors and 64 students 
 --
 
-INSERT INTO book(title,publisher,ISBN,number_of_pages,image,language,available_copies,summary,key_words,school_id) VALUES								
-	('The Enigmatic Conquest', 'Jessica Gray', '978-0-06-907517-1', '249','https://dummyimage.com/977x500','Basque','3','Summary 1','[language, whose, leader]','8'),               #1
-	('Echoes of Destiny', 'Emily Bush', '978-0-347-91921-0', '250','https://picsum.photos/386/141','Chechen','2','Summary 2','[traditional, mother, choose]','6'),					#2
-	('The Whispers of Serendipity', 'Nicholas Wright', '978-1-210-19235-8', '409','https://placekitten.com/11/948','Esperanto','4','Summary 3','[usually, team, line]','3'),        #3	
-	('Shadows of Redemption', 'Harry Ramos', '978-0-6488537-8-7', '561','https://placekitten.com/766/866','Tswana','1','Summary 4','[develop, civil, pretty]','7'),					#4
-	('The Forgotten Prophecy', 'Savannah Wallace', '978-0-444-60556-6', '499','https://picsum.photos/401/6','Church Slavic','5','Summary 5','[goal, force, about]','8'),			#5
-	('Fragments of Eternity', 'Jerry Ortiz', '978-0-9964128-0-3', '346','https://picsum.photos/164/432','Bihari languages','5','Summary 6','[future, question, much]','4'),			#6	
-	('The Labyrinth of Secrets', 'Vincent James', '978-0-483-55770-3', '352','https://picsum.photos/676/175','Walloon','2','Summary 7','[cold, local, PM]','4'),					#7
+INSERT INTO student_professor(fullname,username,password,email,phone_number,date_of_birth,role,approval_status, operator_id) VALUES
+	('Brian Maldonado', 'manderson', 'DD6NEYXoS*', 'ashleyharrison@example.org','167.215.9976x955','1972-08-07','professor','approved','1'),
+	('Sherry Ford', 'danielle21', ')BE5+uLs4A', 'sanchezjohn@example.net','001-032-001-9715x93734','1969-11-09','professor','approved','1'),
+	('Jaime Riley', 'jesse15', ')d9+LU*s3c', 'vbrown@example.org','696.293.3561x297','1987-02-28','professor','approved','1'),
+	('Valerie Owens', 'kvalentine', 'b&x0#Tp9(*', 'jeffreysnyder@example.com','(184)822-9465','1975-03-05','professor','approved','2'),
+	('Katie Henson', 'powersbrandon', '#fb%3LXsdX', 'xjacobs@example.net','+1-705-426-3712x40040','1969-03-28','professor','approved','2'),
+	('Michelle Weaver', 'timothy71', '^o1L^CuqBq', 'kthompson@example.com','869.682.5686x44129','1986-09-15','professor','approved','2'),
+	('Amanda Thomas', 'whiteandre', '#3HVg)+QVI', 'ferrellsara@example.com','001-323-261-0858x7648','1977-09-04','professor','approved','3'),
+	('Christopher Holmes', 'crystaljones', '&y42QUo3e^', 'ruizanthony@example.org','057.862.8822x556','1982-04-05','professor','approved','3'),
+	('Jacqueline Williams', 'taramorris', 'q@d82Vc&r0', 'joshuajacobs@example.net','564-666-9529x7096','1983-11-29','professor','approved','3'),
+	('Michael Warner', 'vickiebarnett', ')*$BPzm+R8', 'natalie43@example.org','216-395-0491','1988-06-25','professor','approved','4'),
+	('Robert Dean', 'dylan64', 'K55Oem&@i&', 'kmcfarland@example.com','001-301-160-5381x45628','1970-09-13','professor','approved','4'),
+	('Jimmy Mccormick', 'michaeladuke', 'x^G4TtBA&y', 'smithjames@example.com','(746)304-6507','1979-06-17','professor','approved','4'),
+	('Christopher Dixon', 'benjamin12', '5Pt5Mt7&X(', 'stephaniegrant@example.org','447.047.9804x820','1979-12-31','professor','approved','5'),
+	('Sabrina Stevens', 'robin13', '1d8hEog)*K', 'brianpowell@example.org','(068)596-0878x755','1989-01-11','professor','approved','5'),
+	('Benjamin Bridges', 'jerryedwards', '$b*R1S8ri7', 'hweber@example.net','310-187-5084','1970-04-10','professor','approved','5'),
+	('Jennifer Wood', 'solisrobert', '*PhANEBrZ2', 'kramervanessa@example.org','001-454-520-0714x340','1970-08-06','professor','approved','6'),
+	('Rebecca Terrell DVM', 'sosatimothy', 'h@DSL9Dx!0', 'ellismary@example.net','3871779967','1984-02-05','professor','approved','6'),
+	('Mikayla Thomas', 'mackenziewoods', 'eF*$v9GiAx', 'englishrichard@example.net','571-593-5531','1977-03-18','professor','approved','6'),
+	('Lucas Pittman', 'jonathanjames', '3PFp1W5k_(', 'kevinsmith@example.net','549-425-3446x89555','1988-03-16','professor','approved','7'),
+	('Joshua Jones', 'danielleburns', '3ke42BKp4*', 'masoneugene@example.net','337-179-6723','1995-08-08','professor','approved','7'),
+	('Sean Mccall', 'kpeters', '%1O&5lJ)u#', 'dennismichael@example.org','581-317-2609x27161','1980-05-14','professor','approved','7'),
+	('Hannah Allen', 'marc82', 'pPR@1EUhC7', 'marissa49@example.org','001-317-727-1690x15922','1991-10-14','professor','approved','8'),
+	('Brian Bryant', 'andersonroger', '72L6*D#z@v', 'ramirezmark@example.net','587-257-4439','1983-03-29','professor','approved','8'),
+	('Lori Duffy', 'annette69', 'a+3DY6Tk(n', 'sparker@example.net','(229)249-8552x061','1979-08-25','professor','approved','8'),
+    ('Anita Williams', 'fphillips', '$aSJ#7Fr@1', 'nsmith@example.com','+1-371-296-3621','2016-01-08','student','approved','1'),
+	('Barbara James', 'nicholsamanda', 'K)R9Txr$4)', 'dylanking@example.com','044-369-4340x291','2014-04-15','student','approved','1'),
+	('Mark Wood', 'rmoore', '+^S1OP@O_w', 'jenniferfrench@example.net','7653140008','2016-09-15','student','approved','1'),
+	('Vanessa Brown', 'penningtonmorgan', '^)45Lc9b5E', 'michaelanderson@example.org','600-272-9245','2014-06-24','student','approved','1'),
+	('Melissa Barton', 'nancybaker', 'mW9Moqoa$R', 'dianafuller@example.org','140-114-5452','2015-03-31','student','approved','1'),
+	('Linda Hernandez', 'hernandezmegan', ')%iWMicT82', 'fjohnson@example.com','619-859-4614x6454','2013-05-19','student','approved','1'),
+	('Susan Bond', 'daniel80', 'Z0GjQz1_@e', 'bishopdawn@example.net','+1-269-051-3596x03160','2012-01-27','student','approved','1'),
+	('Sarah Hooper', 'danielnelson', '##I0BqGecI', 'bakeremily@example.net','799.961.4646x1495','2011-04-20','student','approved','1'),
+    ('Crystal Johnson', 'kristinedean', 'G!gn4E%gnu', 'kellybrian@example.com','743-900-6043x20173','2012-05-01','student','approved','2'),
+	('Mark Johnston', 'sosadylan', 'sT0YnuXti+', 'ocarter@example.com','287-572-6522','2011-07-23','student','approved','2'),
+	('Matthew Page', 'joshuaabbott', 'Wxmm2EFh7^', 'erinwright@example.net','(686)959-1346x23631','2017-03-22','student','approved','2'),
+	('Stacy Wright', 'birdnicholas', '1yAUZoYI)p', 'ctownsend@example.com','143.948.6112x3457','2013-08-07','student','approved','2'),
+	('Elizabeth Palmer', 'gjones', 'Bx!6TH&fX0', 'tcole@example.org','+1-064-327-9420x8335','2011-12-10','student','approved','2'),
+	('Wendy Spence', 'victorwalker', 'uu45ID54p!', 'tammy90@example.org','+1-722-578-4375x04436','2015-08-12','student','approved','2'),
+	('Monica Reyes', 'lorilewis', '&lQ5WpJb9p', 'kennedyadam@example.org','513-893-7197','2015-02-14','student','approved','2'),
+	('Linda Morales', 'cruzashley', '2_Y7hPd+Y@', 'savannah29@example.net','224.206.5675x4917','2015-01-19','student','approved','2'),
+    ('Theresa Armstrong', 'montoyamichele', '$m80CDGtrt', 'kelly28@example.com','201-783-5672','2008-09-16','student','approved','3'),
+	('Kayla Webster', 'mccarthypatricia', '$(4LNvNzgN', 'nfarrell@example.org','(321)304-1185','2009-09-16','student','approved','3'),
+	('Douglas Daniel', 'wrightalexander', 'Ba0HFaTFG^', 'qnewman@example.org','(716)849-7102x4073','2008-06-10','student','approved','3'),
+	('Tracey Zimmerman', 'mcneillawrence', 'i4&UTW4f+C', 'imiller@example.org','104-930-5618x977','2010-03-31','student','approved','3'),
+	('Glen Dudley', 'zjackson', 'nqL8Xyd2h^', 'aacosta@example.com','+1-401-119-7551x224','2010-10-23','student','approved','3'),
+	('Timothy Hawkins', 'amanda81', '0E7PahpAY)', 'pamela49@example.org','835-555-9173x50430','2009-07-03','student','approved','3'),
+	('Teresa Parsons', 'allison61', '4u+96Bs!_!', 'fbarron@example.com','001-222-833-0805','2010-03-22','student','approved','3'),
+	('Kevin Nichols', 'philipharris', 'G3tlC&zW)R', 'cheryldelgado@example.com','(393)313-2683x79017','2008-09-19','student','approved','3'),
+    ('Stacey Irwin', 'emilycook', 'U9*8W(rq4Z', 'walterevans@example.org','(808)954-2991x49534','2008-06-04','student','approved','4'),
+	('Mary Brooks', 'codychung', 'u)D7^PEdpW', 'ewingaustin@example.com','001-497-930-6689x4840','2009-08-20','student','approved','4'),
+	('Karen Smith', 'christopher13', '#5IFtoQq)&', 'warrenmariah@example.net','(507)112-4786','2009-11-18','student','approved','4'),
+	('Christian Stevens', 'jonathan95', 'y)6GXIpl@x', 'fishermichael@example.net','(284)615-1468x542','2009-11-11','student','approved','4'),
+	('Krystal Sharp', 'zrodriguez', 'v98f2EXr%#', 'dsimon@example.org','394.283.8903','2008-04-16','student','approved','4'),
+	('Sarah Watson', 'robert26', '&PJm)hGj$4', 'hperkins@example.org','542-691-1571','2008-10-26','student','approved','4'),
+	('Carolyn Collins', 'millsalexander', 'q^_L9G+fDQ', 'melissasmith@example.net','3603695599','2010-07-26','student','approved','4'),
+	('Cristina Gonzalez', 'dhoover', 't7AR+zbr!l', 'carolyn67@example.net','1677101589','2008-08-30','student','approved','4'),
+	('Leslie Bennett', 'laura47', 'Km8%WvOJ#F', 'bakeremily@example.net','001-133-575-2118','2008-08-30','student','approved','5'),
+	('Charles Oneal', 'shannon42', '+t65)GHDs^', 'xharrison@example.com','422-596-5680x5195','2008-04-11','student','approved','5'),
+	('Christine Armstrong', 'rojastheresa', 'UI&l1HAt8b', 'christinebecker@example.net','993-857-4428x768','2010-05-31','student','approved','5'),
+	('Robert Hartman', 'usloan', 'ih2HDqI8*k', 'umiller@example.net','(703)428-2904x1899','2008-06-01','student','approved','5'),
+	('Lacey Torres', 'jeffrey59', '2mMM&6Sy^1', 'sfrederick@example.org','001-619-766-9756','2010-05-15','student','approved','5'),
+	('Anna Jackson', 'pamelabennett', '+2LC0jnd4y', 'uweaver@example.org','968-303-8363x616','2008-11-04','student','approved','5'),
+	('Katie Phillips', 'belinda57', '(!2g5!Dol&', 'vsoto@example.com','214.695.8441','2010-07-07','student','approved','5'),
+	('Kelly Sawyer', 'edwardsbrian', '*ux9Zy7s!0', 'willisjohn@example.com','(415)299-0931','2008-08-29','student','approved','5'),
+    ('Matthew Gray', 'buckleydonna', '_%7dVQigpj', 'andreablake@example.com','249-474-5298','2010-12-19','student','approved','6'),
+	('Veronica Jennings', 'alexmarquez', '5XNmas&6*9', 'jgregory@example.net','001-476-644-8036x71531','2010-04-15','student','approved','6'),
+	('Bruce Thompson', 'martinyolanda', 'o0*23NIjP_', 'reginaldryan@example.org','+1-125-094-8417x749','2008-07-06','student','approved','6'),
+	('Stephen Ferguson', 'etaylor', 'x7%WTG_4)w', 'timothy58@example.org','948.836.5899','2010-06-25','student','approved','6'),
+	('Jacqueline Atkins', 'gedwards', 'h)2Zdo^xps', 'davidphillips@example.com','001-200-254-3629x3328','2009-08-09','student','approved','6'),
+	('Dean Soto', 'apatterson', '7LkF8Fev^t', 'benjamin14@example.org','+1-288-291-1086x38489','2009-10-31','student','approved','6'),
+	('Tiffany Allen', 'zbradley', '(p3fJrU1$o', 'jenniferthompson@example.net','+1-905-771-3851','2010-11-01','student','approved','6'),
+	('Shelby Robles', 'michaelhendricks', '+L36SYsp%8', 'richardsonmichelle@example.net','413-214-5295x8586','2010-04-23','student','approved','6'),
+    ('Sabrina Dennis', 'robert63', '#6bH8bYLzB', 'anthonygoodman@example.com','080.771.3789x56299','2005-11-12','student','approved','7'),
+	('Brandon Richardson', 'garciamark', '%)7Dqo8sFK', 'romanjennifer@example.org','(394)565-9084','2005-07-21','student','approved','7'),
+	('Barry Pollard', 'dmiller', 'jj$Y@3FpEF', 'watersdavid@example.com','104-528-1502x49506','2005-12-29','student','approved','7'),
+	('Joel Noble', 'petersbradley', '%_ekd8RabZ', 'cmunoz@example.org','361-935-4078x657','2006-08-12','student','approved','7'),
+	('Crystal Moore', 'esims', '*1tR5Pl+F7', 'christywilson@example.net','+1-265-984-2725x21377','2007-04-09','student','approved','7'),
+	('Andrea Crosby', 'anthony29', '%Gl0EpEmu#', 'burkeedward@example.org','(655)639-9795x766','2007-09-23','student','approved','7'),
+	('Edward Archer', 'torreskimberly', '^W8RZo*jSw', 'olsonsheila@example.com','315.703.8815x866','2007-07-10','student','approved','7'),
+	('Timothy Vaughan', 'watersmatthew', '$5Xc8Lcs#6', 'jonesjustin@example.net','805-731-0139','2007-10-01','student','approved','7'),
+    ('Jackie Carr', 'guerrerowilliam', ')4Xa0F0vRQ', 'aramos@example.com','001-117-485-8034x88814','2005-07-19','student','approved','8'),
+	('Kirk Bean', 'rubenleon', '#0TPq@ebcW', 'jparker@example.org','+1-834-671-1604x4571','2006-01-03','student','approved','8'),
+	('Donald Klein', 'lisaramirez', '*_8QtTmqBF', 'solissandra@example.org','+1-762-024-9888','2006-09-14','student','approved','8'),
+	('Joseph Friedman', 'whiterichard', '+Y#b2YHa%1', 'lambertmark@example.net','235-333-8248x8419','2007-06-29','student','approved','8'),
+	('Theodore Gibson', 'knappsarah', 'N*at2vI0qs', 'wilsonwilliam@example.net','+1-065-547-5999x87842','2006-10-23','student','approved','8'),
+	('Bryan Anthony', 'kjohnson', 'W5$GMU@p+c', 'robyndixon@example.net','001-799-844-7776x6014','2007-05-21','student','approved','8'),
+	('Anthony Stephenson', 'michaelreyes', 'Q&h5Uv4!zl', 'jonathanpatrick@example.org','126-952-6552x27945','2005-08-02','student','approved','8'),
+	('Debra Williams', 'annahicks', '$19I!vphV_', 'james32@example.com','337-208-4511','2006-04-27','student','approved','8');
+    
+    
+--
+-- Insert 150 Book Data
+--
+
+	INSERT INTO book(title,publisher,ISBN,number_of_pages,image,language,available_copies,summary,key_words,school_id) VALUES								
+	('The Enigmatic Conquest', 'Jessica Gray', '978-0-06-907517-1', '249','https://dummyimage.com/977x500','Basque','3','Summary 1','[language, whose, leader]','8'),               
+	('Echoes of Destiny', 'Emily Bush', '978-0-347-91921-0', '250','https://picsum.photos/386/141','Chechen','2','Summary 2','[traditional, mother, choose]','6'),					
+	('The Whispers of Serendipity', 'Nicholas Wright', '978-1-210-19235-8', '409','https://placekitten.com/11/948','Esperanto','4','Summary 3','[usually, team, line]','3'),        	
+	('Shadows of Redemption', 'Harry Ramos', '978-0-6488537-8-7', '561','https://placekitten.com/766/866','Tswana','1','Summary 4','[develop, civil, pretty]','7'),					
+	('The Forgotten Prophecy', 'Savannah Wallace', '978-0-444-60556-6', '499','https://picsum.photos/401/6','Church Slavic','5','Summary 5','[goal, force, about]','8'),			
+	('Fragments of Eternity', 'Jerry Ortiz', '978-0-9964128-0-3', '346','https://picsum.photos/164/432','Bihari languages','5','Summary 6','[future, question, much]','4'),				
+	('The Labyrinth of Secrets', 'Vincent James', '978-0-483-55770-3', '352','https://picsum.photos/676/175','Walloon','2','Summary 7','[cold, local, PM]','4'),					
 	('Journey to the Unknown', 'Andrea Glover', '978-0-13-591299-7', '404','https://placekitten.com/679/251','Shona','2','Summary 8','[year, not, play]','5'),
 	('Beneath the Starlit Sky', 'Scott Morris', '978-0-86907-875-4', '415','https://dummyimage.com/330x1011','Dzongkha','3','Summary 9','[want, suggest, with]','7'),
 	('The Silent Legacy', 'Carol Howard', '978-0-14-142329-6', '392','https://dummyimage.com/964x620','Lithuanian','0','Summary 10','[contain, focus, board]','4'),
@@ -200,7 +242,58 @@ INSERT INTO book(title,publisher,ISBN,number_of_pages,image,language,available_c
 	('The Shadowed Legacy', 'Corey Kim', '978-1-05-379185-5', '121','https://placekitten.com/47/501','Uzbek','1','Summary 97','[likely, look, finally]','5'),
 	('The Mystics Prophecy', 'Justin Smith', '978-1-232-27397-4', '306','https://placekitten.com/830/296','Slovenian','1','Summary 98','[just, no, program]','5'),
 	('The Vanishing Spell', 'Jason Espinoza', '978-1-00-787817-5', '211','https://placekitten.com/605/535','Bosnian','4','Summary 99','[consider, role, news]','3'),
-	('The Forbidden Scroll', 'Deborah Sanchez', '978-0-7628-7347-0', '460','https://picsum.photos/296/298','Italian','4','Summary 100','[last, all, western]','8');
+	('The Forbidden Scroll', 'Deborah Sanchez', '978-0-7628-7347-0', '460','https://picsum.photos/296/298','Italian','4','Summary 100','[last, all, western]','8'),
+    ('The Iliad', 'Danielle Montgomery', '978-1-86116-860-3', '579','https://placekitten.com/595/311','Italian','1','Summary 101','[only, health, take]','7'),
+	('The Great Gatsby', 'Hannah Smith', '978-0-526-87127-8', '225','https://placekitten.com/20/463','Slovenian','4','Summary 102','[recent, child, raise]','2'),
+	('To Kill a Mockingbird', 'Kevin Cannon', '978-0-448-56096-0', '324','https://picsum.photos/359/641','Twi','3','Summary 103','[daughter, player, raise]','3'),
+	('1984', 'Veronica Pitts', '978-0-457-14463-2', '104','https://placekitten.com/979/904','Latvian','5','Summary 104','[popular, ahead, book]','8'),
+	('Pride and Prejudice', 'Roger Adams', '978-0-284-49466-5', '564','https://placekitten.com/779/918','Yoruba','4','Summary 105','[allow, opportunity, call]','5'),
+	('The Catcher in the Rye', 'Erik Guerra', '978-0-596-10233-3', '403','https://placekitten.com/208/433','Croatian','3','Summary 106','[particular, crime, design]','6'),
+	('The Lord of the Rings', 'Jeffrey Suarez', '978-0-591-47926-3', '227','https://picsum.photos/332/692','Luxembourgish','0','Summary 107','[morning, the, follow]','7'),
+	('Harry Potter and the Sorcerers Stone', 'Kristy Thomas', '978-1-61944-159-0', '339','https://picsum.photos/909/492','Gujarati','5','Summary 108','[material, during, give]','8'),
+	('The Chronicles of Narnia', 'Diana Sweeney', '978-0-8089-7801-5', '112','https://picsum.photos/895/255','Sinhala','3','Summary 109','[around, million, all]','4'),
+	('Moby-Dick', 'Eric Baker', '978-1-9831-5247-4', '104','https://dummyimage.com/83x480','Telugu','5','Summary 110','[all, scene, consumer]','6'),
+	('The Hobbit', 'Valerie Smith', '978-1-61195-657-3', '307','https://picsum.photos/510/455','Shona','2','Summary 111','[ok, kitchen, step]','5'),
+	('The Great Gatsby', 'Joseph Hernandez', '978-1-78471-752-0', '158','https://placekitten.com/122/773','Icelandic','4','Summary 112','[rate, write, never]','6'),
+	('The Alchemist', 'Joshua Wright', '978-1-58571-342-4', '399','https://placekitten.com/414/156','Urdu','4','Summary 113','[team, six, question]','6'),
+	('Brave New World', 'Stephanie Gibson', '978-0-405-57558-7', '493','https://placekitten.com/799/1019','Marathi','4','Summary 114','[human, two, dark]','3'),
+	('Animal Farm', 'Elizabeth Holt', '978-1-75838-466-6', '193','https://dummyimage.com/851x487','Tamil','2','Summary 115','[fear, themselves, every]','7'),
+	('Gone with the Wind', 'Natasha Griffin', '978-0-8319-2975-6', '488','https://picsum.photos/414/464','Armenian','4','Summary 116','[beyond, Mrs, color]','2'),
+	('The Hunger Games', 'Miss Jennifer Sanchez', '978-0-18-558257-7', '325','https://placekitten.com/593/874','Maori','1','Summary 117','[huge, goal, certainly]','7'),
+	('The Da Vinci Code', 'David Lawson', '978-0-9766801-9-2', '428','https://dummyimage.com/780x516','Croatian','2','Summary 118','[what, evening, experience]','2'),
+	('The Hitchhikers Guide to the Galaxy', 'Stephanie Chang', '978-0-679-56923-7', '531','https://dummyimage.com/422x608','Azerbaijani','4','Summary 119','[I, easy, among]','1'),
+	('The Shining', 'Kimberly Vaughn', '978-0-7212-8432-3', '140','https://dummyimage.com/232x776','Javanese','1','Summary 120','[democratic, guy, move]','3'),
+	('The Picture of Dorian Gray', 'Kathleen Nguyen', '978-0-237-34038-4', '170','https://placekitten.com/543/466','Aragonese','5','Summary 121','[project, fund, set]','7'),
+	('Fahrenheit 451', 'Sara Gibson', '978-0-384-08996-9', '451','https://picsum.photos/559/167','Yiddish','5','Summary 122','[style, choice, nature]','7'),
+	('Jane Eyre', 'Dr. Briana Love', '978-0-269-44981-9', '587','https://dummyimage.com/888x15','Amharic','3','Summary 123','[peace, might, lot]','1'),
+	('The Odyssey', 'Alicia Ball', '978-1-313-08987-6', '212','https://placekitten.com/623/880','Kikuyu','2','Summary 124','[always, technology, fire]','2'),
+	('The Divine Comedy', 'Michael Fisher', '978-1-158-90730-4', '245','https://placekitten.com/349/270','Tsonga','2','Summary 125','[money, carry, near]','4'),
+	('The Girl with the Dragon Tattoo', 'Tracy Warren', '978-0-7036-9928-2', '242','https://placekitten.com/679/968','Kuanyama','5','Summary 126','[lot, today, way]','5'),
+	('The Kite Runner', 'John Dixon', '978-0-926850-14-9', '229','https://picsum.photos/628/36','Kinyarwanda','3','Summary 127','[rule, appear, manage]','3'),
+	('The Handmaids Tale', 'Kelly Sharp', '978-1-946517-33-3', '571','https://placekitten.com/912/939','Albanian','3','Summary 128','[result, anything, middle]','1'),
+	('The Book Thief', 'Robert Bell', '978-1-5041-3274-9', '385','https://placekitten.com/583/977','Croatian','3','Summary 129','[despite, vote, for]','8'),
+	('The Color Purple', 'Anthony Lawson', '978-0-86530-743-8', '104','https://placekitten.com/286/67','Afar','5','Summary 130','[their, key, certain]','2'),
+	('The Sun Also Rises', 'Thomas Nelson', '978-1-82429-852-1', '208','https://dummyimage.com/830x48','Tswana','2','Summary 131','[matter, nation, food]','8'),
+	('Catch-22', 'Dustin Castillo', '978-0-535-02311-8', '240','https://placekitten.com/607/323','Breton','1','Summary 132','[notice, I, walk]','5'),
+	('The Adventures of Huckleberry Finn', 'Jeff Cruz', '978-1-09-161877-0', '241','https://placekitten.com/988/689','Avaric','1','Summary 133','[doctor, than, bag]','2'),
+	('One Hundred Years of Solitude', 'Joseph Merritt', '978-1-268-21158-2', '275','https://placekitten.com/107/455','Wolof','1','Summary 134','[surface, article, church]','3'),
+	('Beloved', 'Michael Mccormick', '978-0-8112-5953-8', '102','https://picsum.photos/813/654','Ganda','4','Summary 135','[chance, conference, instead]','1'),
+	('Frankenstein', 'Susan Martin', '978-1-03-751378-7', '429','https://placekitten.com/814/301','Galician','1','Summary 136','[tend, possible, economy]','6'),
+	('The Scarlet Letter', 'Angel Cross', '978-1-86683-146-5', '222','https://picsum.photos/886/149','Bislama','0','Summary 137','[after, response, institution]','3'),
+	('The Grapes of Wrath', 'Derek Snow', '978-1-208-38579-3', '474','https://placekitten.com/1013/92','Cree','4','Summary 138','[education, organization, without]','5'),
+	('War and Peace', 'Lucas Nicholson', '978-0-624-60307-8', '382','https://placekitten.com/207/465','Pushto','2','Summary 139','[entire, scientist, structure]','5'),
+	('The Count of Monte Cristo', 'Haley Chavez', '978-1-05-092821-6', '145','https://dummyimage.com/102x70','Korean','0','Summary 140','[scene, PM, sign]','7'),
+	('Pride and Prejudice', 'Patricia Harris', '978-1-04-383414-2', '298','https://placekitten.com/846/742','Indonesian','4','Summary 141','[story, idea, south]','6'),
+	('Don Quixote', 'Douglas Parsons', '978-1-195-03759-0', '299','https://placekitten.com/289/530','Pali','4','Summary 142','[itself, conference, I]','1'),
+	('Wuthering Heights', 'Monique Fernandez', '978-1-5422-0689-1', '371','https://placekitten.com/584/622','North Ndebele','5','Summary 143','[full, various, write]','8'),
+	('The Lord of the Flies', 'Richard Jackson', '978-1-7339787-0-5', '595','https://picsum.photos/18/751','Afrikaans','1','Summary 144','[ball, something, carry]','3'),
+	('The Outsiders', 'Tonya Walton', '978-1-205-20605-3', '273','https://dummyimage.com/702x86','Haitian','5','Summary 145','[simply, memory, let]','4'),
+	('A Tale of Two Cities', 'Larry House', '978-1-69524-770-3', '535','https://picsum.photos/251/725','Norwegian','1','Summary 146','[heavy, realize, dinner]','8'),
+	('The Secret Garden', 'Nicholas Turner', '978-0-219-06219-8', '578','https://placekitten.com/294/5','Basque','0','Summary 147','[tough, media, entire]','3'),
+	('The Little Prince', 'Martin Chang', '978-0-291-44742-5', '140','https://dummyimage.com/534x919','Ndonga','4','Summary 148','[race, special, music]','3'),
+	('Les Misérables', 'Robert Durham', '978-1-334-82090-8', '350','https://placekitten.com/998/831','Fulah','3','Summary 149','[accept, throughout, own]','4'),
+	('The Iliad', 'Benjamin Ramirez', '978-0-15-159300-2', '119','https://dummyimage.com/837x647','Persian','3','Summary 150','[condition, car, sport]','5');
+
 
 
 
@@ -414,7 +507,7 @@ INSERT INTO book_thematic_categories(thematic_category,book_id) VALUES
 -- Insert an administrator
 --
 INSERT INTO administrator(username, password) VALUES 
-('LORD', 'SKOPELOS2001');  #1
+('Spanoulis', 'SKOPELOS2001');  #1
 
 
 --
@@ -635,6 +728,11 @@ INSERT INTO book_authors(author , book_id) VALUES
 ('Amy Juarez', 100);
 
 
+--
+-- INSERT 100 BOOK BORROWINGS 
+--
+-- INSERT INTO book_borrowing(borrowing_date,return_date,actual_return_date,book_id,stud_prof_id,operator_id) VALUES
+-- ('2016-01-14','2016-01-21','2016-01-20','')
 
 
 

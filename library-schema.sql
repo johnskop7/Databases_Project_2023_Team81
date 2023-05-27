@@ -12,21 +12,6 @@ DROP
 CREATE SCHEMA library; 
 USE library;
     
-    --
-    -- Table structure for table 'users'
-    --
-
-CREATE TABLE user(
-    user_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    username VARCHAR(45) NOT NULL,
-    full_name VARCHAR(45) NOT NULL,
-    PASSWORD VARCHAR(20) NOT NULL,
-    date_of_birth DATE NOT NULL CHECK (date_of_birth < '2017-01-01'),
-    email VARCHAR(45) NOT NULL,
-    phone_number VARCHAR(45),
-    PRIMARY KEY(user_id)
-);
-
 --
 -- Table structure for table 'administrator'
 --
@@ -61,11 +46,15 @@ CREATE TABLE school_unit(
 --
 
 CREATE TABLE operator(
-    operator_user_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    administrator_id SMALLINT UNSIGNED NOT NULL,
+    operator_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    username VARCHAR(45) NOT NULL,
+    password VARCHAR(45) NOT NULL,
+    fullname VARCHAR(45) NOT NULL,
+    email VARCHAR(45) NOT NULL,
+    phone_number VARCHAR(45) NOT NULL,
     school_id SMALLINT UNSIGNED NOT NULL,
-    PRIMARY KEY(operator_user_id),
-    CONSTRAINT fk_operator_user FOREIGN KEY(operator_user_id) REFERENCES user(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    administrator_id SMALLINT UNSIGNED NOT NULL,
+    PRIMARY KEY(operator_id),
     CONSTRAINT fk_operator_administrator FOREIGN KEY(administrator_id) REFERENCES administrator(administrator_id) ON UPDATE CASCADE,
     CONSTRAINT fk_operator_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -75,16 +64,20 @@ CREATE TABLE operator(
 --
 
 CREATE TABLE student_professor(
-	stud_prof_user_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	stud_prof_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    fullname VARCHAR(45) NOT NULL,
+    username VARCHAR(45) NOT NULL,
+    password VARCHAR(45) NOT NULL,
+    email VARCHAR(45) NOT NULL,
+    phone_number VARCHAR(45) NOT NULL,
+    date_of_birth DATE,
 	role ENUM ("student", "professor"),
-	active_status VARCHAR(15) NOT NULL,
-	approval_status VARCHAR(15) NOT NULL,
-	operator_user_id SMALLINT UNSIGNED NOT NULL, 
-    school_id SMALLINT UNSIGNED NOT NULL,
-	PRIMARY KEY(stud_prof_user_id),
-	CONSTRAINT fk_student_professor_user FOREIGN KEY(stud_prof_user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT fk_student_professor_operator FOREIGN KEY(operator_user_id) REFERENCES operator(operator_user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-	CONSTRAINT fk_student_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE CASCADE ON UPDATE CASCADE
+	approval_status ENUM ('approved','not approved'),
+	operator_id SMALLINT UNSIGNED NOT NULL, 
+    -- school_id SMALLINT UNSIGNED NOT NULL,
+	PRIMARY KEY(stud_prof_id),
+	CONSTRAINT fk_student_professor_operator FOREIGN KEY(operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
+	-- CONSTRAINT fk_student_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 
@@ -96,11 +89,11 @@ CREATE TABLE borrower_card(
 	card_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	issue_date DATE NOT NULL,
 	expiry_date DATE NOT NULL,
-	stud_prof_user_id SMALLINT UNSIGNED NOT NULL,
-	operator_user_id SMALLINT UNSIGNED NOT NULL,
+	stud_prof_id SMALLINT UNSIGNED NOT NULL,
+	operator_id SMALLINT UNSIGNED NOT NULL,
 	PRIMARY KEY(card_id),
-	CONSTRAINT fk_borrower_card_student_professor FOREIGN KEY(stud_prof_user_id) REFERENCES student_professor(stud_prof_user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-	CONSTRAINT fk_borrower_card_operator FOREIGN KEY(operator_user_id) REFERENCES operator(operator_user_id) ON DELETE RESTRICT ON UPDATE CASCADE
+	CONSTRAINT fk_borrower_card_student_professor FOREIGN KEY(stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT fk_borrower_card_operator FOREIGN KEY(operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 --
@@ -152,16 +145,16 @@ CREATE TABLE book_authors (
 CREATE TABLE reviews (
   review_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   book_id SMALLINT UNSIGNED NOT NULL,
-  stud_prof_user_id SMALLINT UNSIGNED NOT NULL,
-  operator_user_id SMALLINT UNSIGNED NOT NULL,
+  stud_prof_id SMALLINT UNSIGNED NOT NULL,
+  operator_id SMALLINT UNSIGNED NOT NULL,
   rating DECIMAL(1,0) CHECK(rating>0 AND rating<6 ),
   review_date DATE,
   review_text TEXT,
   status ENUM('approved', 'not yet approved', 'denied'),
-  PRIMARY KEY (review_id, book_id, stud_prof_user_id),
+  PRIMARY KEY (review_id, book_id, stud_prof_id),
   CONSTRAINT fk_reviews_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_reviews_student_professor_book FOREIGN KEY (stud_prof_user_id) REFERENCES student_professor(stud_prof_user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_reviews_operator FOREIGN KEY (operator_user_id) REFERENCES operator(operator_user_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_reviews_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT fk_reviews_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 --
@@ -171,15 +164,15 @@ CREATE TABLE reviews (
 CREATE TABLE reservations (
   reservation_id SMALLINT UNSIGNED NOT NULL auto_increment,
   book_id SMALLINT UNSIGNED NOT NULL,
-  stud_prof_user_id SMALLINT UNSIGNED NOT NULL,
-  operator_user_id SMALLINT UNSIGNED NOT NULL,
+  stud_prof_id SMALLINT UNSIGNED NOT NULL,
+  operator_id SMALLINT UNSIGNED NOT NULL,
   reservation_date DATE,
   expiry_date DATE,
   status ENUM('expired', 'active'),
-  PRIMARY KEY (reservation_id, book_id, stud_prof_user_id),
+  PRIMARY KEY (reservation_id, book_id, stud_prof_id),
   CONSTRAINT fk_reservations_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_reservations_student_professor_book FOREIGN KEY (stud_prof_user_id) REFERENCES student_professor(stud_prof_user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_reservations_operator FOREIGN KEY (operator_user_id) REFERENCES operator(operator_user_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_reservations_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT fk_reservations_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 --
@@ -188,17 +181,16 @@ CREATE TABLE reservations (
 
 CREATE TABLE book_borrowing (
   borrowing_id SMALLINT UNSIGNED NOT NULL auto_increment,
-  book_id SMALLINT UNSIGNED NOT NULL,
-  stud_prof_user_id SMALLINT UNSIGNED NOT NULL,
-  operator_user_id SMALLINT UNSIGNED NOT NULL,
-  borrowing_date DATE,
-  return_date DATE,
+  borrowing_date DATE NOT NULL,
+  return_date DATE NOT NULL,
   actual_return_date DATE,
-  status ENUM('active', 'delayed_return', 'returned_on_time'),
-  PRIMARY KEY (borrowing_id, book_id, stud_prof_user_id),
+  book_id SMALLINT UNSIGNED NOT NULL,
+  stud_prof_id SMALLINT UNSIGNED NOT NULL,
+  operator_id SMALLINT UNSIGNED NOT NULL,
+  PRIMARY KEY (borrowing_id, book_id, stud_prof_id),
   CONSTRAINT fk_book_borrowing_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_book_borrowing_student_professor_book FOREIGN KEY (stud_prof_user_id) REFERENCES student_professor(stud_prof_user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_book_borrowing_operator FOREIGN KEY (operator_user_id) REFERENCES operator(operator_user_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_book_borrowing_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT fk_book_borrowing_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 
@@ -219,6 +211,13 @@ HAVING COUNT(b.book_id) <= (
     ) AS subquery
 );
 
+-- 3.1.2) For a specific book category, find all the authors of this category and the professors that have borrowed a book of that category the last year
+-- CREATE PROCEDURE authors_of_category (thematic_category VARCHAR(255)) 
+-- SELECT DISTINCT ba.author 
+-- FROM book_authors ba 
+-- JOIN book b ON ba.book_id = b.book_id 
+-- JOIN book_thematic_categories btc ON b.book_id = btc.book_id 
+-- WHERE btc.thematic_category = thematic_category ;
 
 
 
