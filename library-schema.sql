@@ -146,15 +146,15 @@ CREATE TABLE reviews (
   review_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   book_id SMALLINT UNSIGNED NOT NULL,
   stud_prof_id SMALLINT UNSIGNED NOT NULL,
-  operator_id SMALLINT UNSIGNED NOT NULL,
+  -- operator_id SMALLINT UNSIGNED NOT NULL,
   rating DECIMAL(1,0) CHECK(rating>0 AND rating<6 ),
   review_date DATE,
   review_text TEXT,
   status ENUM('approved', 'not yet approved', 'denied'),
   PRIMARY KEY (review_id, book_id, stud_prof_id),
   CONSTRAINT fk_reviews_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_reviews_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_reviews_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_reviews_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  -- CONSTRAINT fk_reviews_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 --
@@ -165,14 +165,14 @@ CREATE TABLE reservations (
   reservation_id SMALLINT UNSIGNED NOT NULL auto_increment,
   book_id SMALLINT UNSIGNED NOT NULL,
   stud_prof_id SMALLINT UNSIGNED NOT NULL,
-  operator_id SMALLINT UNSIGNED NOT NULL,
+  -- operator_id SMALLINT UNSIGNED NOT NULL,
   reservation_date DATE,
   expiry_date DATE,
   status ENUM('expired', 'active'),
   PRIMARY KEY (reservation_id, book_id, stud_prof_id),
   CONSTRAINT fk_reservations_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_reservations_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_reservations_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_reservations_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  -- CONSTRAINT fk_reservations_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 --
@@ -186,11 +186,11 @@ CREATE TABLE book_borrowing (
   actual_return_date DATE,
   book_id SMALLINT UNSIGNED NOT NULL,
   stud_prof_id SMALLINT UNSIGNED NOT NULL,
-  operator_id SMALLINT UNSIGNED NOT NULL,
+  -- operator_id SMALLINT UNSIGNED NOT NULL,
   PRIMARY KEY (borrowing_id, book_id, stud_prof_id),
   CONSTRAINT fk_book_borrowing_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_book_borrowing_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_book_borrowing_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_book_borrowing_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  -- CONSTRAINT fk_book_borrowing_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 
