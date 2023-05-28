@@ -20,14 +20,14 @@ ALTER TABLE `student_professor` auto_increment = 1;
 -- Insert 8 school_units
 --
 INSERT INTO school_unit(school_name, address, city , school_director_full_name , library_operator_full_name, email , phone_number,administrator_id ) VALUES
-    ('Peparithio','Doulidou 3','Skopelos','Philipos Lemonis','Karagkounis Panagiotis','apro56@otenet.gr' ,'2424022172',1 ),       	#1
-    ('Dimokrito' , 'Ermou 2', 'Drama' , 'Samaras Giorgos','Katsouranis Dimos','aktel@gmail.com', '2421023567' ,1),	        		#2
-    ('Krifo Sxolio' , 'Georgiou 25', 'Kastoria' ,'Efthimiou Nikos','Pasxalis Terzis' ,'atp@yahoo.gr','2467086595' ,1),     			#3
-    ('Mantoulidi','Chrisipou 20','Zografou', 'Askounis Vaggelis','Tsipi Zoe','awq@hotmail.gr','2356056793',1),	            		#4
+    ('Peparithio','Doulidou 3','Skopelos','Philipos Lemonis','Dora Panteli','apro56@otenet.gr' ,'2424022172',1 ),       	#1
+    ('Dimokrito' , 'Ermou 2', 'Drama' , 'Samaras Giorgos','Panagiotis Giadikiaroglou','aktel@gmail.com', '2421023567' ,1),	        		#2
+    ('Krifo Sxolio' , 'Georgiou 25', 'Kastoria' ,'Efthimiou Nikos','Alexandros Emmanouilidis' ,'atp@yahoo.gr','2467086595' ,1),     			#3
+    ('Mantoulidi','Chrisipou 20','Zografou', 'Askounis Vaggelis','Thomas Walkup','awq@hotmail.gr','2356056793',1),	            		#4
     ('Saint-Joseph','Egnatia 34', 'Thessaloniki','Kostas Sloukas','George Pappas','larentzakis@kobra.gr','2421045678',1),			#5
-    ('MIT' , 'Omonoias 45' ,'Kamatero','Giorgos Papagiannis','Lefteris Bochoridis','bochou@gmail.com','2356089725',1 ),				#6
-    ('UCLA','Filis 21','Tinos','Pipis Remoundos','Velalopoulos Michael','pip@otenet.gr','2423028953',1),							#7
-    ('Princeton','Papagou 7','Ioannina','Charitos Giorgos','Ntatsis Alexandros','ntats@gmail.com','2521057430',1);					#8	
+    ('MIT' , 'Omonoias 45' ,'Kamatero','Giorgos Papagiannis','Kaiti Provia','bochou@gmail.com','2356089725',1 ),				#6
+    ('UCLA','Filis 21','Tinos','Pipis Remoundos','Michael Velalopoulos','pip@otenet.gr','2423028953',1),							#7
+    ('Princeton','Papagou 7','Ioannina','Charitos Giorgos','Beril Mckissic','ntats@gmail.com','2521057430',1);					#8	
     
 
 -- 
@@ -38,9 +38,9 @@ INSERT INTO operator(fullname,username,password,email,phone_number,school_id,adm
 	('Panagiotis Giadikiaroglou', 'jhill', '(4f!Rxc+Ff', 'dennisrusso@example.com','9671127828','2','1'),
 	('Alexandros Emmanouilidis', 'eatonjonathan', '@0_I%ywv7T', 'kristiadams@example.net','342-283-3779x424','3','1'),
 	('Thomas Walkup', 'qfernandez', 'r+QKo2wP*0', 'msanders@example.com','349-301-8402x47751','4','1'),
-	('Nikitas Ionitsa', 'patelbrad', 'J$$kD1WBDp', 'bennettreginald@example.org','(327)763-2867x2635','5','1'),
+	('George Pappas', 'patelbrad', 'J$$kD1WBDp', 'bennettreginald@example.org','(327)763-2867x2635','5','1'),
 	('Kaiti Provia', 'kristin93', '$A9eYCi@r9', 'danielgregory@example.org','948.817.1472','6','1'),
-	('Alec Peters', 'brendan21', 'L8rZU*Gz_d', 'tinawong@example.com','(459)206-5360x5928','7','1'),
+	('Michael Velalopoulos', 'brendan21', 'L8rZU*Gz_d', 'tinawong@example.com','(459)206-5360x5928','7','1'),
 	('Beril Mckissic', 'jclark', '!@VaDTqC2z', 'danielruiz@example.org','077.982.3338','8','1');
 
 --
