@@ -72,7 +72,7 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 	('Hannah Allen', 'marc82', 'pPR@1EUhC7', 'marissa49@example.org','001-317-727-1690x15922','1991-10-14','professor','approved','8'),                 #22
 	('Brian Bryant', 'andersonroger', '72L6*D#z@v', 'ramirezmark@example.net','587-257-4439','1983-03-29','professor','approved','8'),                  #23
 	('Lori Duffy', 'annette69', 'a+3DY6Tk(n', 'sparker@example.net','(229)249-8552x061','1979-08-25','professor','approved','8'),                       #24
-        ('Anita Williams', 'fphillips', '$aSJ#7Fr@1', 'nsmith@example.com','+1-371-296-3621','2016-01-08','student','approved','1'),                        #25
+	('Anita Williams', 'fphillips', '$aSJ#7Fr@1', 'nsmith@example.com','+1-371-296-3621','2016-01-08','student','approved','1'),                        #25
 	('Barbara James', 'nicholsamanda', 'K)R9Txr$4)', 'dylanking@example.com','044-369-4340x291','2014-04-15','student','approved','1'),                 #26
 	('Mark Wood', 'rmoore', '+^S1OP@O_w', 'jenniferfrench@example.net','7653140008','2016-09-15','student','approved','1'),                             #27
 	('Vanessa Brown', 'penningtonmorgan', '^)45Lc9b5E', 'michaelanderson@example.org','600-272-9245','2014-06-24','student','approved','1'),            #28
@@ -138,18 +138,20 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 	('Debra Williams', 'annahicks', '$19I!vphV_', 'james32@example.com','337-208-4511','2006-04-27','student','approved','8');                          #88
     
     
+    
+
 --
--- Insert 150 Book Data:  18 books(school_id = 1) + 18 (school_id = 2) + 19 (<<) + 19 (<<) + 20 (<<) + 20 (<<) + 20 (<<) = 150 books
+-- Insert 150 Book Data:  16 books(school_id = 1) + 18 (school_id = 2) + 18 (<<) + 19 (<<) + 19 (<<) + 20 (<<) + 20 (<<) + 20 (<<) = 150 books
 --
 
 	INSERT INTO book(title,publisher,ISBN,number_of_pages,image,language,available_copies,summary,key_words,school_id) VALUES								
 	('The Enigmatic Conquest', 'Jessica Gray', '978-0-06-907517-1', '249','https://dummyimage.com/977x500','Basque','3','Summary 1','[language, whose, leader]','1'),                       #1   
-	('Echoes of Destiny', 'Emily Bush', '978-0-347-91921-0', '250','https://picsum.photos/386/141','Chechen','2','Summary 2','[traditional, mother, choose]','1'),			        #2	
-	('The Whispers of Serendipity', 'Nicholas Wright', '978-1-210-19235-8', '409','https://placekitten.com/11/948','Esperanto','4','Summary 3','[usually, team, line]','1'),        	#3
-	('Shadows of Redemption', 'Harry Ramos', '978-0-6488537-8-7', '561','https://placekitten.com/766/866','Tswana','1','Summary 4','[develop, civil, pretty]','1'),				#4	
-	('The Forgotten Prophecy', 'Savannah Wallace', '978-0-444-60556-6', '499','https://picsum.photos/401/6','Church Slavic','5','Summary 5','[goal, force, about]','1'),			#5
-	('Fragments of Eternity', 'Jerry Ortiz', '978-0-9964128-0-3', '346','https://picsum.photos/164/432','Bihari languages','5','Summary 6','[future, question, much]','1'),			#6	
-	('The Labyrinth of Secrets', 'Vincent James', '978-0-483-55770-3', '352','https://picsum.photos/676/175','Walloon','2','Summary 7','[cold, local, PM]','1'),				#7	
+	('Echoes of Destiny', 'Emily Bush', '978-0-347-91921-0', '250','https://picsum.photos/386/141','Chechen','2','Summary 2','[traditional, mother, choose]','1'),			    		    #2	
+	('The Whispers of Serendipity', 'Nicholas Wright', '978-1-210-19235-8', '409','https://placekitten.com/11/948','Esperanto','4','Summary 3','[usually, team, line]','1'),        		#3
+	('Shadows of Redemption', 'Harry Ramos', '978-0-6488537-8-7', '561','https://placekitten.com/766/866','Tswana','1','Summary 4','[develop, civil, pretty]','1'),							#4	
+	('The Forgotten Prophecy', 'Savannah Wallace', '978-0-444-60556-6', '499','https://picsum.photos/401/6','Church Slavic','5','Summary 5','[goal, force, about]','1'),					#5
+	('Fragments of Eternity', 'Jerry Ortiz', '978-0-9964128-0-3', '346','https://picsum.photos/164/432','Bihari languages','5','Summary 6','[future, question, much]','1'),					#6	
+	('The Labyrinth of Secrets', 'Vincent James', '978-0-483-55770-3', '352','https://picsum.photos/676/175','Walloon','2','Summary 7','[cold, local, PM]','1'),							#7	
 	('Journey to the Unknown', 'Andrea Glover', '978-0-13-591299-7', '404','https://placekitten.com/679/251','Shona','2','Summary 8','[year, not, play]','1'),                              #8
 	('Beneath the Starlit Sky', 'Scott Morris', '978-0-86907-875-4', '415','https://dummyimage.com/330x1011','Dzongkha','3','Summary 9','[want, suggest, with]','1'),                       #9
 	('The Silent Legacy', 'Carol Howard', '978-0-14-142329-6', '392','https://dummyimage.com/964x620','Lithuanian','0','Summary 10','[contain, focus, board]','1'),                         #10
@@ -766,7 +768,144 @@ VALUES
 ('2020-03-15', '2020-04-19', '2020-04-26', 7, 1),
 ('2018-08-08', '2018-09-12', '2018-09-20', 12, 2),
 ('2017-03-25', '2017-04-29', '2017-05-06', 13, 2),
-('2016-12-10',
+('2016-12-10', )
+
+--
+-- Reviews (1-25->1ο σχολειο) (26-40->2ο ) (41-55->3ο) (56-70->4ο) (71-85->5ο) (86-100->6ο) (101-115->7ο) (116-130->8ο)
+--
+INSERT INTO reviews(stud_prof_id,rating,review_date,review_text,status,book_id,school_id) VALUES
+(1,5,"???",'review 1','approved',1,1),												#1
+(2,4,"???",'review 2','approved',2,1),												#2
+(25,1,"???",'review 3','not yet approved',1,1),										#3
+(30,5,"???",'review 4','denied',1,1),												#4
+(31,4,"???",'review 5','approved',5,1),												#5
+(1, 1, "???", 'review 6', 'approved', 1, 1),										#6
+(2, 2, "???", 'review 7', 'approved', 14, 1),										#7
+(2, 4, "???", 'review 8', 'approved', 3, 1),										#8
+(3, 3, "???", 'review 9', 'approved', 4, 1),										#9
+(2, 3, "???", 'review 10', 'approved', 5, 1),										#10
+(2, 2, "???", 'review 11', 'approved', 2, 1),										#11
+(3, 1, "???", 'review 12', 'approved', 7, 1),										#12
+(1, 5, "???", 'review 13', 'approved', 8, 1),										#13
+(3, 3, "???", 'review 14', 'approved', 9, 1),										#14
+(3, 4, "???", 'review 15', 'approved', 10, 1),										#15
+(27, 4, "???", 'review 16', 'not yet approved', 5, 1),								#16
+(28, 3, "???", 'review 17', 'approved', 6, 1),										#17
+(31, 5, "???", 'review 18', 'denied', 7, 1),										#18
+(30, 1, "???", 'review 19', 'approved', 13, 1),										#19
+(26, 2, "???", 'review 20', 'approved', 9, 1),										#20
+(31, 3, "???", 'review 21', 'approved', 10, 1),										#21
+(29, 4, "???", 'review 22', 'denied', 11, 1),										#22
+(32, 2, "???", 'review 23', 'approved', 12, 1),										#23
+(25, 3, "???", 'review 24', 'denied', 15, 1),										#24
+(30, 5, "???", 'review 25', 'approved', 14, 1),										#25
+(4, 3, "???", 'review 26', 'approved', 19, 2),										#26
+(6, 2, "???", 'review 27', 'approved', 28, 2),										#27
+(4, 3, "???", 'review 28', 'approved', 32, 2),										#28
+(6, 4, "???", 'review 29', 'approved', 22, 2),										#29
+(5, 2, "???", 'review 30', 'approved', 27, 2),										#30
+(36, 4, "???", 'review 31', 'denied', 19, 2),										#31
+(34, 1, "???", 'review 32', 'not yet approved', 29, 2),								#32
+(39, 5, "???", 'review 33', 'approved', 23, 2),										#33
+(33, 2, "???", 'review 34', 'denied', 18, 2),										#34
+(35, 3, "???", 'review 35', 'approved', 24, 2),										#35
+(38, 2, "???", 'review 36', 'denied', 27, 2),										#36
+(37, 5, "???", 'review 37', 'not yet approved', 20, 2),								#37
+(33, 4, "???", 'review 38', 'denied', 21, 2),										#38
+(34, 3, "???", 'review 39', 'approved', 28, 2),										#39
+(39, 1, "???", 'review 40', 'approved', 30, 2),										#40
+(7, 2, "???", 'review 41', 'approved', 44, 3),										#41
+(8, 3, "???", 'review 42', 'approved', 51, 3),										#42
+(9, 4, "???", 'review 43', 'approved', 36, 3),										#43
+(7, 1, "???", 'review 44', 'approved', 46, 3),										#44
+(8, 5, "???", 'review 45', 'approved', 39, 3),										#45
+(41, 4, "???", 'review 46', 'not yet approved', 51, 3),								#46
+(45, 5, "???", 'review 47', 'approved', 52, 3),										#47
+(48, 2, "???", 'review 48', 'denied', 38, 3),										#48
+(43, 1, "???", 'review 49', 'approved', 40, 3),										#49
+(47, 3, "???", 'review 50', 'approved', 36, 3),										#50
+(44, 4, "???", 'review 51', 'denied', 41, 3),										#51
+(42, 1, "???", 'review 52', 'approved', 50, 3),										#52
+(46, 5, "???", 'review 53', 'approved', 35, 3),										#53
+(41, 2, "???", 'review 54', 'denied', 48, 3),										#54
+(45, 3, "???", 'review 55', 'approved', 47, 3),										#55
+(10, 3, "???", 'review 56', 'approved', 66, 4),										#56
+(11, 1, "???", 'review 57', 'approved', 59, 4),										#57
+(12, 4, "???", 'review 58', 'approved', 57, 4),										#58
+(10, 2, "???", 'review 59', 'approved', 70, 4),										#59
+(11, 5, "???", 'review 60', 'approved', 64, 4),										#60
+(52, 2, "???", 'review 61', 'approved', 45, 4),										#61
+(51, 3, "???", 'review 62', 'denied', 39, 4),										#62
+(54, 1, "???", 'review 63', 'approved', 42, 4),										#63
+(55, 5, "???", 'review 64', 'denied', 52, 4),										#64
+(49, 4, "???", 'review 65', 'not yet approved', 35, 4),								#65
+(53, 2, "???", 'review 66', 'approved', 50, 4),										#66
+(50, 5, "???", 'review 67', 'approved', 41, 4),										#67
+(56, 1, "???", 'review 68', 'denied', 46, 4),										#68
+(52, 3, "???", 'review 69', 'approved', 38, 4),										#69
+(51, 2, "???", 'review 70', 'denied', 51, 4),										#70
+(15, 3, "???", 'review 71', 'approved', 79, 5),										#71
+(14, 2, "???", 'review 72', 'approved', 77, 5),										#72
+(13, 4, "???", 'review 73', 'approved', 81, 5),										#73
+(14, 5, "???", 'review 74', 'approved', 82, 5),										#74
+(15, 1, "???", 'review 75', 'approved', 75, 5),										#75
+(57, 3, "???", 'review 76', 'denied', 77, 5),										#76
+(58, 5, "???", 'review 77', 'not yet approved', 82, 5),								#77
+(59, 4, "???", 'review 78', 'approved', 74, 5),										#78
+(62, 2, "???", 'review 79', 'approved', 85, 5),										#79
+(60, 1, "???", 'review 80', 'denied', 78, 5),										#80
+(57, 3, "???", 'review 81', 'approved', 79, 5),										#81
+(63, 4, "???", 'review 82', 'approved', 76, 5),										#82
+(61, 5, "???", 'review 83', 'denied', 84, 5),										#83
+(62, 2, "???", 'review 84', 'approved', 73, 5),										#84
+(59, 1, "???", 'review 85', 'denied', 89, 5),										#85
+(16, 2, "???", 'review 86', 'approved', 105, 6),									#86
+(17, 5, "???", 'review 87', 'approved', 100, 6),									#87
+(16, 4, "???", 'review 88', 'approved', 98, 6),										#88
+(18, 3, "???", 'review 89', 'approved', 108, 6),									#89
+(18, 1, "???", 'review 90', 'approved', 96, 6),										#90
+(67, 1, "???", 'review 91', 'approved', 93, 6),										#91
+(70, 2, "???", 'review 92', 'not yet approved', 101, 6),							#92
+(65, 4, "???", 'review 93', 'denied', 97, 6),										#93
+(66, 3, "???", 'review 94', 'approved', 103, 6),									#94
+(72, 5, "???", 'review 95', 'approved', 109, 6),									#95
+(68, 2, "???", 'review 96', 'denied', 92, 6),										#96
+(69, 1, "???", 'review 97', 'approved', 106, 6),									#97
+(65, 4, "???", 'review 98', 'approved', 95, 6),										#98
+(71, 3, "???", 'review 99', 'denied', 104, 6),										#99
+(66, 5, "???", 'review 100', 'approved', 110, 6),									#100
+(19, 2, "???", 'review 101', 'approved', 115, 7),									#101
+(20, 4, "???", 'review 102', 'approved', 112, 7),									#102
+(21, 3, "???", 'review 103', 'approved', 118, 7),									#103
+(19, 1, "???", 'review 104', 'approved', 111, 7),									#104
+(21, 5, "???", 'review 105', 'approved', 117, 7),									#105
+(75, 3, "???", 'review 106', 'denied', 120, 7),										#106
+(80, 5, "???", 'review 107', 'approved', 116, 7),									#107
+(73, 4, "???", 'review 108', 'approved', 119, 7),									#108
+(79, 2, "???", 'review 109', 'not yet approved', 128, 7),							#109
+(74, 1, "???", 'review 110', 'approved', 111, 7),									#110
+(75, 3, "???", 'review 111', 'denied', 112, 7),										#111
+(78, 4, "???", 'review 112', 'approved', 123, 7),									#112
+(73, 5, "???", 'review 113', 'denied', 127, 7),										#113
+(80, 2, "???", 'review 114', 'approved', 125, 7),									#114
+(77, 1, "???", 'review 115', 'approved', 114, 7),									#115
+(22, 4, "???", 'review 116', 'approved', 139, 8),									#116
+(23, 2, "???", 'review 117', 'approved', 135, 8),									#117
+(24, 5, "???", 'review 118', 'approved', 141, 8),									#118
+(24, 3, "???", 'review 119', 'approved', 136, 8),									#119
+(22, 1, "???", 'review 120', 'approved', 133, 8),									#120
+(82, 1, "???", 'review 121', 'approved', 137, 8),									#121
+(88, 3, "???", 'review 122', 'denied', 146, 8),										#122
+(82, 4, "???", 'review 123', 'not yet approved', 143, 8),							#123
+(81, 2, "???", 'review 124', 'approved', 147, 8),									#124
+(86, 5, "???", 'review 125', 'approved', 139, 8),									#125
+(86, 1, "???", 'review 126', 'denied', 136, 8),										#126
+(84, 4, "???", 'review 127', 'approved', 142, 8),									#127
+(83, 3, "???", 'review 128', 'denied', 148, 8),										#128
+(81, 5, "???", 'review 129', 'approved', 145, 8),									#129
+(87, 2, "???", 'review 130', 'approved', 150, 8),									#130
+
+
 
 
 
