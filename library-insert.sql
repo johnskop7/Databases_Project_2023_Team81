@@ -75,7 +75,7 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 	('Hannah Allen', 'marc82', 'pPR@1EUhC7', 'marissa49@example.org','001-317-727-1690x15922','1991-10-14','professor','approved','8'),                 #22
 	('Brian Bryant', 'andersonroger', '72L6*D#z@v', 'ramirezmark@example.net','587-257-4439','1983-03-29','professor','approved','8'),                  #23
 	('Lori Duffy', 'annette69', 'a+3DY6Tk(n', 'sparker@example.net','(229)249-8552x061','1979-08-25','professor','approved','8'),                       #24
-        ('Anita Williams', 'fphillips', '$aSJ#7Fr@1', 'nsmith@example.com','+1-371-296-3621','2016-01-08','student','approved','1'),                        #25
+	('Anita Williams', 'fphillips', '$aSJ#7Fr@1', 'nsmith@example.com','+1-371-296-3621','2016-01-08','student','approved','1'),                        #25
 	('Barbara James', 'nicholsamanda', 'K)R9Txr$4)', 'dylanking@example.com','044-369-4340x291','2014-04-15','student','approved','1'),                 #26
 	('Mark Wood', 'rmoore', '+^S1OP@O_w', 'jenniferfrench@example.net','7653140008','2016-09-15','student','approved','1'),                             #27
 	('Vanessa Brown', 'penningtonmorgan', '^)45Lc9b5E', 'michaelanderson@example.org','600-272-9245','2014-06-24','student','approved','1'),            #28
@@ -141,18 +141,24 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 	('Debra Williams', 'annahicks', '$19I!vphV_', 'james32@example.com','337-208-4511','2006-04-27','student','approved','8');                          #88
     
     
+    
+
 --
+<<<<<<< HEAD
 -- Insert 150 Book Data:  16 books(school_id = 1) + 18 (school_id = 2) + 18 (<<) + 19 (<<) + 19(<<) + 20 (<<) + 20 (<<) + 20 (<<) = 150 books
+=======
+-- Insert 150 Book Data:  16 books(school_id = 1) + 18 (school_id = 2) + 18 (<<) + 19 (<<) + 19 (<<) + 20 (<<) + 20 (<<) + 20 (<<) = 150 books
+>>>>>>> 736d1dd47a7e1429330a70a019f1a05d9892c0fa
 --
 
 	INSERT INTO book(title,publisher,ISBN,number_of_pages,image,language,available_copies,summary,key_words,school_id) VALUES								
 	('The Enigmatic Conquest', 'Jessica Gray', '978-0-06-907517-1', '249','https://dummyimage.com/977x500','Basque','3','Summary 1','[language, whose, leader]','1'),                       #1   
-	('Echoes of Destiny', 'Emily Bush', '978-0-347-91921-0', '250','https://picsum.photos/386/141','Chechen','2','Summary 2','[traditional, mother, choose]','1'),			        #2	
-	('The Whispers of Serendipity', 'Nicholas Wright', '978-1-210-19235-8', '409','https://placekitten.com/11/948','Esperanto','4','Summary 3','[usually, team, line]','1'),        	#3
-	('Shadows of Redemption', 'Harry Ramos', '978-0-6488537-8-7', '561','https://placekitten.com/766/866','Tswana','1','Summary 4','[develop, civil, pretty]','1'),				#4	
-	('The Forgotten Prophecy', 'Savannah Wallace', '978-0-444-60556-6', '499','https://picsum.photos/401/6','Church Slavic','5','Summary 5','[goal, force, about]','1'),			#5
-	('Fragments of Eternity', 'Jerry Ortiz', '978-0-9964128-0-3', '346','https://picsum.photos/164/432','Bihari languages','5','Summary 6','[future, question, much]','1'),			#6	
-	('The Labyrinth of Secrets', 'Vincent James', '978-0-483-55770-3', '352','https://picsum.photos/676/175','Walloon','2','Summary 7','[cold, local, PM]','1'),				#7	
+	('Echoes of Destiny', 'Emily Bush', '978-0-347-91921-0', '250','https://picsum.photos/386/141','Chechen','2','Summary 2','[traditional, mother, choose]','1'),			    		    #2	
+	('The Whispers of Serendipity', 'Nicholas Wright', '978-1-210-19235-8', '409','https://placekitten.com/11/948','Esperanto','4','Summary 3','[usually, team, line]','1'),        		#3
+	('Shadows of Redemption', 'Harry Ramos', '978-0-6488537-8-7', '561','https://placekitten.com/766/866','Tswana','1','Summary 4','[develop, civil, pretty]','1'),							#4	
+	('The Forgotten Prophecy', 'Savannah Wallace', '978-0-444-60556-6', '499','https://picsum.photos/401/6','Church Slavic','5','Summary 5','[goal, force, about]','1'),					#5
+	('Fragments of Eternity', 'Jerry Ortiz', '978-0-9964128-0-3', '346','https://picsum.photos/164/432','Bihari languages','5','Summary 6','[future, question, much]','1'),					#6	
+	('The Labyrinth of Secrets', 'Vincent James', '978-0-483-55770-3', '352','https://picsum.photos/676/175','Walloon','2','Summary 7','[cold, local, PM]','1'),							#7	
 	('Journey to the Unknown', 'Andrea Glover', '978-0-13-591299-7', '404','https://placekitten.com/679/251','Shona','2','Summary 8','[year, not, play]','1'),                              #8
 	('Beneath the Starlit Sky', 'Scott Morris', '978-0-86907-875-4', '415','https://dummyimage.com/330x1011','Dzongkha','3','Summary 9','[want, suggest, with]','1'),                       #9
 	('The Silent Legacy', 'Carol Howard', '978-0-14-142329-6', '392','https://dummyimage.com/964x620','Lithuanian','0','Summary 10','[contain, focus, board]','1'),                         #10
@@ -1029,7 +1035,6 @@ INSERT INTO book_borrowing(borrowing_date,return_date,actual_return_date,book_id
 ('2022-04-24', '2023-12-24', '2023-12-26', 131, 23),
 ('2021-12-18', '2023-12-27', '2023-12-27', 141, 22),
 ('2021-04-17', '2023-08-27', '2023-11-28', 142, 82);
-
 
 
 INSERT INTO reviews(stud_prof_id,rating,review_date,review_text,status,book_id,school_id) VALUES
