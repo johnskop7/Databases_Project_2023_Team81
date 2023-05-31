@@ -1,23 +1,43 @@
 const express = require('express');
-
-require('custom-env').env('localhost');
-
-/* ROUTES and how to import routes */
-
-const layout = require('./routes/layout');
-
-/* end of ROUTES and how to import routes */
-
+const path = require('path');
+const session = require('express-session');
+const flash = require('connect-flash');
 const app = express();
-const port = process.env.SERVER_PORT || 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
+app.use(flash());
+app.use(session({
+    secret: "ThisShouldBeSecret",
+    resave: false,
+    saveUninitialized: false
+}));
+
+const port = process.env.SERVER_PORT || 3000;
 app.listen(port, () => {
     console.log(`🚀 Server running on port ${port}!`);
 });
 
+
+/* ROUTES and how to import routes */
+
+const loginRouter = require('./routes/login_page');
+
+/* end of ROUTES and how to import routes */
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 /* Routes used by the project */
 
-app.use('/', layout);
+app.use('/', loginRouter);
+app.use('/admin_login' , loginRouter)
+app.use('/operator_login' , loginRouter)
 
 /* End of routes used by the project */
 
