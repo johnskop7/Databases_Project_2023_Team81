@@ -300,7 +300,6 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 	('The Little Prince', 'Martin Chang', '978-0-291-44742-5', '140','https://dummyimage.com/534x919','Ndonga','4','Summary 148','[race, special, music]','8'),                             #148
 	('Les Misérables', 'Robert Durham', '978-1-334-82090-8', '350','https://placekitten.com/998/831','Fulah','0','Summary 149','[accept, throughout, own]','8'),                            #149
 	('The Iliad', 'Benjamin Ramirez', '978-0-15-159300-2', '119','https://dummyimage.com/837x647','Persian','3','Summary 150','[condition, car, sport]','8');                               #150
-                                                                                                                                                                                                
 
 
 
@@ -1272,16 +1271,17 @@ INSERT INTO reviews(stud_prof_id, rating,review_date, review_text, status, book_
 (33,2,'2023-04-09','review 34','denied',18),              #34
 (35,3,'2023-04-09','review 35','approved',24),            #35
 (38,2,'2023-04-09','review 36','denied',27),              #36
-(37,5,'2023-04-09','review 37','not yet approved',20),     #37
+(37,5,'2023-04-09','review 37','not yet approved',20),    #37
 (33,4,'2023-04-09','review 38','denied',21),              #38
-(34, 3, '2023-04-09', 'review 39', 'approved', 28),      #39
-(39, 1, '2023-04-09', 'review 40', 'approved', 30),      #40
-(7, 2, '2023-04-09', 'review 41', 'approved', 44),       #41
-(8, 3, '2023-04-09', 'review 42', 'approved', 51),       #42
-(9, 4, '2023-04-09', 'review 43', 'approved', 36),       #43
-(7, 1, '2023-04-09', 'review 44', 'approved', 46),       #44
-(8, 5, '2023-04-09', 'review 45', 'approved', 39),       #45
+(34, 3, '2023-04-09', 'review 39', 'approved', 28),       #39
+(39, 1, '2023-04-09', 'review 40', 'approved', 30),       #40
+(7, 2, '2023-04-09', 'review 41', 'approved', 44),        #41
+(8, 3, '2023-04-09', 'review 42', 'approved', 51),        #42
+(9, 4, '2023-04-09', 'review 43', 'approved', 36),        #43
+(7, 1, '2023-04-09', 'review 44', 'approved', 46),        #44
+(8, 5, '2023-04-09', 'review 45', 'approved', 39),        #45
 (41,4,'2023-04-09','review 46','not yet approved',51),    #46
-(45, 5, '2023-04-09', 'review 47', 'approved', 52),      #47
-(48, 2, '2023-04-09', 'review 48', 'denied', 38),       #48
-(43, 1, '2023-04-09', 'review 49', 'approved', 40);      #49
+(45, 5, '2023-04-09', 'review 47', 'approved', 52),       #47
+(48, 2, '2023-04-09', 'review 48', 'denied', 38),         #48
+(43, 1, '2023-04-09', 'review 49', 'approved', 40);       #49
+
