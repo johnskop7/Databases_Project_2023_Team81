@@ -193,7 +193,91 @@ CREATE TABLE book_borrowing (
   -- CONSTRAINT fk_book_borrowing_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+
+--
 -- QUERIES
+--
+
+--
+-- Administrator
+--
+
+--
+-- 3.1.1) List with the total number of loans per school (Search criteria: year, calendar month, e.g. January).
+--
+CREATE VIEW book_borrowings_per_school_unit AS
+SELECT new.borrowing_id, new.book_id, s.school_name, new.borrowing_date
+FROM
+    (
+    SELECT
+        br.borrowing_id,
+        b.book_id,
+        b.school_id,
+        br.borrowing_date
+    FROM
+        book b
+    JOIN book_borrowing br ON
+        b.book_id = br.book_id
+) new
+JOIN school_unit s ON
+    s.school_id = new.school_id;
+
+
+DELIMITER $$
+
+CREATE PROCEDURE book_borrowings_count_per_school (IN month SMALLINT, IN year SMALLINT)
+BEGIN
+    IF month IS NULL AND year IS NULL THEN
+        SELECT school_name, COUNT(borrowing_id) FROM book_borrowings_per_school_unit GROUP BY school_name;
+    ELSEIF month IS NULL THEN
+        SELECT school_name, COUNT(borrowing_id) FROM book_borrowings_per_school_unit WHERE YEAR(borrowing_date) = year GROUP BY school_name;
+    ELSEIF year IS NULL THEN
+        SELECT school_name, COUNT(borrowing_id) FROM book_borrowings_per_school_unit WHERE MONTH(borrowing_date) = month GROUP BY school_name;
+    ELSE
+        SELECT school_name, COUNT(borrowing_id) FROM book_borrowings_per_school_unit WHERE MONTH(borrowing_date) = month AND YEAR(borrowing_date) = year GROUP BY school_name;
+    END IF;
+END $$
+
+DELIMITER ;
+
+
+--
+-- 3.1.2) For a given book category (user-selected), which authors belong to it and which teachers have borrowed books from that category in the last year?
+--
+
+DELIMITER $$
+
+CREATE PROCEDURE authors_belong_to_category (IN category VARCHAR(30))
+BEGIN
+	SELECT DISTINCT a.author
+	FROM book_authors a
+	JOIN book_thematic_categories c
+       	ON a.book_id = c.book_id
+        WHERE c.thematic_category = category;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE teachers_borrowed_books_from_category (IN category VARCHAR(30))
+BEGIN   
+	SELECT DISTINCT fullname
+	FROM student_professor
+	WHERE stud_prof_id in
+	(SELECT DISTINCT br.stud_prof_id
+	FROM book_borrowing br
+	JOIN book_thematic_categories c
+	ON br.book_id = c.book_id
+	WHERE c.thematic_category = category
+        AND YEAR(br.borrowing_date) = YEAR(CURDATE()))
+	AND role = 'professor';
+END $$
+
+DELIMITER ;
+
+
+--
 -- 3.1.7) Find all the authors that have written five or less books than the author with the most books
 CREATE VIEW authors_with_five_or_less AS
 SELECT ba.author, COUNT(b.book_id) AS book_count
@@ -253,39 +337,14 @@ GROUP BY bo.operator_id
 HAVING num_borrowed > 20
 ORDER BY num_borrowed DESC;
 
--- 3.1.2) For a given category of books , find the authors that belong to it, and which educators have borrowed books of this category in the last year
-
-DELIMITER //
--- NEEDS CORRECTION  !!!!!!!!!
-CREATE PROCEDURE GetAuthorsAndEducatorsByCategory(IN category VARCHAR(255))
-BEGIN
-  SELECT DISTINCT author, fullname
-  FROM (
-    SELECT ba.author, sp.fullname
-    FROM book_authors ba
-    JOIN book_thematic_categories btc ON ba.book_id = btc.book_id
-    JOIN book b ON ba.book_id = b.book_id
-    JOIN book_borrowing bb ON b.book_id = bb.book_id
-    JOIN student_professor sp ON bb.stud_prof_id = sp.stud_prof_id
-    WHERE btc.thematic_category = category
-      AND YEAR(bb.borrowing_date) = YEAR(CURDATE()) - 1
-    ) AS subquery;
-END//
-
-DELIMITER ;
 
 
 
--- 3.1.2) For a specific book category, find all the authors of this category and the professors that have borrowed a book of that category the last year
--- CREATE PROCEDURE authors_of_category (thematic_category VARCHAR(255)) 
--- SELECT DISTINCT ba.author 
--- FROM book_authors ba 
--- JOIN book b ON ba.book_id = b.book_id 
--- JOIN book_thematic_categories btc ON b.book_id = btc.book_id 
--- WHERE btc.thematic_category = thematic_category ;
+--
+-- Operator
+--
 
-
-
+-- 3.2.1) 
 
 
 
