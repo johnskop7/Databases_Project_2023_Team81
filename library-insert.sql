@@ -144,11 +144,11 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
     
 
 --
-<<<<<<< HEAD
+-- <<<<<<< HEAD
 -- Insert 150 Book Data:  16 books(school_id = 1) + 18 (school_id = 2) + 18 (<<) + 19 (<<) + 19(<<) + 20 (<<) + 20 (<<) + 20 (<<) = 150 books
-=======
+-- =======
 -- Insert 150 Book Data:  16 books(school_id = 1) + 18 (school_id = 2) + 18 (<<) + 19 (<<) + 19 (<<) + 20 (<<) + 20 (<<) + 20 (<<) = 150 books
->>>>>>> 736d1dd47a7e1429330a70a019f1a05d9892c0fa
+-- >>>>>>> 736d1dd47a7e1429330a70a019f1a05d9892c0fa
 --
 
 	INSERT INTO book(title,publisher,ISBN,number_of_pages,image,language,available_copies,summary,key_words,school_id) VALUES								
@@ -302,7 +302,6 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 	('The Little Prince', 'Martin Chang', '978-0-291-44742-5', '140','https://dummyimage.com/534x919','Ndonga','4','Summary 148','[race, special, music]','8'),                             #148
 	('Les Misérables', 'Robert Durham', '978-1-334-82090-8', '350','https://placekitten.com/998/831','Fulah','3','Summary 149','[accept, throughout, own]','8'),                            #149
 	('The Iliad', 'Benjamin Ramirez', '978-0-15-159300-2', '119','https://dummyimage.com/837x647','Persian','3','Summary 150','[condition, car, sport]','8');                               #150
-                                                                                                                                                                                                
 
 
 
@@ -1037,135 +1036,135 @@ INSERT INTO book_borrowing(borrowing_date,return_date,actual_return_date,book_id
 ('2021-04-17', '2023-08-27', '2023-11-28', 142, 82);
 
 
-INSERT INTO reviews(stud_prof_id,rating,review_date,review_text,status,book_id) VALUES
-(1,5,"???",'review 1','approved',1),											#1
-(2,4,"???",'review 2','approved',2),											#2
-(25,1,"???",'review 3','not yet approved',1),										#3
-(30,5,"???",'review 4','denied',1),											#4
-(31,4,"???",'review 5','approved',5),											#5
-(1, 1, "???", 'review 6', 'approved', 1),										#6
-(2, 2, "???", 'review 7', 'approved', 14),										#7
-(2, 4, "???", 'review 8', 'approved', 3, ),										#8
-(3, 3, "???", 'review 9', 'approved', 4 ),										#9
-(2, 3, "???", 'review 10', 'approved', 5 ),										#10
-(2, 2, "???", 'review 11', 'approved', 2 ),										#11
-(3, 1, "???", 'review 12', 'approved', 7 ),										#12
-(1, 5, "???", 'review 13', 'approved', 8 ),										#13
-(3, 3, "???", 'review 14', 'approved', 9 ),										#14
-(3, 4, "???", 'review 15', 'approved', 10 ),										#15
-(27, 4, "???", 'review 16', 'not yet approved', 5 ),						 			#16
-(28, 3, "???", 'review 17', 'approved', 6 ),										#17
-(31, 5, "???", 'review 18', 'denied', 7 ),										#18
-(30, 1, "???", 'review 19', 'approved', 13 ),										#19
-(26, 2, "???", 'review 20', 'approved', 9 ),										#20
-(31, 3, "???", 'review 21', 'approved', 10  ),										#21
-(29, 4, "???", 'review 22', 'denied', 11 ),										#22
-(32, 2, "???", 'review 23', 'approved', 12 ),										#23
-(25, 3, "???", 'review 24', 'denied', 15 ),										#24
-(30, 5, "???", 'review 25', 'approved', 14 ),										#25
-(4, 3, "???", 'review 26', 'approved', 19 ),										#26
-(6, 2, "???", 'review 27', 'approved', 28 ),										#27
-(4, 3, "???", 'review 28', 'approved', 32 ),										#28
-(6, 4, "???", 'review 29', 'approved', 22 ),										#29
-(5, 2, "???", 'review 30', 'approved', 27 ),										#30
-(36, 4, "???", 'review 31', 'denied', 19 ),										#31
-(34, 1, "???", 'review 32', 'not yet approved', 29 ),									#32
-(39, 5, "???", 'review 33', 'approved', 23   ),										#33
-(33, 2, "???", 'review 34', 'denied', 18 ),										#34
-(35, 3, "???", 'review 35', 'approved', 24 ),										#35
-(38, 2, "???", 'review 36', 'denied', 27 ),										#36
-(37, 5, "???", 'review 37', 'not yet approved', 20 ),									#37
-(33, 4, "???", 'review 38', 'denied', 21 ),										#38
-(34, 3, "???", 'review 39', 'approved', 28 ),										#39
-(39, 1, "???", 'review 40', 'approved', 30 ),										#40
-(7, 2, "???", 'review 41', 'approved', 44 ),										#41
-(8, 3, "???", 'review 42', 'approved', 51 ),										#42
-(9, 4, "???", 'review 43', 'approved', 36 ),										#43
-(7, 1, "???", 'review 44', 'approved', 46 ),										#44
-(8, 5, "???", 'review 45', 'approved', 39 ),										#45
-(41, 4, "???", 'review 46', 'not yet approved', 51 ),									#46
-(45, 5, "???", 'review 47', 'approved', 52 ),										#47
-(48, 2, "???", 'review 48', 'denied', 38 ),										#48
-(43, 1, "???", 'review 49', 'approved', 40 ),										#49
-(47, 3, "???", 'review 50', 'approved', 36 ),										#50
-(44, 4, "???", 'review 51', 'denied', 41 ),										#51
-(42, 1, "???", 'review 52', 'approved', 50 ),										#52
-(46, 5, "???", 'review 53', 'approved', 35 ),										#53
-(41, 2, "???", 'review 54', 'denied', 48 ),										#54
-(45, 3, "???", 'review 55', 'approved', 47 ),										#55
-(10, 3, "???", 'review 56', 'approved', 66 ),										#56
-(11, 1, "???", 'review 57', 'approved', 59 ),										#57
-(12, 4, "???", 'review 58', 'approved', 57 ),										#58
-(10, 2, "???", 'review 59', 'approved', 70 ),										#59
-(11, 5, "???", 'review 60', 'approved', 64 ),										#60
-(52, 2, "???", 'review 61', 'approved', 45 ),										#61
-(51, 3, "???", 'review 62', 'denied', 39 ),										#62
-(54, 1, "???", 'review 63', 'approved', 42 ),										#63
-(55, 5, "???", 'review 64', 'denied', 52 ),										#64
-(49, 4, "???", 'review 65', 'not yet approved', 35 ),									#65
-(53, 2, "???", 'review 66', 'approved', 50 ),										#66
-(50, 5, "???", 'review 67', 'approved', 41 ),										#67
-(56, 1, "???", 'review 68', 'denied', 46 ),										#68
-(52, 3, "???", 'review 69', 'approved', 38 ),										#69
-(51, 2, "???", 'review 70', 'denied', 51 ),										#70
-(15, 3, "???", 'review 71', 'approved', 79 ),										#71
-(14, 2, "???", 'review 72', 'approved', 77 ),										#72
-(13, 4, "???", 'review 73', 'approved', 81 ),										#73
-(14, 5, "???", 'review 74', 'approved', 82 ),										#74
-(15, 1, "???", 'review 75', 'approved', 75 ),										#75
-(57, 3, "???", 'review 76', 'denied', 77 ),										#76
-(58, 5, "???", 'review 77', 'not yet approved', 82 ),									#77
-(59, 4, "???", 'review 78', 'approved', 74 ),										#78
-(62, 2, "???", 'review 79', 'approved', 85 ),										#79
-(60, 1, "???", 'review 80', 'denied', 78 ),										#80
-(57, 3, "???", 'review 81', 'approved', 79 ),										#81
-(63, 4, "???", 'review 82', 'approved', 76 ),										#82
-(61, 5, "???", 'review 83', 'denied', 84 ),										#83
-(62, 2, "???", 'review 84', 'approved', 73 ),										#84
-(59, 1, "???", 'review 85', 'denied', 89 ),										#85
-(16, 2, "???", 'review 86', 'approved', 105 ),									#86
-(17, 5, "???", 'review 87', 'approved', 100 ),									#87
-(16, 4, "???", 'review 88', 'approved', 98 ),										#88
-(18, 3, "???", 'review 89', 'approved', 108 ),									#89
-(18, 1, "???", 'review 90', 'approved', 96 ),										#90
-(67, 1, "???", 'review 91', 'approved', 93 ),										#91
-(70, 2, "???", 'review 92', 'not yet approved', 101 ),								#92
-(65, 4, "???", 'review 93', 'denied', 97 ),										#93
-(66, 3, "???", 'review 94', 'approved', 103 ),									#94
-(72, 5, "???", 'review 95', 'approved', 109 ),									#95
-(68, 2, "???", 'review 96', 'denied', 92 ),										#96
-(69, 1, "???", 'review 97', 'approved', 106 ),									#97
-(65, 4, "???", 'review 98', 'approved', 95 ),										#98
-(71, 3, "???", 'review 99', 'denied', 104 ),										#99
-(66, 5, "???", 'review 100', 'approved', 110 ),									#100
-(19, 2, "???", 'review 101', 'approved', 115 ),									#101
-(20, 4, "???", 'review 102', 'approved', 112 ),									#102
-(21, 3, "???", 'review 103', 'approved', 118 ),									#103
-(19, 1, "???", 'review 104', 'approved', 111 ),									#104
-(21, 5, "???", 'review 105', 'approved', 117 ),									#105
-(75, 3, "???", 'review 106', 'denied', 120 ),										#106
-(80, 5, "???", 'review 107', 'approved', 116 ),									#107
-(73, 4, "???", 'review 108', 'approved', 119 ),									#108
-(79, 2, "???", 'review 109', 'not yet approved', 128),								#109
-(74, 1, "???", 'review 110', 'approved', 111 ),									#110
-(75, 3, "???", 'review 111', 'denied', 112 ),										#111
-(78, 4, "???", 'review 112', 'approved', 123 ),									#112
-(73, 5, "???", 'review 113', 'denied', 127 ),										#113
-(80, 2, "???", 'review 114', 'approved', 125 ),									#114
-(77, 1, "???", 'review 115', 'approved', 114 ),									#115
-(22, 4, "???", 'review 116', 'approved', 139 ),									#116
-(23, 2, "???", 'review 117', 'approved', 135 ),									#117
-(24, 5, "???", 'review 118', 'approved', 141 ),									#118
-(24, 3, "???", 'review 119', 'approved', 136 ),									#119
-(22, 1, "???", 'review 120', 'approved', 133 ),									#120
-(82, 1, "???", 'review 121', 'approved', 137 ),									#121
-(88, 3, "???", 'review 122', 'denied', 146 ),										#122
-(82, 4, "???", 'review 123', 'not yet approved', 143 ),								#123
-(81, 2, "???", 'review 124', 'approved', 147 ),									#124
-(86, 5, "???", 'review 125', 'approved', 139 ),									#125
-(86, 1, "???", 'review 126', 'denied', 136 ),										#126
-(84, 4, "???", 'review 127', 'approved', 142 ),									#127
-(83, 3, "???", 'review 128', 'denied', 148 ),										#128
-(81, 5, "???", 'review 129', 'approved', 145 ),									#129
-(87, 2, "???", 'review 130', 'approved', 150 ),									#130
+-- INSERT INTO reviews(stud_prof_id,rating,review_date,review_text,status,book_id) VALUES
+-- (1,5,"???",'review 1','approved',1),											#1
+-- (2,4,"???",'review 2','approved',2),											#2
+-- (25,1,"???",'review 3','not yet approved',1),										#3
+-- (30,5,"???",'review 4','denied',1),											#4
+-- (31,4,"???",'review 5','approved',5),											#5
+-- (1, 1, "???", 'review 6', 'approved', 1),										#6
+-- (2, 2, "???", 'review 7', 'approved', 14),										#7
+-- (2, 4, "???", 'review 8', 'approved', 3 ),										#8
+-- (3, 3, "???", 'review 9', 'approved', 4 ),										#9
+-- (2, 3, "???", 'review 10', 'approved', 5 ),										#10
+-- (2, 2, "???", 'review 11', 'approved', 2 ),										#11
+-- (3, 1, "???", 'review 12', 'approved', 7 ),										#12
+-- (1, 5, "???", 'review 13', 'approved', 8 ),										#13
+-- (3, 3, "???", 'review 14', 'approved', 9 ),										#14
+-- (3, 4, "???", 'review 15', 'approved', 10 ),										#15
+-- (27, 4, "???", 'review 16', 'not yet approved', 5 ),						 			#16
+-- (28, 3, "???", 'review 17', 'approved', 6 ),										#17
+-- (31, 5, "???", 'review 18', 'denied', 7 ),										#18
+-- (30, 1, "???", 'review 19', 'approved', 13 ),										#19
+-- (26, 2, "???", 'review 20', 'approved', 9 ),										#20
+-- (31, 3, "???", 'review 21', 'approved', 10  ),										#21
+-- (29, 4, "???", 'review 22', 'denied', 11 ),										#22
+-- (32, 2, "???", 'review 23', 'approved', 12 ),										#23
+-- (25, 3, "???", 'review 24', 'denied', 15 ),										#24
+-- (30, 5, "???", 'review 25', 'approved', 14 ),										#25
+-- (4, 3, "???", 'review 26', 'approved', 19 ),										#26
+-- (6, 2, "???", 'review 27', 'approved', 28 ),										#27
+-- (4, 3, "???", 'review 28', 'approved', 32 ),										#28
+-- (6, 4, "???", 'review 29', 'approved', 22 ),										#29
+-- (5, 2, "???", 'review 30', 'approved', 27 ),										#30
+-- (36, 4, "???", 'review 31', 'denied', 19 ),										#31
+-- (34, 1, "???", 'review 32', 'not yet approved', 29 ),									#32
+-- (39, 5, "???", 'review 33', 'approved', 23   ),										#33
+-- (33, 2, "???", 'review 34', 'denied', 18 ),										#34
+-- (35, 3, "???", 'review 35', 'approved', 24 ),										#35
+-- (38, 2, "???", 'review 36', 'denied', 27 ),										#36
+-- (37, 5, "???", 'review 37', 'not yet approved', 20 ),									#37
+-- (33, 4, "???", 'review 38', 'denied', 21 ),										#38
+-- (34, 3, "???", 'review 39', 'approved', 28 ),										#39
+-- (39, 1, "???", 'review 40', 'approved', 30 ),										#40
+-- (7, 2, "???", 'review 41', 'approved', 44 ),										#41
+-- (8, 3, "???", 'review 42', 'approved', 51 ),										#42
+-- (9, 4, "???", 'review 43', 'approved', 36 ),										#43
+-- (7, 1, "???", 'review 44', 'approved', 46 ),										#44
+-- (8, 5, "???", 'review 45', 'approved', 39 ),										#45
+-- (41, 4, "???", 'review 46', 'not yet approved', 51 ),									#46
+-- (45, 5, "???", 'review 47', 'approved', 52 ),										#47
+-- (48, 2, "???", 'review 48', 'denied', 38 ),										#48
+-- (43, 1, "???", 'review 49', 'approved', 40 ),										#49
+-- (47, 3, "???", 'review 50', 'approved', 36 ),										#50
+-- (44, 4, "???", 'review 51', 'denied', 41 ),										#51
+-- (42, 1, "???", 'review 52', 'approved', 50 ),										#52
+-- (46, 5, "???", 'review 53', 'approved', 35 ),										#53
+-- (41, 2, "???", 'review 54', 'denied', 48 ),										#54
+-- (45, 3, "???", 'review 55', 'approved', 47 ),										#55
+-- (10, 3, "???", 'review 56', 'approved', 66 ),										#56
+-- (11, 1, "???", 'review 57', 'approved', 59 ),										#57
+-- (12, 4, "???", 'review 58', 'approved', 57 ),										#58
+-- (10, 2, "???", 'review 59', 'approved', 70 ),										#59
+-- (11, 5, "???", 'review 60', 'approved', 64 ),										#60
+-- (52, 2, "???", 'review 61', 'approved', 45 ),										#61
+-- (51, 3, "???", 'review 62', 'denied', 39 ),										#62
+-- (54, 1, "???", 'review 63', 'approved', 42 ),										#63
+-- (55, 5, "???", 'review 64', 'denied', 52 ),										#64
+-- (49, 4, "???", 'review 65', 'not yet approved', 35 ),									#65
+-- (53, 2, "???", 'review 66', 'approved', 50 ),										#66
+-- (50, 5, "???", 'review 67', 'approved', 41 ),										#67
+-- (56, 1, "???", 'review 68', 'denied', 46 ),										#68
+-- (52, 3, "???", 'review 69', 'approved', 38 ),										#69
+-- (51, 2, "???", 'review 70', 'denied', 51 ),										#70
+-- (15, 3, "???", 'review 71', 'approved', 79 ),										#71
+-- (14, 2, "???", 'review 72', 'approved', 77 ),										#72
+-- (13, 4, "???", 'review 73', 'approved', 81 ),										#73
+-- (14, 5, "???", 'review 74', 'approved', 82 ),										#74
+-- (15, 1, "???", 'review 75', 'approved', 75 ),										#75
+-- (57, 3, "???", 'review 76', 'denied', 77 ),										#76
+-- (58, 5, "???", 'review 77', 'not yet approved', 82 ),									#77
+-- (59, 4, "???", 'review 78', 'approved', 74 ),										#78
+-- (62, 2, "???", 'review 79', 'approved', 85 ),										#79
+-- (60, 1, "???", 'review 80', 'denied', 78 ),										#80
+-- (57, 3, "???", 'review 81', 'approved', 79 ),										#81
+-- (63, 4, "???", 'review 82', 'approved', 76 ),										#82
+-- (61, 5, "???", 'review 83', 'denied', 84 ),										#83
+-- (62, 2, "???", 'review 84', 'approved', 73 ),										#84
+-- (59, 1, "???", 'review 85', 'denied', 89 ),										#85
+-- (16, 2, "???", 'review 86', 'approved', 105 ),									#86
+-- (17, 5, "???", 'review 87', 'approved', 100 ),									#87
+-- (16, 4, "???", 'review 88', 'approved', 98 ),										#88
+-- (18, 3, "???", 'review 89', 'approved', 108 ),									#89
+-- (18, 1, "???", 'review 90', 'approved', 96 ),										#90
+-- (67, 1, "???", 'review 91', 'approved', 93 ),										#91
+-- (70, 2, "???", 'review 92', 'not yet approved', 101 ),								#92
+-- (65, 4, "???", 'review 93', 'denied', 97 ),										#93
+-- (66, 3, "???", 'review 94', 'approved', 103 ),									#94
+-- (72, 5, "???", 'review 95', 'approved', 109 ),									#95
+-- (68, 2, "???", 'review 96', 'denied', 92 ),										#96
+-- (69, 1, "???", 'review 97', 'approved', 106 ),									#97
+-- (65, 4, "???", 'review 98', 'approved', 95 ),										#98
+-- (71, 3, "???", 'review 99', 'denied', 104 ),										#99
+-- (66, 5, "???", 'review 100', 'approved', 110 ),									#100
+-- (19, 2, "???", 'review 101', 'approved', 115 ),									#101
+-- (20, 4, "???", 'review 102', 'approved', 112 ),									#102
+-- (21, 3, "???", 'review 103', 'approved', 118 ),									#103
+-- (19, 1, "???", 'review 104', 'approved', 111 ),									#104
+-- (21, 5, "???", 'review 105', 'approved', 117 ),									#105
+-- (75, 3, "???", 'review 106', 'denied', 120 ),										#106
+-- (80, 5, "???", 'review 107', 'approved', 116 ),									#107
+-- (73, 4, "???", 'review 108', 'approved', 119 ),									#108
+-- (79, 2, "???", 'review 109', 'not yet approved', 128),								#109
+-- (74, 1, "???", 'review 110', 'approved', 111 ),									#110
+-- (75, 3, "???", 'review 111', 'denied', 112 ),										#111
+-- (78, 4, "???", 'review 112', 'approved', 123 ),									#112
+-- (73, 5, "???", 'review 113', 'denied', 127 ),										#113
+-- (80, 2, "???", 'review 114', 'approved', 125 ),									#114
+-- (77, 1, "???", 'review 115', 'approved', 114 ),									#115
+-- (22, 4, "???", 'review 116', 'approved', 139 ),									#116
+-- (23, 2, "???", 'review 117', 'approved', 135 ),									#117
+-- (24, 5, "???", 'review 118', 'approved', 141 ),									#118
+-- (24, 3, "???", 'review 119', 'approved', 136 ),									#119
+-- (22, 1, "???", 'review 120', 'approved', 133 ),									#120
+-- (82, 1, "???", 'review 121', 'approved', 137 ),									#121
+-- (88, 3, "???", 'review 122', 'denied', 146 ),										#122
+-- (82, 4, "???", 'review 123', 'not yet approved', 143 ),								#123
+-- (81, 2, "???", 'review 124', 'approved', 147 ),									#124
+-- (86, 5, "???", 'review 125', 'approved', 139 ),									#125
+-- (86, 1, "???", 'review 126', 'denied', 136 ),										#126
+-- (84, 4, "???", 'review 127', 'approved', 142 ),									#127
+-- (83, 3, "???", 'review 128', 'denied', 148 ),										#128
+-- (81, 5, "???", 'review 129', 'approved', 145 ),									#129
+-- (87, 2, "???", 'review 130', 'approved', 150 )									#130
 

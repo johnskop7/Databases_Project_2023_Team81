@@ -193,7 +193,6 @@ CREATE TABLE book_borrowing (
   -- CONSTRAINT fk_book_borrowing_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
-
 -- QUERIES
 -- 3.1.7) Find all the authors that have written five or less books than the author with the most books
 CREATE VIEW authors_with_five_or_less AS
@@ -210,6 +209,72 @@ HAVING COUNT(b.book_id) <= (
         GROUP BY ba.author
     ) AS subquery
 );
+
+-- 3.1.4) Find all the authors whose books have never been borrowed
+CREATE VIEW authors_with_no_borrowing AS
+SELECT DISTINCT ba.author
+FROM book_authors ba
+WHERE ba.book_id IN (
+  SELECT book_id
+  FROM book
+  WHERE book_id NOT IN (SELECT book_id FROM book_borrowing)
+)
+AND ba.author NOT IN (
+  SELECT DISTINCT ba2.author
+  FROM book_authors ba2
+  JOIN book_borrowing bb ON ba2.book_id = bb.book_id
+);
+ 
+-- 3.1.3) Find all the professors under the age of 40 that have borrowed the most books and the number of the books
+CREATE VIEW prof_with_most_borrowings AS
+SELECT sp.stud_prof_id, COUNT(bb.book_id) AS num_borrowed
+FROM student_professor sp
+JOIN book_borrowing bb ON sp.stud_prof_id = bb.stud_prof_id
+WHERE sp.role = 'professor' AND TIMESTAMPDIFF(YEAR, sp.date_of_birth, CURDATE()) < 40
+GROUP BY sp.stud_prof_id
+HAVING COUNT(bb.book_id) = (
+  SELECT COUNT(bb2.book_id) AS max_books
+  FROM student_professor sp2
+  JOIN book_borrowing bb2 ON sp2.stud_prof_id = bb2.stud_prof_id
+  WHERE sp2.role = 'professor' AND TIMESTAMPDIFF(YEAR, sp2.date_of_birth, CURDATE()) < 40
+  GROUP BY sp2.stud_prof_id
+  ORDER BY max_books DESC
+  LIMIT 1
+);
+
+-- 3.1.5) Find the operators that have loaned the most books(>20) in a span of a year
+CREATE VIEW oper_with_most_loans AS
+SELECT bo.operator_id, COUNT(bb.book_id) AS num_borrowed
+FROM book_borrowing bb
+JOIN student_professor sp ON bb.stud_prof_id = sp.stud_prof_id
+JOIN operator bo ON sp.operator_id = bo.operator_id
+WHERE YEAR(bb.borrowing_date) = YEAR(CURDATE()) AND DATEDIFF(CURDATE(), bb.borrowing_date) <= 365
+GROUP BY bo.operator_id
+HAVING num_borrowed > 20
+ORDER BY num_borrowed DESC;
+
+-- 3.1.2) For a given category of books , find the authors that belong to it, and which educators have borrowed books of this category in the last year
+
+DELIMITER //
+-- NEEDS CORRECTION  !!!!!!!!!
+CREATE PROCEDURE GetAuthorsAndEducatorsByCategory(IN category VARCHAR(255))
+BEGIN
+  SELECT DISTINCT author, fullname
+  FROM (
+    SELECT ba.author, sp.fullname
+    FROM book_authors ba
+    JOIN book_thematic_categories btc ON ba.book_id = btc.book_id
+    JOIN book b ON ba.book_id = b.book_id
+    JOIN book_borrowing bb ON b.book_id = bb.book_id
+    JOIN student_professor sp ON bb.stud_prof_id = sp.stud_prof_id
+    WHERE btc.thematic_category = category
+      AND YEAR(bb.borrowing_date) = YEAR(CURDATE()) - 1
+    ) AS subquery;
+END//
+
+DELIMITER ;
+
+
 
 -- 3.1.2) For a specific book category, find all the authors of this category and the professors that have borrowed a book of that category the last year
 -- CREATE PROCEDURE authors_of_category (thematic_category VARCHAR(255)) 
