@@ -278,38 +278,8 @@ DELIMITER ;
 
 
 --
--- 3.1.7) Find all the authors that have written five or less books than the author with the most books
-CREATE VIEW authors_with_five_or_less AS
-SELECT ba.author, COUNT(b.book_id) AS book_count
-FROM book_authors ba
-JOIN book b ON ba.book_id = b.book_id
-GROUP BY ba.author
-HAVING COUNT(b.book_id) <= (
-    SELECT MAX(book_count) - 5
-    FROM (
-        SELECT COUNT(b.book_id) AS book_count
-        FROM book_authors ba
-        JOIN book b ON ba.book_id = b.book_id
-        GROUP BY ba.author
-    ) AS subquery
-);
-
--- 3.1.4) Find all the authors whose books have never been borrowed
-CREATE VIEW authors_with_no_borrowing AS
-SELECT DISTINCT ba.author
-FROM book_authors ba
-WHERE ba.book_id IN (
-  SELECT book_id
-  FROM book
-  WHERE book_id NOT IN (SELECT book_id FROM book_borrowing)
-)
-AND ba.author NOT IN (
-  SELECT DISTINCT ba2.author
-  FROM book_authors ba2
-  JOIN book_borrowing bb ON ba2.book_id = bb.book_id
-);
- 
 -- 3.1.3) Find all the professors under the age of 40 that have borrowed the most books and the number of the books
+--
 CREATE VIEW prof_with_most_borrowings AS
 SELECT sp.stud_prof_id, COUNT(bb.book_id) AS num_borrowed
 FROM student_professor sp
@@ -326,7 +296,28 @@ HAVING COUNT(bb.book_id) = (
   LIMIT 1
 );
 
+
+--
+-- 3.1.4) Find all the authors whose books have never been borrowed
+--
+CREATE VIEW authors_with_no_borrowing AS
+SELECT DISTINCT ba.author
+FROM book_authors ba
+WHERE ba.book_id IN (
+  SELECT book_id
+  FROM book
+  WHERE book_id NOT IN (SELECT book_id FROM book_borrowing)
+)
+AND ba.author NOT IN (
+  SELECT DISTINCT ba2.author
+  FROM book_authors ba2
+  JOIN book_borrowing bb ON ba2.book_id = bb.book_id
+);
+
+
+--
 -- 3.1.5) Find the operators that have loaned the most books(>20) in a span of a year
+--
 CREATE VIEW oper_with_most_loans AS
 SELECT bo.operator_id, COUNT(bb.book_id) AS num_borrowed
 FROM book_borrowing bb
@@ -338,6 +329,41 @@ HAVING num_borrowed > 20
 ORDER BY num_borrowed DESC;
 
 
+--
+-- 3.1.6) Many books cover more than one category. Among field pairs (e.g., history and poetry) that are common in books, find the top-3 pairs that appeared in borrowings.
+--
+CREATE VIEW top_3_pairs AS
+SELECT th.Category1, th.Category2, COUNT(*) AS Score
+FROM (SELECT c1.book_id, c1.thematic_category AS Category1, c2.thematic_category AS Category2
+FROM book_thematic_categories c1
+JOIN book_thematic_categories c2
+ON c1.book_id = c2.book_id AND c1.thematic_category > c2.thematic_category) th
+JOIN book_borrowing br
+ON th.book_id = br.book_id
+GROUP BY th.Category1, th.Category2
+ORDER BY Score DESC LIMIT 3;
+
+
+--
+-- 3.1.7) Find all the authors that have written five or less books than the author with the most books
+--
+CREATE VIEW authors_with_five_or_less AS
+SELECT ba.author, COUNT(b.book_id) AS book_count
+FROM book_authors ba
+JOIN book b ON ba.book_id = b.book_id
+GROUP BY ba.author
+HAVING COUNT(b.book_id) <= (
+    SELECT MAX(book_count) - 5
+    FROM (
+        SELECT COUNT(b.book_id) AS book_count
+        FROM book_authors ba
+        JOIN book b ON ba.book_id = b.book_id
+        GROUP BY ba.author
+    ) AS subquery
+);
+
+
+ 
 
 
 --
