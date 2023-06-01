@@ -15,10 +15,10 @@ exports.handleLogin_admin = (req, res ) => {
     if (messages.length == 0) messages = [];
 
     // Retrieve username and password from request body
-    const username = req.body.username;
-    const password = req.body.password;
+    const username = req.body.admin_username;
+    const password = req.body.admin_password;
 
-    console.log('Reached query!')
+    console.log(username)
     // Query the database to check if the user exists
     pool.getConnection((err, conn) => {
       if (err) {

@@ -41,8 +41,8 @@ app.use(express.json());
 
 app.use('/', homepageRouter);
 app.use('/', memberloginRouter);
-app.use('/admin_login', adminloginRouter);
-app.use('/operator_login', operatorloginRouter);
+app.use('/', adminloginRouter);
+app.use('/', operatorloginRouter);
 
 /* End of routes used by the project */
 

@@ -2,6 +2,7 @@
 const {pool} = require('../database');
 
 exports.getOperatorLoginPage= (req, res, next) => {
+    console.log('Found!')
     res.render('operator_login.ejs', {
         pageTitle: 'Operator Login Page',
         messages: [] // You can pass any desired messages to display on the admin login page
@@ -15,8 +16,10 @@ exports.handleLogin_operator = (req, res) => {
     if (messages.length == 0) messages = [];
 
     // Retrieve username and password from request body
-    const username = req.body.username;
-    const password = req.body.password;
+    const username = req.body.operator_username;
+    const password = req.body.operator_password;
+
+    console.log('Reached controller!')
   
     // Query the database to check if the user exists
     pool.getConnection((err, conn) => {
