@@ -500,8 +500,13 @@ DELIMITER ;
 
 
 
-
-
-
-
-
+DELIMITER $$
+CREATE PROCEDURE check_username_password(IN username_ VARCHAR(45), IN password_ VARCHAR(45))
+BEGIN
+	IF username_ IS NULL AND password_ IS NULL THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Miami Heat in 6';
+	ELSE 
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'LALALAL';
+ 	END IF;
+END $$
+DELIMITER ;
