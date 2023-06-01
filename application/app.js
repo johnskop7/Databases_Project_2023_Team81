@@ -26,7 +26,11 @@ app.listen(port, () => {
 
 /* ROUTES and how to import routes */
 
-const loginRouter = require('./routes/login_page');
+
+const adminloginRouter = require('./routes/administrator');
+const operatorloginRouter = require('./routes/operators');
+const memberloginRouter = require('./routes/stud_prof');
+const homepageRouter = require('./routes/get_home');
 
 /* end of ROUTES and how to import routes */
 
@@ -35,9 +39,10 @@ app.use(express.json());
 
 /* Routes used by the project */
 
-app.use('/', loginRouter);
-app.use('/admin_login' , loginRouter)
-app.use('/operator_login' , loginRouter)
+app.use('/', homepageRouter);
+app.use('/', memberloginRouter);
+app.use('/admin_login', adminloginRouter);
+app.use('/operator_login', operatorloginRouter);
 
 /* End of routes used by the project */
 
