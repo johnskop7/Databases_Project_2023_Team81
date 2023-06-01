@@ -498,15 +498,74 @@ END $$
 DELIMITER ;
 
 
+--
+-- 3.2.2) Find all borrowers who own at least one book and have delayed its return. (Search criteria: First Name, Last Name, Delay Days).
+-- 
+
+CREATE VIEW overdue_library_book AS
+SELECT br.book_id, br.stud_prof_id, DATEDIFF(CURDATE(), return_date) AS overdue_days, sp.fullname, sp.operator_id
+FROM book_borrowing br
+JOIN student_professor sp
+ON br.stud_prof_id = sp.stud_prof_id
+WHERE actual_return_date IS NULL
+AND DATEDIFF(CURDATE(), return_date) > 0;
 
 
 DELIMITER $$
-CREATE PROCEDURE check_username_password(IN username_ VARCHAR(45), IN password_ VARCHAR(45))
-BEGIN
-	IF username_ IS NULL AND password_ IS NULL THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Miami Heat in 6';
-	ELSE 
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'LALALAL';
- 	END IF;
+CREATE PROCEDURE find_overdue_borrowers(IN operator_id_ SMALLINT, IN first_name_ VARCHAR(20), IN last_name_ VARCHAR(20), IN overdue_days_ SMALLINT)
+BEGIN 
+	IF first_name_ IS NULL AND last_name_ IS NULL AND overdue_days_ IS NULL THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'At least one field is required';
+	ELSEIF first_name_ IS NOT NULL AND last_name_ IS NULL AND overdue_days_ IS NULL THEN
+		SELECT fullname, overdue_days
+		FROM overdue_library_book
+		WHERE operator_id = operator_id_
+		AND (fullname LIKE CONCAT('%', first_name_, '%'));
+	ELSEIF first_name_ IS NULL AND last_name_ IS NOT NULL AND overdue_days_ IS NULL THEN
+		SELECT fullname, overdue_days
+                FROM overdue_library_book
+                WHERE operator_id = operator_id_
+                AND (fullname LIKE CONCAT('%', last_name_, '%'));
+	ELSEIF first_name_ IS NULL AND last_name_ IS NULL AND overdue_days_ IS NOT NULL THEN
+		SELECT fullname, overdue_days
+                FROM overdue_library_book
+                WHERE operator_id = operator_id_
+                AND overdue_days = overdue_days_;
+	ELSEIF first_name_ IS NOT NULL AND last_name_ IS NOT NULL AND overdue_days_ IS NULL THEN
+		SELECT fullname, overdue_days
+                FROM overdue_library_book
+                WHERE operator_id = operator_id_
+                AND (fullname LIKE CONCAT('%', first_name_, '%'))
+		AND (fullname LIKE CONCAT('%', last_name_, '%'));
+	ELSEIF first_name_ IS  NULL AND last_name_ IS NOT NULL AND overdue_days_ IS NOT NULL THEN
+                SELECT fullname, overdue_days
+                FROM overdue_library_book
+                WHERE operator_id = operator_id_
+                AND (fullname LIKE CONCAT('%', last_name_, '%'))
+		AND overdue_days = overdue_days_;
+	ELSEIF first_name_ IS NOT NULL AND last_name_ IS NULL AND overdue_days_ IS NOT NULL THEN
+		SELECT fullname, overdue_days
+                FROM overdue_library_book
+                WHERE operator_id = operator_id_
+                AND (fullname LIKE CONCAT('%', first_name_, '%'))
+                AND overdue_days = overdue_days_;
+	ELSE
+		SELECT fullname, overdue_days
+                FROM overdue_library_book
+                WHERE operator_id = operator_id_
+                AND (fullname LIKE CONCAT('%', first_name_, '%'))
+		AND (fullname LIKE CONCAT('%', last_name_, '%'))
+                AND overdue_days = overdue_days_;
+	END IF;
 END $$
 DELIMITER ;
+
+
+--
+-- 3.2.3) Average Ratings per borrower and category (Search criteria: user/category)
+--
+
+
+
+
+
