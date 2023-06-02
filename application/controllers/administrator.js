@@ -228,3 +228,44 @@ exports.handleLogin_admin = (req, res ) => {
         .catch(err => console.log(err))
     });
   };
+
+  
+  exports.getAdminProfilePage= (req, res, next) => {
+    res.render('admin_profile.ejs', {
+        pageTitle: 'Administrator Login Page',
+        messages: [] // You can pass any desired messages to display on the admin login page
+      });
+  }
+
+
+exports.UpdateAdminPassword = (req, res, next) => {
+
+  /* get necessary data sent */
+  const password = req.body.newPassword;
+  pool.getConnection((err, conn) => {
+      var sqlQuery = `UPDATE administrator SET password = ? WHERE username = 'Spanoulis' `;
+
+      conn.promise().query(sqlQuery, [password])
+      .then(() => {
+          console.log(sqlQuery);
+          pool.releaseConnection(conn);
+          res.render('admin_mainpage.ejs', {
+            pageTitle: 'Administrator Main Page',
+            messages: [] // You can pass any desired messages to display on the admin login page
+          });
+      })
+      .catch(err => {
+          console.log(err);
+          req.flash('messages', { type: 'error', value: "Something went wrong, Executive could not be updated." })
+          res.redirect('/admin_mainpage');
+      })
+  })
+}
+
+
+exports.getBacktotheMainPage= (req, res, next) => {
+  res.render('member_login.ejs', {
+      pageTitle: 'Member Login Page',
+      messages: [] // You can pass any desired messages to display on the admin login page
+    });
+}
