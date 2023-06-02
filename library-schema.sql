@@ -565,7 +565,45 @@ DELIMITER ;
 -- 3.2.3) Average Ratings per borrower and category (Search criteria: user/category)
 --
 
+CREATE VIEW reviews_borrowers_categories AS
+SELECT r.stud_prof_id, r.book_id, r.status, r.rating, c.thematic_category, sp.operator_id, sp.fullname
+FROM reviews r
+JOIN book_thematic_categories c
+ON r.book_id = c.book_id
+JOIN student_professor sp
+ON r.stud_prof_id = sp.stud_prof_id
+WHERE r.status = 'approved';
+
+DELIMITER $$
+CREATE PROCEDURE avg_rating_borrowers_categories(IN operator_id_ SMALLINT, IN full_name_ VARCHAR(45), IN category_ VARCHAR(40))
+BEGIN
+	IF full_name_ IS NULL AND category_ IS NULL THEN 
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'At least one field is required';
+	ELSEIF full_name_ IS NOT NULL AND category_ IS NULL THEN
+		SELECT th.fullname, AVG(th.rating) AS Average_rating
+		FROM (SELECT fullname, rating, operator_id
+		      FROM reviews_borrowers_categories
+		      WHERE (fullname LIKE CONCAT('%', full_name_, '%'))
+		      AND operator_id = operator_id_
+	              GROUP BY book_id) AS th; 
+	ELSEIF full_name_ IS NULL AND category_ IS NOT NULL THEN
+		SELECT th.thematic_category, AVG(th.rating) AS Average_rating
+		FROM (SELECT stud_prof_id, book_id, rating, operator_id, thematic_category
+		      FROM reviews_borrowers_categories
+		      WHERE thematic_category = category_
+	              AND operator_id = operator_id_) AS th;
+	ELSE
+		SELECT th.fullname, th.thematic_category, AVG(th.rating) AS Average_rating
+		FROM (SELECT fullname, thematic_category, rating, operator_id
+		      FROM reviews_borrowers_categories
+	              WHERE (fullname LIKE CONCAT('%', full_name_, '%'))
+	              AND thematic_category = category_
+		      AND operator_id = operator_id_) AS th;
+	END IF;
+END $$
+DELIMITER ;
 
 
+       
 
 
