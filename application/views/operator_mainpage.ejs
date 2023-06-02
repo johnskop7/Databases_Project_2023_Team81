@@ -98,7 +98,7 @@
   <div class="container-wrapper">
     <div class="container">
       <h1>Ερώτηση 3.2.1</h1>
-
+      <p>Βρείτε όλα τα βιβλία κατά Τίτλο, Συγγραφέα (Κριτήρια αναζήτησης: τίτλος/κατηγορία/συγγραφέας/αντίτυπα)</p>
       <form id="bookForm" action="/books_per_school" method="get">
         <label for="title">Τίτλος:</label>
         <input type="text" id="title" name="title">
@@ -118,7 +118,9 @@
     
     <div class="container">
       <h1>Ερώτηση 3.2.2</h1>
-
+      <p>Βρείτε όλους τους δανειζόμενους που έχουν στην κατοχή τους τουλάχιστον ένα βιβλίο και 
+        έχουν καθυστερήσει την επιστροφή του. (Κριτήρια αναζήτησης: Όνομα, Επώνυμο, Ημέρες 
+        Καθυστέρησης)</p>
       <form id="studentForm" action="/late_returns" method="get">
         <label for="firstName">Όνομα:</label>
         <input type="text" id="firstName" name="firstName">
@@ -134,17 +136,36 @@
     </div>
     <div class="container">
         <h1>Ερώτηση 3.2.3</h1>
-  
+        <p>Μέσος Όρος Αξιολογήσεων ανά δανειζόμενο και κατηγορία (Κριτήρια αναζήτησης: 
+        χρήστης/ κατηγορία) </p>
         <form id="thirdForm" action="/average_rating" method="get">
           <label for="studentName">Ονοματεπώνυμο μαθητή:</label>
           <input type="text" id="studentName" name="studentName">
-  
+      
           <label for="category">Κατηγορία:</label>
-          <input type="text" id="category" name="category">
-  
+          <select id="category" name="category">
+            <option value="">-- Επιλέξτε κατηγορία --</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Romance">Romance</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Horror">Horror</option>
+            <option value="Biography">Biography</option>
+            <option value="Self-Help">Self-Help</option>
+            <option value="Crime">Crime</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Poetry">Poetry</option>
+            <option value="Action">Action</option>
+            <option value="Graphic Novel">Graphic Novel</option>
+          </select>
+      
           <button type="button" onclick="submitReviewForm()">Check</button>
         </form>
       </div>
+      
   </div>
 </body>
 </html>

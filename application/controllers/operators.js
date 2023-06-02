@@ -73,7 +73,7 @@ exports.getBooks = (req, res) => {
               pageTitle: "Query 3.2.1",
               results: results,
             });
-            //console.log(results)
+            console.log(results)
           })
           .then(() => pool.releaseConnection(conn))
           .catch(err => console.log(err))

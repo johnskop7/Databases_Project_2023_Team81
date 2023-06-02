@@ -386,119 +386,125 @@ GROUP BY b.book_id;
 
 
 DELIMITER $$
-CREATE PROCEDURE list_title_authors(IN School_id1 SMALLINT UNSIGNED, IN Title1 VARCHAR(100), IN Category1 VARCHAR(30), IN Author1 VARCHAR(70), Copies1 SMALLINT UNSIGNED) 
+CREATE PROCEDURE list_title_authors(
+    IN School_id1 SMALLINT UNSIGNED,
+    IN Title1 VARCHAR(100),
+    IN Category1 VARCHAR(30),
+    IN Author1 VARCHAR(70),
+    IN Copies1 SMALLINT UNSIGNED
+) 
 BEGIN 
-	IF Title1 IS NULL AND Category1 IS NULL AND Author1 IS NULL AND Copies1 IS NULL THEN
-              SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'At least one field is required';
-	ELSEIF Title1 IS NOT NULL AND Category1 IS NULL AND Author1 IS NULL AND Copies1 IS NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (title LIKE CONCAT('%', Title1, '%'))
-		GROUP BY book_id;
-	ELSEIF Title1 IS NULL AND Category1 IS NOT NULL AND Author1 IS NULL AND Copies1 IS NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (thematic_category LIKE CONCAT('%', Category1, '%'))
-                GROUP BY book_id;
-	ELSEIF Title1 IS NULL AND Category1 IS NULL AND Author1 IS NOT NULL AND Copies1 IS NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (author LIKE CONCAT('%', Author1, '%'))
-                GROUP BY book_id;
-	ELSEIF Title1 IS NULL AND Category1 IS NULL AND Author1 IS NULL AND Copies1 IS NOT NULL THEN
-		SELECT title, author
-		FROM book_info_3_joins
-		WHERE school_id = School_id1
-		AND (available_copies = Copies1);
-                
-	ELSEIF Title1 IS NOT NULL AND Category1 IS NOT NULL AND Author1 IS NULL AND Copies1 IS NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (title LIKE CONCAT('%', Title1, '%'))
-                AND (thematic_category LIKE CONCAT('%', Category1, '%'))
-                GROUP BY book_id;
-	ELSEIF Title1 IS NULL AND Category1 IS NOT NULL AND Author1 IS NOT NULL AND Copies1 IS NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (thematic_category LIKE CONCAT('%', Category1, '%'))
-                AND (author LIKE CONCAT('%', Author1, '%'))
-                GROUP BY book_id;
-	ELSEIF Title1 IS NULL AND Category1 IS NULL AND Author1 IS NOT NULL AND Copies1 IS NOT NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (author LIKE CONCAT('%', Author1, '%'))
-                AND (available_copies = Copies1)
-                GROUP BY book_id;
-	ELSEIF Title1 IS NOT NULL AND Category1 IS NULL AND Author1 IS NOT NULL AND Copies1 IS NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (title LIKE CONCAT('%', Title1, '%'))
-                AND (author LIKE CONCAT('%', Author1, '%'))
-                GROUP BY book_id;
-	ELSEIF Title1 IS NOT NULL AND Category1 IS NULL AND Author1 IS NULL AND Copies1 IS NOT NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (title LIKE CONCAT('%', Title1, '%'))
-                AND (available_copies = Copies1)
-                GROUP BY book_id;
-	ELSEIF Title1 IS NULL AND Category1 IS NOT NULL AND Author1 IS NULL AND Copies1 IS NOT NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (thematic_category LIKE CONCAT('%', Category1, '%'))
-                AND (available_copies = Copies1)
-                GROUP BY book_id;
-	ELSEIF Title1 IS NOT NULL AND Category1 IS NOT NULL AND Author1 IS NOT NULL AND Copies1 IS NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (title LIKE CONCAT('%', Title1, '%'))
-                AND (thematic_category LIKE CONCAT('%', Category1, '%'))
-                AND (author LIKE CONCAT('%', Author1, '%'))
-                GROUP BY book_id;
-	ELSEIF Title1 IS NULL AND Category1 IS NOT NULL AND Author1 IS NOT NULL AND Copies1 IS NOT NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (thematic_category LIKE CONCAT('%', Category1, '%'))
-                AND (author LIKE CONCAT('%', Author1, '%'))
-                AND (available_copies = Copies1)
-                GROUP BY book_id;
-	ELSEIF Title1 IS NOT NULL AND Category1 IS NULL AND Author1 IS NOT NULL AND Copies1 IS NOT NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (title LIKE CONCAT('%', Title1, '%'))
-                AND (author LIKE CONCAT('%', Author1, '%'))
-                AND (available_copies = Copies1)
-                GROUP BY book_id;
-	ELSEIF Title1 IS NOT NULL AND Category1 IS NOT NULL AND Author1 IS NULL AND Copies1 IS NOT NULL THEN
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (title LIKE CONCAT('%', Title1, '%'))
-                AND (thematic_category LIKE CONCAT('%', Category1, '%'))
-                AND (available_copies = Copies1)
-                GROUP BY book_id;
-	ELSE 
-		SELECT title, GROUP_CONCAT(DISTINCT author)
-                FROM book_info_3_joins
-                WHERE school_id = School_id1
-                AND (title LIKE CONCAT('%', Title1, '%'))
-                AND (thematic_category LIKE CONCAT('%', Category1, '%'))
-                AND (author LIKE CONCAT('%', Author1, '%'))
-                AND (available_copies = Copies1)
-                GROUP BY title;
-	END IF;
+    IF Title1 IS NULL AND Category1 IS NULL AND Author1 IS NULL AND Copies1 IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'At least one field is required';
+    ELSEIF Title1 IS NOT NULL AND Category1 IS NULL AND Author1 IS NULL AND Copies1 IS NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (title LIKE CONCAT('%', Title1, '%'))
+        GROUP BY book_id;
+    ELSEIF Title1 IS NULL AND Category1 IS NOT NULL AND Author1 IS NULL AND Copies1 IS NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (thematic_category LIKE CONCAT('%', Category1, '%'))
+        GROUP BY book_id;
+    ELSEIF Title1 IS NULL AND Category1 IS NULL AND Author1 IS NOT NULL AND Copies1 IS NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (author LIKE CONCAT('%', Author1, '%'))
+        GROUP BY book_id;
+    ELSEIF Title1 IS NULL AND Category1 IS NULL AND Author1 IS NULL AND Copies1 IS NOT NULL THEN
+        SELECT title, author AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (available_copies = Copies1);
+    ELSEIF Title1 IS NOT NULL AND Category1 IS NOT NULL AND Author1 IS NULL AND Copies1 IS NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (title LIKE CONCAT('%', Title1, '%'))
+            AND (thematic_category LIKE CONCAT('%', Category1, '%'))
+        GROUP BY book_id;
+    ELSEIF Title1 IS NULL AND Category1 IS NOT NULL AND Author1 IS NOT NULL AND Copies1 IS NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (thematic_category LIKE CONCAT('%', Category1, '%'))
+            AND (author LIKE CONCAT('%', Author1, '%'))
+        GROUP BY book_id;
+    ELSEIF Title1 IS NULL AND Category1 IS NULL AND Author1 IS NOT NULL AND Copies1 IS NOT NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (author LIKE CONCAT('%', Author1, '%'))
+            AND (available_copies = Copies1)
+        GROUP BY book_id;
+    ELSEIF Title1 IS NOT NULL AND Category1 IS NULL AND Author1 IS NOT NULL AND Copies1 IS NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (title LIKE CONCAT('%', Title1, '%'))
+            AND (author LIKE CONCAT('%', Author1, '%'))
+        GROUP BY book_id;
+    ELSEIF Title1 IS NOT NULL AND Category1 IS NULL AND Author1 IS NULL AND Copies1 IS NOT NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (title LIKE CONCAT('%', Title1, '%'))
+            AND (available_copies = Copies1)
+        GROUP BY book_id;
+    ELSEIF Title1 IS NULL AND Category1 IS NOT NULL AND Author1 IS NULL AND Copies1 IS NOT NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (thematic_category LIKE CONCAT('%', Category1, '%'))
+            AND (available_copies = Copies1)
+        GROUP BY book_id;
+    ELSEIF Title1 IS NOT NULL AND Category1 IS NOT NULL AND Author1 IS NOT NULL AND Copies1 IS NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (title LIKE CONCAT('%', Title1, '%'))
+            AND (thematic_category LIKE CONCAT('%', Category1, '%'))
+            AND (author LIKE CONCAT('%', Author1, '%'))
+        GROUP BY book_id;
+    ELSEIF Title1 IS NULL AND Category1 IS NOT NULL AND Author1 IS NOT NULL AND Copies1 IS NOT NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (thematic_category LIKE CONCAT('%', Category1, '%'))
+            AND (author LIKE CONCAT('%', Author1, '%'))
+            AND (available_copies = Copies1)
+        GROUP BY book_id;
+    ELSEIF Title1 IS NOT NULL AND Category1 IS NULL AND Author1 IS NOT NULL AND Copies1 IS NOT NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (title LIKE CONCAT('%', Title1, '%'))
+            AND (author LIKE CONCAT('%', Author1, '%'))
+            AND (available_copies = Copies1)
+        GROUP BY book_id;
+    ELSEIF Title1 IS NOT NULL AND Category1 IS NOT NULL AND Author1 IS NULL AND Copies1 IS NOT NULL THEN
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (title LIKE CONCAT('%', Title1, '%'))
+            AND (thematic_category LIKE CONCAT('%', Category1, '%'))
+            AND (available_copies = Copies1)
+        GROUP BY book_id;
+    ELSE 
+        SELECT title, GROUP_CONCAT(DISTINCT author) AS authors
+        FROM book_info_3_joins
+        WHERE school_id = School_id1
+            AND (title LIKE CONCAT('%', Title1, '%'))
+            AND (thematic_category LIKE CONCAT('%', Category1, '%'))
+            AND (author LIKE CONCAT('%', Author1, '%'))
+            AND (available_copies = Copies1)
+        GROUP BY title;
+    END IF;
 END $$
+
 DELIMITER ;
 
 
