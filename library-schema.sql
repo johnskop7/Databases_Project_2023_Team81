@@ -279,7 +279,7 @@ DELIMITER ;
 --
 
 CREATE VIEW prof_with_most_borrowings AS
-SELECT sp.stud_prof_id, COUNT(bb.book_id) AS num_borrowed
+SELECT sp.fullname, COUNT(bb.book_id) AS num_borrowed
 FROM student_professor sp
 JOIN book_borrowing bb ON sp.stud_prof_id = bb.stud_prof_id
 WHERE sp.role = 'professor' AND TIMESTAMPDIFF(YEAR, sp.date_of_birth, CURDATE()) < 40
