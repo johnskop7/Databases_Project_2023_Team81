@@ -4,43 +4,147 @@
   <meta charset="utf-8">
   <title>Book Form</title>
   <style>
-    /* CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    
+    .container {
+      flex-basis: calc(50% - 40px);
+      max-width: 500px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      margin-right: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-top: 0;
+    }
+    
+    form {
+      display: grid;
+      grid-gap: 10px;
+    }
+    
+    label {
+      font-weight: bold;
+    }
+    
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    
+    button {
+      background-color: brown;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    button:hover {
+      background-color: brown;
+    }
   </style>
   <script>
-    function submitForm() {
-      // Get the form element
+    function submitBookForm() {
       var form = document.getElementById("bookForm");
-
-      // Get the values entered by the user
       var title = form.title.value;
       var category = form.category.value;
       var author = form.author.value;
       var copies = form.copies.value === "" ? null : parseInt(form.copies.value);
-
-      // Pass the values to the desired function or perform any other action
       window.location.href = `/books_per_school?title=${title}&category=${category}&author=${author}&copies=${copies}`;
+    }
+  </script>
+  <script>
+    function submitStudentForm() {
+      var studentForm = document.getElementById("studentForm");
+      var firstName = studentForm.firstName.value;
+      var lastName = studentForm.lastName.value;
+      var overdueDays = studentForm.overdueDays.value === "" ? null : parseInt(studentForm.overdueDays.value);
+  
+      window.location.href = `/late_returns?firstname=${firstName}&lastname=${lastName}&overdueDays=${overdueDays}`;
+    }
+  </script>
+  <script>
+     function submitReviewForm() {
+      var thirdForm = document.getElementById("thirdForm");
+      var studentName = thirdForm.studentName.value;
+      var category = thirdForm.category.value;
+
+      window.location.href = `/average_rating?studentName=${studentName}&category=${category}`;
     }
   </script>
 </head>
 <body>
-  <div class="container">
-    <h1>Book Form</h1>
+  <div class="container-wrapper">
+    <div class="container">
+      <h1>Ερώτηση 3.2.1</h1>
 
-    <form id="bookForm" action="/books_per_school" method="get">
-      <label for="title">Τίτλος:</label>
-      <input type="text" id="title" name="title">
+      <form id="bookForm" action="/books_per_school" method="get">
+        <label for="title">Τίτλος:</label>
+        <input type="text" id="title" name="title">
 
-      <label for="category">Κατηγορία:</label>
-      <input type="text" id="category" name="category">
+        <label for="category">Κατηγορία:</label>
+        <input type="text" id="category" name="category">
 
-      <label for="author">Συγγραφέας:</label>
-      <input type="text" id="author" name="author">
+        <label for="author">Συγγραφέας:</label>
+        <input type="text" id="author" name="author">
 
-      <label for="copies">Αντίτυπα:</label>
-      <input type="number" id="copies" name="copies" min="0">
+        <label for="copies">Διαθέσιμα Αντίτυπα:</label>
+        <input type="number" id="copies" name="copies" min="0">
 
-      <button type="button" onclick="submitForm()">Check</button>
-    </form>
+        <button type="button" onclick="submitBookForm()">Check</button>
+      </form>
+    </div>
+    
+    <div class="container">
+      <h1>Ερώτηση 3.2.2</h1>
+
+      <form id="studentForm" action="/late_returns" method="get">
+        <label for="firstName">Όνομα:</label>
+        <input type="text" id="firstName" name="firstName">
+
+        <label for="lastName">Επώνυμο:</label>
+        <input type="text" id="lastName" name="lastName">
+
+        <label for="overdueDays">Ημέρες Καθυστέρησης:</label>
+        <input type="number" id="overdueDays" name="overdueDays" min="0">
+
+        <button type="button" onclick="submitStudentForm()">Check</button>
+      </form>
+    </div>
+    <div class="container">
+        <h1>Ερώτηση 3.2.3</h1>
+  
+        <form id="thirdForm" action="/average_rating" method="get">
+          <label for="studentName">Ονοματεπώνυμο μαθητή:</label>
+          <input type="text" id="studentName" name="studentName">
+  
+          <label for="category">Κατηγορία:</label>
+          <input type="text" id="category" name="category">
+  
+          <button type="button" onclick="submitReviewForm()">Check</button>
+        </form>
+      </div>
   </div>
 </body>
 </html>

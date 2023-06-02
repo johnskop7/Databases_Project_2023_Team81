@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Books with the chosen attributes</title>
+  <title>Students with late returns</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -44,16 +44,16 @@
 </head>
 <body>
   <div class="container">
-    <h1>Books with the chosen attributes</h1>
+    <h1>Students with late returns</h1>
     <table>
       <tr>
-        <th>Title</th>
-        <th>Authors</th>
+        <th>Student name</th>
+        <th>overdue Days</th>
       </tr>
       <% results[0].forEach((result) => { %>
       <tr>
-        <td><%= result.title %></td>
-        <td><%= result.authors %></td>
+        <td><%= result.fullname %></td>
+        <td><%= result.overdue_days %></td>
       </tr>
       <% }) %>
     </table>
