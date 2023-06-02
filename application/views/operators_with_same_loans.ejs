@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Operators with the same amount of loans(>20) in a span of a year</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+    <h1>Operators with the same amount of loans(>20) in a span of a year</h1>
+    <% if (operators.length === 0) { %>
+      <p>No operators found</p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Operators' Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% operators.forEach((operators_with_same_loans, _ ) => { %>
+            <tr>
+              <td><%= operators_with_same_loans.operator %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+</body>
+</html>

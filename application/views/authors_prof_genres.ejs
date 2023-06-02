@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Authors and Professors Belonging to Category</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 550px;
+      margin: 0 auto;
+      margin-top: 100px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: white;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Authors that belong to a certain category and professors that have borrowed a book of that category in the last year</h1>
+    <% if (authors.length === 0) { %>
+      <p>No authors found</p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Authors' Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% authors.forEach((authors_belong_to_category, _ ) => { %>
+            <tr>
+              <td><%= authors_belong_to_category.author %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+
+    <% if (professors.length === 0) { %>
+      <p>No professors found</p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Professors' Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% professors.forEach((teacher_borrowed_books_from_category, _) => { %>
+            <tr>
+              <td><%= teacher_borrowed_books_from_category.fullname %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+</body>
+</html>
+

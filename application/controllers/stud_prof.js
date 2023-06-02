@@ -4,7 +4,7 @@ const {pool} = require('../database');
 // Handle login request
 exports.handleLogin_member = (req, res) => {
     // Check for messages in order to show them when rendering the page
-    console.log('Reached controller!')
+    //console.log('Reached controller!')
     let messages = req.flash('messages');
     if (messages.length === 0) messages = [];
   
@@ -23,7 +23,7 @@ exports.handleLogin_member = (req, res) => {
         .query('SELECT * FROM student_professor WHERE username = ? AND password = ?', [username, password])
         .then(([results]) => {
           if (results.length === 0) {
-            console.log('Reached query!')
+            //console.log('Reached query!')
             // User doesn't exist, add an error message
             res.redirect('/');
             req.flash('messages', { type: 'error', value: 'Invalid username or password' });

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Top3 Pairs of Book Genres Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Top3 Pairs of Book Genres</h1>
+  <table>
+    <tr>
+      <th>First Category</th>
+      <th>Second Category</th>
+      <th>Number of Books</th>
+    </tr>
+    <% pairs.forEach((top_3_pairs,_) => { %>
+      <tr>
+        <td><%= top_3_pairs.Category1 %></td>
+        <td><%= top_3_pairs.Category2 %></td>
+        <td><%= top_3_pairs.Score %></td>
+      </tr>
+    <% }); %>
+  </table>
+</body>
+</html>

@@ -2,7 +2,7 @@
 const {pool} = require('../database');
 
 exports.getOperatorLoginPage= (req, res, next) => {
-    console.log('Found!')
+    //console.log('Found!')
     res.render('operator_login.ejs', {
         pageTitle: 'Operator Login Page',
         messages: [] // You can pass any desired messages to display on the admin login page
