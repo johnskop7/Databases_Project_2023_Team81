@@ -1235,53 +1235,53 @@ INSERT INTO reservations(book_id, stud_prof_id, reservation_date, expiry_date, s
 
 
 INSERT INTO reviews(stud_prof_id, rating,review_date, review_text, status, book_id) VALUES
-(1,5,'2023-04-09','review 1','approved',1),               #1
-(2,4,'2023-04-09','review 2','approved',2),               #2
-(25,1,'2023-04-09','review 3','not yet approved',1),      #3
-(30,5,'2023-04-09','review 4','denied',1),                #4
-(31,4,'2023-04-09','review 5','approved',5),              #5
-(1,1,'2023-04-09','review 6','approved',1),               #6
-(2,2,'2023-04-09','review 7','approved',14),              #7
-(2,4,'2023-04-09','review 8','approved',3),               #8
-(3,3,'2023-04-09','review 9','approved',4),               #9
-(2,3,'2023-04-09','review 10','approved',5),              #10
-(2,2,'2023-04-09','review 11','approved',2),              #11
-(3,1,'2023-04-09','review 12','approved',7),              #12
-(1,5,'2023-04-09','review 13','approved',8),              #13
-(3,3,'2023-04-09','review 14','approved',9),              #14
-(3,4,'2023-04-09','review 15','approved',10),             #15
-(27,4,'2023-04-09','review 16','not yet approved',5),     #16
-(28,3,'2023-04-09','review 17','approved',6),             #17
-(31,5,'2023-04-09','review 18','denied',7),               #18
-(30,1,'2023-04-09','review 19','approved',13),            #19
-(26,2,'2023-04-09','review 20','approved',9),             #20
-(31,3,'2023-04-09','review 21','approved',10),            #21
-(29,4,'2023-04-09','review 22','denied',11),              #22
-(32,2,'2023-04-09','review 23','approved',12),            #23
-(25,3,'2023-04-09','review 24','denied',15),              #24
-(30,5,'2023-04-09','review 25','approved',14),            #25
-(4,3,'2023-04-09','review 26','approved',19),             #26
-(6,2,'2023-04-09','review 27','approved',28),             #27
-(4,3,'2023-04-09','review 28','approved',32),             #28
-(6,4,'2023-04-09','review 29','approved',22),             #29
-(5,2,'2023-04-09','review 30','approved',27),             #30
-(36,4,'2023-04-09','review 31','denied',19),              #31
-(34,1,'2023-04-09','review 32','not yet approved',29),    #32
-(39,5,'2023-04-09','review 33','approved',23),            #33
-(33,2,'2023-04-09','review 34','denied',18),              #34
-(35,3,'2023-04-09','review 35','approved',24),            #35
-(38,2,'2023-04-09','review 36','denied',27),              #36
-(37,5,'2023-04-09','review 37','not yet approved',20),    #37
-(33,4,'2023-04-09','review 38','denied',21),              #38
-(34, 3, '2023-04-09', 'review 39', 'approved', 28),       #39
-(39, 1, '2023-04-09', 'review 40', 'approved', 30),       #40
-(7, 2, '2023-04-09', 'review 41', 'approved', 44),        #41
-(8, 3, '2023-04-09', 'review 42', 'approved', 51),        #42
-(9, 4, '2023-04-09', 'review 43', 'approved', 36),        #43
-(7, 1, '2023-04-09', 'review 44', 'approved', 46),        #44
-(8, 5, '2023-04-09', 'review 45', 'approved', 39),        #45
-(41,4,'2023-04-09','review 46','not yet approved',51),    #46
-(45, 5, '2023-04-09', 'review 47', 'approved', 52),       #47
-(48, 2, '2023-04-09', 'review 48', 'denied', 38),         #48
-(43, 1, '2023-04-09', 'review 49', 'approved', 40);       #49
+(1,5,'2022-04-28','review 1','approved',5),               #1
+(2,4,'2022-04-28','review 2','approved',2),               #2
+(2,1,'2023-04-09','review 3','not yet approved',5),      #3
+(3,5,'2021-11-22','review 4','denied',15),                #4
+(25,4,'2022-01-13','review 5','approved',9),              #5
+(28,1,'2022-12-17','review 6','approved',9),               #6
+(28,2,'2020-03-18','review 7','approved',3),              #7
+(31,4,'2023-04-09','review 8','approved',7),               #8
+(32,3,'2023-04-09','review 9','approved',4),               #9
+(5,3,'2022-05-04','review 10','approved',32),              #10
+(5,2,'2021-12-09','review 11','approved',33),              #11
+(37,1,'2021-03-05','review 12','approved',33),              #12
+(37,5,'2023-06-15','review 13','approved',31),              #13
+(38,3,'2023-04-08','review 14','approved',19),              #14
+(3,4,'2021-05-25','review 15','approved',15),             #15
+(8,4,'2022-05-02','review 16','not yet approved',50),     #16
+(9,3,'2023-04-10','review 17','approved',37),             #17
+(41,5,'2023-01-15','review 18','denied',47),               #18
+(41,1,'2022-06-20','review 19','approved',46),            #19
+(44,2,'2020-03-07','review 20','approved',39),             #20
+(47,3,'2022-02-08','review 21','approved',42),            #21
+(48,4,'2023-05-09','review 22','denied',45),              #22
+(11,2,'2022-05-02','review 23','approved',69),            #23
+(12,3,'2022-04-29','review 24','denied',64),              #24
+(53,5,'2023-05-31','review 25','approved',53),            #25
+(51,3,'2021-02-01','review 26','approved',60),             #26
+(49,2,'2023-01-14','review 27','approved',68),             #27
+(56,3,'2023-04-09','review 28','approved',61),             #28
+(15,4,'2023-04-09','review 29','approved',74),             #29
+(14,2,'2021-12-09','review 30','approved',80),             #30
+(15,4,'2022-04-29','review 31','denied',83),              #31
+(58,1,'2022-02-03','review 32','not yet approved',80),    #32
+(58,5,'2023-04-09','review 33','approved',75),            #33
+(60,2,'2020-03-09','review 34','denied',80),              #34
+(61,3,'2023-05-30','review 35','approved',79),            #35
+(62,2,'2023-05-29','review 36','denied',72),              #36
+(18,5,'2023-04-29','review 37','not yet approved',99),    #37
+(18,4,'2023-04-09','review 38','denied',101),              #38
+(68, 3, '2020-03-07', 'review 39', 'approved', 105),       #39
+(18, 1, '2020-12-14', 'review 40', 'approved', 93),       #40
+(18, 2, '2023-04-09', 'review 41', 'approved', 92),        #41
+(21, 3, '2022-04-25', 'review 42', 'approved', 119),        #42
+(80, 4, '2023-04-09', 'review 43', 'approved', 118),        #43
+(79, 1, '2023-04-09', 'review 44', 'approved', 119),        #44
+(23, 5, '2021-12-01', 'review 45', 'approved', 135),        #45
+(24,4,'2020-07-15','review 46','not yet approved',148),    #46
+(84, 5, '2020-03-09', 'review 47', 'approved', 145),       #47
+(86, 2, '2023-05-30', 'review 48', 'denied', 137),         #48
+(82, 1, '2020-03-07', 'review 49', 'approved', 135);       #49
 
