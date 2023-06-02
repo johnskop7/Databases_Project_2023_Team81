@@ -10,7 +10,8 @@ router.get('/authors_prof_genres',admin_route.getGenreInfo);
 router.get('/prof_with_most_borrowings',admin_route.getProfWithMostBorrowings);
 router.get('/authors_with_no_borrowings',admin_route.getAuthorsWithNoBorrowings);
 router.get('/top3_pairs',admin_route.getTop3Pairs),
-router.get('/authors_with_five_or_less',admin_route.getAuthorsWithFiveOrLessBooks);
-
+router.get('/authors_with_five_or_less',admin_route.getAuthorsWithFiveOrLessBooks),
+router.get('/operators_with_same_loans',admin_route.getOperatorsWithSameLoans),
+router.get('/borrowings_per_school',admin_route.BorrowingsPerSchool);
 
 module.exports = router;

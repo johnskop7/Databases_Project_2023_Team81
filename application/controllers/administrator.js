@@ -123,7 +123,7 @@ exports.handleLogin_admin = (req, res ) => {
             authors: authors,
             messages: messages
           });
-          console.log(authors);
+          //console.log(authors);
         })
         .then(() => pool.releaseConnection(conn))
         .catch(err => console.log(err));
@@ -147,7 +147,7 @@ exports.handleLogin_admin = (req, res ) => {
             pairs: pairs,
             messages: messages
           });
-          console.log(pairs);
+          //console.log(pairs);
         })
         .then(() => pool.releaseConnection(conn))
         .catch(err => console.log(err));
@@ -171,10 +171,60 @@ exports.handleLogin_admin = (req, res ) => {
             authors: authors,
             messages: messages
           });
-          console.log(authors);
+          //console.log(authors);
         })
         .then(() => pool.releaseConnection(conn))
         .catch(err => console.log(err));
     });
   };
 
+
+  exports.getOperatorsWithSameLoans = (req, res) => {
+    /* check for messages in order to show them when rendering the page */
+    let messages = req.flash("messages");
+    if (messages.length === 0) messages = [];
+  
+    /* create the connection, execute query, render data */
+    pool.getConnection((err, conn) => {
+      conn.promise()
+        .query('SELECT * FROM oper_with_same_loans')
+        .then(([rows]) => {
+            const operators = rows;
+            res.render('operators_with_same_loans.ejs', {
+            pageTitle: "Operators with the same loans in a span of a year Page",
+            operators: operators,
+            messages: messages
+          });
+          console.log(operators);
+        })
+        .then(() => pool.releaseConnection(conn))
+        .catch(err => console.log(err));
+    });
+  };
+
+  exports.BorrowingsPerSchool = (req, res) => {
+    const month = req.query.month;
+    const year = req.query.year;
+    // Query the database with the genre parameter
+    console.log(year);
+    pool.getConnection((err, conn) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
+      }
+      conn.promise()
+      .query('CALL book_borrowings_count_per_school(?,?)', [month,year])
+      .then(([results]) => {
+        // Process the results or perform any other actions
+        const schools = results[0];
+            // Render the view with both sets of results
+            res.render('borrowings_per_school.ejs', {
+              pageTitle: "Book borrowings per school for a certain month and year",
+              schools: schools,
+            });
+            console.log(results[0]);
+         })
+        .then(() => pool.releaseConnection(conn))
+        .catch(err => console.log(err))
+    });
+  };

@@ -316,7 +316,7 @@ AND ba.author NOT IN (
 --
 -- 3.1.5) Find the operators that have loaned the most books(>20) in a span of a year
 --
-CREATE VIEW oper_with_most_loans AS
+CREATE VIEW oper_with_same_loans AS
 SELECT bo.operator_id, COUNT(bb.book_id) AS num_borrowed
 FROM book_borrowing bb
 JOIN student_professor sp ON bb.stud_prof_id = sp.stud_prof_id

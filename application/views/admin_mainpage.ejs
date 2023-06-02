@@ -7,6 +7,21 @@
     body {
       font-family: Arial, sans-serif;
     }
+
+    .menubar {
+      background-color: #333;
+      padding: 10px;
+    }
+    
+    .menubar button {
+      background-color: transparent;
+      border: none;
+      color: white;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
     
     .container {
       display: flex;
@@ -44,10 +59,53 @@
       cursor: pointer;
     }
     
+    .menubar button:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
+  <!-- Add the menubar -->
+  <div class="menubar">
+    <button onclick="location.href='/another_page_1';">Applications for new libraries and operators</button>
+    <button onclick="location.href='/another_page_2';">Profile</button>
+    <button onclick="location.href='/another_page_3';">Backup and restore</button>
+  </div>
   <div class="container">
+    <div class="borrowings_per_school-container">
+      <h1>Ερώτημα 3.1.1</h1>
+      <p>Βρείτε τον συνολικό αριθμό δανεισμών ανά σχολείο (Κριτήρια αναζήτησης: έτος, ημερολογιακός μήνας π.χ. Ιανουάριος).</p>
+      <div>
+        <select id="month_select">
+          <option value="">Select a month</option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+        <select id="year_select">
+          <option value="">Select a year</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+        </select>
+        <div class="button-container">
+          <button onclick="checkBorrowingsPerSchool()">Check</button>
+        </div>
+      </div>
+    </div>
     <div class="genres-container">
       <h1>Ερώτημα 3.1.2</h1>
       <p>Για συγκεκριμένη κατηγορία βρείτε ποιοι συγγραφείς ανήκουν σε αυτή και ποιοι εκπαιδευτικοί έχουν δανειστεί από αυτή το τελευταίο έτος.</p>
@@ -91,7 +149,7 @@
       <h1>Ερώτημα 3.1.5</h1>
       <p>Βρείτε ποιοι χειριστές έχουν δανείσει τον ίδιο αριθμό βιβλίων σε διάστημα ενός έτους με περισσότερους από 20 δανεισμούς</p>
       <div class="button-container">
-        <button onclick="URL">Check</button>
+        <button onclick="location.href='/operators_with_same_loans';">Check</button>
       </div>
     </div>
     <div class="top_3_pairs-container">
@@ -118,7 +176,16 @@
       // Redirect to another page with the selected genre as a query parameter
       window.location.href = `/authors_prof_genres?genre=${selectedGenre}`;
     }
-    
+    function checkBorrowingsPerSchool() {
+      const monthSelect = document.getElementById('month_select');
+      const yearSelect = document.getElementById('year_select');
+      const selectedMonth = monthSelect.value;
+      const selectedYear = yearSelect.value;
+      
+      // Redirect to another page with the selected month and year as query parameters
+      window.location.href = `/borrowings_per_school?month=${selectedMonth}&year=${selectedYear}`;
+}
+
     function redirectToAnotherPage() {
       // Redirect to another page
       window.location.href = "/prof_with_most_borrowings";
