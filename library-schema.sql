@@ -196,8 +196,6 @@ CREATE TABLE book_borrowing (
 
 
 
-
-
 --
 -- QUERIES
 --
@@ -361,8 +359,6 @@ HAVING COUNT(b.book_id) <= (
 );
 
 
- 
-
 
 --
 -- Operator
@@ -371,6 +367,7 @@ HAVING COUNT(b.book_id) <= (
 --
 -- 3.2.1) All books by Title, Author (Search criteria: title/ category/ author/ copies).
 --
+
 CREATE VIEW book_info_3_joins AS
 SELECT b.book_id, b.school_id , b.title, GROUP_CONCAT(DISTINCT a.author) AS author, GROUP_CONCAT(DISTINCT c.thematic_category) AS thematic_category, b.available_copies 
 FROM book b
@@ -604,6 +601,62 @@ END $$
 DELIMITER ;
 
 
-       
 
+--
+-- User
+--
 
+--
+-- 3.3.1) List with all books (Search criteria: title/category/author), ability to select a book and create a reservation request.
+--
+
+DELIMITER $$
+CREATE PROCEDURE search_book_by_title_author_category(IN school_id_ SMALLINT, IN title_ VARCHAR(100), IN author_ VARCHAR(45), IN category_ VARCHAR(30))
+BEGIN
+	IF title_ IS NULL AND author_ IS NULL AND category_ IS NULL THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'At least one field is required';
+	ELSEIF title_ IS NOT NULL AND author_ IS NULL AND category_ IS NULL THEN 
+		SELECT title 
+		FROM book_info_3_joins
+		WHERE (title LIKE CONCAT('%', title_, '%'))
+		AND school_id = school_id_;
+	ELSEIF title_ IS NULL AND author_ IS NOT NULL AND category_ IS NULL THEN
+		SELECT title
+		FROM book_info_3_joins
+		WHERE (author LIKE CONCAT('%', author_, '%'))
+                AND school_id = school_id_;
+	ELSEIF title_ IS NULL AND author_ IS NULL AND category_ IS NOT NULL THEN
+	       SELECT title
+	       FROM book_info_3_joins
+	       WHERE (thematic_category LIKE CONCAT('%', category_, '%'))
+               AND school_id = school_id_;	
+	ELSEIF title_ IS NOT NULL AND author_ IS NOT NULL AND category_ IS NULL THEN
+		SELECT title
+		FROM book_info_3_joins
+		WHERE (title LIKE CONCAT('%', title_, '%'))
+		AND (author LIKE CONCAT('%', author_, '%'))
+		AND school_id = school_id_;
+	ELSEIF title_ IS NULL AND author_ IS NOT NULL AND category_ IS NOT NULL THEN
+	       SELECT title
+               FROM book_info_3_joins
+               WHERE (author LIKE CONCAT('%', author_, '%'))
+	       AND (thematic_category LIKE CONCAT('%', category_, '%'))
+	       AND school_id = school_id_;
+	ELSEIF title_ IS NOT NULL AND author_ IS NULL AND category_ IS NOT NULL THEN
+		SELECT title
+                FROM book_info_3_joins
+		WHERE (title LIKE CONCAT('%', title_, '%'))
+		AND (thematic_category LIKE CONCAT('%', category_, '%'))
+		AND school_id = school_id_;
+	ELSE 
+		SELECT title
+                FROM book_info_3_joins
+		WHERE (title LIKE CONCAT('%', title_, '%'))
+		AND (author LIKE CONCAT('%', author_, '%'))
+		AND (thematic_category LIKE CONCAT('%', category_, '%'))
+		AND school_id = school_id_;
+	END IF;
+END $$
+DELIMITER ;
+
+	
