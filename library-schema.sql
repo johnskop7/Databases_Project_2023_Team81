@@ -230,13 +230,13 @@ DELIMITER $$
 CREATE PROCEDURE book_borrowings_count_per_school (IN month SMALLINT, IN year SMALLINT)
 BEGIN
     IF month IS NULL AND year IS NULL THEN
-        SELECT school_name, COUNT(borrowing_id) FROM book_borrowings_per_school_unit GROUP BY school_name;
+        SELECT school_name, COUNT(borrowing_id) as books FROM book_borrowings_per_school_unit GROUP BY school_name;
     ELSEIF month IS NULL THEN
-        SELECT school_name, COUNT(borrowing_id) FROM book_borrowings_per_school_unit WHERE YEAR(borrowing_date) = year GROUP BY school_name;
+        SELECT school_name, COUNT(borrowing_id) as books FROM book_borrowings_per_school_unit WHERE YEAR(borrowing_date) = year GROUP BY school_name;
     ELSEIF year IS NULL THEN
-        SELECT school_name, COUNT(borrowing_id) FROM book_borrowings_per_school_unit WHERE MONTH(borrowing_date) = month GROUP BY school_name;
+        SELECT school_name, COUNT(borrowing_id) as books FROM book_borrowings_per_school_unit WHERE MONTH(borrowing_date) = month GROUP BY school_name;
     ELSE
-        SELECT school_name, COUNT(borrowing_id) FROM book_borrowings_per_school_unit WHERE MONTH(borrowing_date) = month AND YEAR(borrowing_date) = year GROUP BY school_name;
+        SELECT school_name, COUNT(borrowing_id) as books FROM book_borrowings_per_school_unit WHERE MONTH(borrowing_date) = month AND YEAR(borrowing_date) = year GROUP BY school_name;
     END IF;
 END $$
 DELIMITER ;
@@ -319,14 +319,15 @@ AND ba.author NOT IN (
 --
 
 CREATE VIEW oper_with_same_loans AS
-SELECT bo.operator_id, COUNT(bb.book_id) AS num_borrowed
+SELECT op.fullname AS operator_name, COUNT(bb.book_id) AS num_borrowed
 FROM book_borrowing bb
 JOIN student_professor sp ON bb.stud_prof_id = sp.stud_prof_id
-JOIN operator bo ON sp.operator_id = bo.operator_id
+JOIN operator op ON sp.operator_id = op.operator_id
 WHERE YEAR(bb.borrowing_date) = YEAR(CURDATE()) AND DATEDIFF(CURDATE(), bb.borrowing_date) <= 365
-GROUP BY bo.operator_id
+GROUP BY op.operator_id
 HAVING num_borrowed > 20
 ORDER BY num_borrowed DESC;
+
 
 
 --

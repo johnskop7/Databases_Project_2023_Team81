@@ -51,7 +51,7 @@
       <tbody>
         <% professors.forEach((prof_with_most_borrowings,_) => { %>
           <tr>
-            <td><%= prof_with_most_borrowings.stud_prof_id %></td>
+            <td><%= prof_with_most_borrowings.fullname %></td>
             <td><%= prof_with_most_borrowings.num_borrowed %></td>
           </tr>
         <% }) %>

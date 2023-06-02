@@ -33,12 +33,14 @@
         <thead>
           <tr>
             <th>Operators' Name</th>
+            <th>Number of loans</th>
           </tr>
         </thead>
         <tbody>
           <% operators.forEach((operators_with_same_loans, _ ) => { %>
             <tr>
-              <td><%= operators_with_same_loans.operator %></td>
+              <td><%= operators_with_same_loans.operator_name %></td>
+              <td><%= operators_with_same_loans.num_borrowed %></td>
             </tr>
           <% }) %>
         </tbody>

@@ -53,7 +53,7 @@
       <% schools.forEach((book_borrowings_count_per_school,_) => { %>
         <tr>
           <td><%= book_borrowings_count_per_school.school_name %></td>
-          <td><%= book_borrowings_count_per_school.total_book_borrowings %></td>
+          <td><%= book_borrowings_count_per_school.books %></td>
         </tr>
       <% }); %>
     </tbody>

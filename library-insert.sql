@@ -40,8 +40,8 @@ INSERT INTO school_unit(school_name, address, city , school_director_full_name ,
 -- Insert 8 school_operators
 --
 INSERT INTO operator(fullname,username,password,email,phone_number,school_id,administrator_id) VALUES
-        ('Dora Panteli', 'kristin60', 'e8MKFdow%E', 'romerolance@example.org','(870)747-9717','1','1'),
-	('Panagiotis Giadikiaroglou', 'jhill', '(4f!Rxc+Ff', 'dennisrusso@example.com','9671127828','2','1'),
+	('Dora Panteli', 'kristin60', '12', 'romerolance@example.org','(870)747-9717','1','1'),
+	('Panagiotis Giadikiaroglou', 'jhill', '123', 'dennisrusso@example.com','9671127828','2','1'),
 	('Alexandros Emmanouilidis', 'eatonjonathan', '@0_I%ywv7T', 'kristiadams@example.net','342-283-3779x424','3','1'),
 	('Thomas Walkup', 'qfernandez', 'r+QKo2wP*0', 'msanders@example.com','349-301-8402x47751','4','1'),
 	('George Pappas', 'patelbrad', 'J$$kD1WBDp', 'bennettreginald@example.org','(327)763-2867x2635','5','1'),
