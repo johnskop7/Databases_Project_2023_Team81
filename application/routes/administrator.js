@@ -12,6 +12,10 @@ router.get('/authors_with_no_borrowings',admin_route.getAuthorsWithNoBorrowings)
 router.get('/top3_pairs',admin_route.getTop3Pairs),
 router.get('/authors_with_five_or_less',admin_route.getAuthorsWithFiveOrLessBooks),
 router.get('/operators_with_same_loans',admin_route.getOperatorsWithSameLoans),
-router.get('/borrowings_per_school',admin_route.BorrowingsPerSchool);
+router.get('/borrowings_per_school',admin_route.BorrowingsPerSchool),
+router.get('/admin_profile',admin_route.getAdminProfilePage),
+router.post('/admin_profile',admin_route.UpdateAdminPassword),
+router.get('/member_login',admin_route.getBacktotheMainPage);
+
 
 module.exports = router;

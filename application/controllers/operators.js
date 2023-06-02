@@ -37,16 +37,45 @@ exports.handleLogin_operator = (req, res) => {
             }
           // Check if user exists
           else{
-            res.render('operator_login.ejs', {
+            req.session.operatorId = results[0].operator_id;
+            res.render('operator_mainpage.ejs', {
             pageTitle: "Operator login Page",
             messages: messages
             })
+            console.log(results);
           }
-          // User exists, redirect to the desired page or perform any other action
-          // For example, redirect to a dashboard page
-          // res.redirect('/dashboard');
         })
         .then(() => pool.releaseConnection(conn))
         .catch(err => console.log(err))
     });
   };
+
+exports.getBooks = (req, res) => {
+    const title = req.query.title;
+    const category = req.query.categroy;
+    const author = req.query.author;
+    const copies = req.query.copies;
+    const operatorId = req.session.operatorId;
+    console.log(title);
+    // console.log(genre);
+    // Query the database with the genre parameter
+    pool.getConnection((err, conn) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
+      }
+      conn.promise()
+      .query('CALL list_title_authors(?,?,?,?,?)', [operatorId,title,category,author,copies])
+      .then(([results]) => {
+             // Render the view with both sets of results
+              res.render('books_per_school.ejs', {
+              pageTitle: "Query 3.2.1",
+              results: results,
+            });
+            console.log(results)
+          })
+          .then(() => pool.releaseConnection(conn))
+          .catch(err => console.log(err))
+      })
+        
+    };
