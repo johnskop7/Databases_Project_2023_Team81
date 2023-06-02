@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Authors With Five or Less Books Than the Author With the Most Books</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Authors With Five or Less Books Than the Author With the Most Books</h1>
+  <table>
+    <tr>
+      <th>Authors</th>
+      <th>Number of Books</th>
+    </tr>
+    <% authors.forEach((authors_with_five_or_less,_) => { %>
+      <tr>
+        <td><%= authors_with_five_or_less.author %></td>
+        <td><%= authors_with_five_or_less.book_count %></td>
+      </tr>
+    <% }); %>
+  </table>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Book Genre Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    
+    .container > div {
+      flex-basis: calc(50% - 40px);
+      padding: 20px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    
+    h1 {
+      margin-top: 0;
+    }
+    
+    select {
+      margin-bottom: 10px;
+    }
+    
+    .button-container {
+      margin-top: 20px;
+    }
+    
+    .button-container button {
+      padding: 10px 20px;
+      background-color: brown;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="genres-container">
+      <h1>Ερώτημα 3.1.2</h1>
+      <p>Για συγκεκριμένη κατηγορία βρείτε ποιοι συγγραφείς ανήκουν σε αυτή και ποιοι εκπαιδευτικοί έχουν δανειστεί από αυτή το τελευταίο έτος.</p>
+      <select id="genre_select">
+        <option value="">Select a genre</option>
+        <option value="Mystery">Mystery</option>
+        <option value="Romance">Romance</option>
+        <option value="Science Fiction">Science Fiction</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Horror">Horror</option>
+        <option value="Biography">Biography</option>
+        <option value="Self-Help">Self-Help</option>
+        <option value="Crime">Crime</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Poetry">Poetry</option>
+        <option value="Action">Action</option>
+        <option value="Graphic Novel">Graphic Novel</option>
+      </select>
+      <div class="button-container">
+        <button onclick="checkGenre()">Check</button>
+      </div>
+    </div>
+    <div class="most_borrowing-container">
+      <h1>Ερώτημα 3.1.3</h1>
+      <p>Βρείτε τους νέους εκπαιδευτικούς (ηλικίας < 40) που έχουν δανειστεί τα περισσότερα βιβλία και τον αριθμό των βιβλίων.</p>
+      <div class="button-container">
+        <button onclick="redirectToAnotherPage()">Check</button>
+      </div>
+    </div>
+    <div class="no_borrowing-container">
+      <h1>Ερώτημα 3.1.4</h1>
+      <p>Bρείτε τους συγγραφείς των οποίων κανένα βιβλίο δεν έχει τύχει δανεισμού</p>
+      <div class="button-container">
+        <button onclick="location.href='/authors_with_no_borrowings';">Check</button>
+      </div>
+    </div>
+    <div class="oper_with_same_loans-container">
+      <h1>Ερώτημα 3.1.5</h1>
+      <p>Βρείτε ποιοι χειριστές έχουν δανείσει τον ίδιο αριθμό βιβλίων σε διάστημα ενός έτους με περισσότερους από 20 δανεισμούς</p>
+      <div class="button-container">
+        <button onclick="URL">Check</button>
+      </div>
+    </div>
+    <div class="top_3_pairs-container">
+        <h1>Ερώτημα 3.1.6</h1>
+        <p>Ανάμεσα σε ζεύγη πεδίων (π.χ. ιστορία και ποίηση) που είναι κοινά στα βιβλία, βρείτε τα 3 κορυφαία (top-3) ζεύγη που εμφανίστηκαν σε δανεισμούς</p>
+        <div class="button-container">
+          <button onclick="location.href='/top3_pairs';">Check</button>
+        </div>
+    </div>
+    <div>
+    <div class="authors_with_five_or_less-container">
+        <h1>Ερώτημα 3.1.7</h1>
+        <p>Bρείτε όλους τους συγγραφείς που έχουν γράψει τουλάχιστον 5 βιβλία λιγότερα από τον συγγραφέα με τα περισσότερα βιβλία</p>
+        <div class="button-container">
+          <button onclick="location.href='/authors_with_five_or_less';">Check</button>
+        </div>
+    </div>
+  </div>
+  <script>
+    function checkGenre() {
+      const selectElement = document.getElementById('genre_select');
+      const selectedGenre = selectElement.value;
+      
+      // Redirect to another page with the selected genre as a query parameter
+      window.location.href = `/authors_prof_genres?genre=${selectedGenre}`;
+    }
+    
+    function redirectToAnotherPage() {
+      // Redirect to another page
+      window.location.href = "/prof_with_most_borrowings";
+    }
+  </script>
+</body>
+</html>
