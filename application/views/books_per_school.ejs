@@ -50,10 +50,10 @@
         <th>Title</th>
         <th>Authors</th>
       </tr>
-      <% results[0].forEach((result) => { %>
+      <% results[0].forEach((list_title_authors,_) => { %>
       <tr>
-        <td><%= result.title %></td>
-        <td><%= result.authors %></td>
+        <td><%= list_title_authors.title %></td>
+        <td><%= list_title_authors.authors %></td>
       </tr>
       <% }) %>
     </table>

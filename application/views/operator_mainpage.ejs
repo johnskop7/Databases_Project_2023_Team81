@@ -10,6 +10,21 @@
       margin: 0;
       padding: 0;
     }
+    .menubar {
+      background-color: #333;
+      padding: 10px;
+      display: flex; /* Added flex display */
+      justify-content: flex-start; /* Adjusted alignment */
+    }
+    
+    .menubar button {
+      background-color: transparent;
+      border: none;
+      color: white;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
     
     .container-wrapper {
       display: flex;
@@ -40,6 +55,18 @@
     label {
       font-weight: bold;
     }
+    .button-container {
+      margin-top: 20px;
+    }
+    
+    .button-container button {
+      padding: 10px 20px;
+      background-color: brown;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
     
     input[type="text"],
     input[type="number"] {
@@ -63,16 +90,21 @@
     button:hover {
       background-color: brown;
     }
+    .menubar button:hover {
+      text-decoration: underline;
+    }
   </style>
   <script>
-    function submitBookForm() {
-      var form = document.getElementById("bookForm");
-      var title = form.title.value;
-      var category = form.category.value;
-      var author = form.author.value;
-      var copies = form.copies.value === "" ? null : parseInt(form.copies.value);
-      window.location.href = `/books_per_school?title=${title}&category=${category}&author=${author}&copies=${copies}`;
-    }
+   function submitBookForm() {
+        var form = document.getElementById("bookForm");
+        var title = form.title.value 
+        var category = form.category.value 
+        var author = form.author.value 
+        var copies = form.copies.value === "" ? null : (isNaN(form.copies.value) ? null : parseInt(form.copies.value));
+
+        window.location.href = `/books_per_school?title=${title}&category=${category}&author=${author}&copies=${copies}`;
+}
+
   </script>
   <script>
     function submitStudentForm() {
@@ -95,6 +127,11 @@
   </script>
 </head>
 <body>
+    <div class="menubar">
+        <button onclick="location.href='/operator_password';">Change password</button>
+        <button onclick="location.href='/member_login';">Get back to the main page</button>
+        <button onclick="location.href='/school_books';">View all the books of the school</button>
+    </div>
   <div class="container-wrapper">
     <div class="container">
       <h1>Ερώτηση 3.2.1</h1>
@@ -110,9 +147,11 @@
         <input type="text" id="author" name="author">
 
         <label for="copies">Διαθέσιμα Αντίτυπα:</label>
-        <input type="number" id="copies" name="copies" min="0">
+        <input type="text" id="copies" name="copies" pattern="[0-9]*">
 
+        
         <button type="button" onclick="submitBookForm()">Check</button>
+        
       </form>
     </div>
     
