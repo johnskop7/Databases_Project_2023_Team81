@@ -200,6 +200,16 @@ CREATE TABLE book_borrowing (
 -- QUERIES
 --
 
+CREATE VIEW active_book_borrowings AS
+SELECT bb.borrowing_id, bb.borrowing_date, bb.return_date, bb.actual_return_date, b.title, b.ISBN, sp.fullname AS borrower_name, sp.operator_id
+FROM book_borrowing bb
+JOIN book b ON bb.book_id = b.book_id
+JOIN student_professor sp ON bb.stud_prof_id = sp.stud_prof_id
+WHERE bb.actual_return_date IS NULL;
+
+
+
+
 --
 -- Administrator
 --
