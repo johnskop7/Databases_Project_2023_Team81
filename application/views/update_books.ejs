@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Edit book</title>
+  <style>
+    /* CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f2f2f2;
+    }
+    
+    .content {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+    
+    th:last-child,
+    td:last-child {
+      border-right: none;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+      color: #333;
+    }
+    
+    td {
+      width: 12%; /* Adjust the percentage value as needed */
+    }
+    
+    form {
+      display: flex;
+      align-items: center;
+    }
+    
+    input[type="text"] {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    
+    button {
+      background-color: #e35b5b;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+      background-color: #c43f3f;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Edit Book</h1>
+    <form action="/update_books" method="post">
+      <input type="hidden" name="id" value="<%= book.book_id %>">
+     <table>
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td class="editable-field">
+              <strong>Τίτλος:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="title" type="text" name="title" value="<%= book.title %>">
+            </td>
+          </tr>
+          <tr>
+            <td class="editable-field">
+              <strong>Εκδότης:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="publisher" type="text" name="publisher" value="<%= book.publisher %>">
+            </td>
+          </tr>
+          <tr>
+            <td class="editable-field">
+              <strong>ISBN:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="ISBN" type="text" name="ISBN" value="<%= book.ISBN %>">
+            </td>
+          </tr>
+          <tr>
+            <td class="editable-field">
+              <strong>Συγγραφείς:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="authors" type="text" name="authors" value="<%= book.authors %>">
+            </td>
+          </tr>
+          <tr>
+            <td class="editable-field">
+              <strong>Αριθμός Σελίδων:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="number_of_pages" type="text" name="number_of_pages" value="<%= book.number_of_pages %>">
+            </td>
+          </tr>
+          <tr>
+            <td class="editable-field">
+              <strong>Περίληψη:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="summary" type="text" name="summary" value="<%= book.summary %>">
+            </td>
+          </tr>
+          <tr>
+            <td class="editable-field">
+              <strong>Διαθέσιμα Αντίτυπα:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="available_copies" type="text" name="available_copies" value="<%= book.available_copies %>">
+            </td>
+          </tr>
+          <tr>
+            <td class="editable-field">
+              <strong>Εικόνα:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="image" type="text" name="image" value="<%= book.image %>">
+            </td>
+          </tr>
+          <tr>
+            <td class="editable-field">
+              <strong>Θεματική Κατηγορία:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="thematic_categories" type="text" name="thematic_categories" value="<%= book.thematic_categories %>">
+            </td>
+          </tr>
+          <tr>
+            <td class="editable-field">
+              <strong>Γλώσσα:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="language" type="text" name="language" value="<%= book.language %>">
+            </td>
+          </tr>
+          <tr>
+            <td class="editable-field">
+              <strong>Λέξεις Κλειδιά:</strong>
+            </td>
+            <td class="editable-field">
+              <input id="key_words" type="text" name="key_words" value="<%= book.key_words %>">
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <button type="submit">Update</button>
+    </form>
+  </div>
+</body>
+</html>

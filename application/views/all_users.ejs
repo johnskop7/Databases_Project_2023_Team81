@@ -1,0 +1,115 @@
+<!-- all_users.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= pageTitle %></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions form {
+            display: inline-block;
+        }
+
+        .actions button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 3px;
+        }
+
+        .actions button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1><%= pageTitle %></h1>
+
+    <% if (messages && messages.length > 0) { %>
+        <% messages.forEach(function(message) { %>
+            <div class="message"><%= message.value %></div>
+        <% }); %>
+    <% } %>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Date of Birth</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(function(user) { %>
+                <tr>
+                    <td><%= user.fullname %></td>
+                    <td><%= user.username %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.phone_number %></td>
+                    <td><%= user.date_of_birth.toISOString().slice(0, 10) %></td>
+                    <td><%= user.role %></td>
+                    <td class="actions">
+                    
+                        <form method="POST" action="/delete_user/<%= user.stud_prof_id %>">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                        
+                        <form action="/deactivate_user" method="POST">
+                            <input type="hidden" name="userId" value="<%= user.stud_prof_id %>">
+                            <button type="submit">Deactivate</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
