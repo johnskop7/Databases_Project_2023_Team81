@@ -388,6 +388,17 @@ END $$
 DELIMITER ;
 
 
+DELIMITER $$
+CREATE TRIGGER trig_creating_borrower_card_for_old_members AFTER INSERT ON student_professor FOR EACH ROW
+BEGIN
+	IF NEW.approval_status = 'approved' THEN
+		INSERT INTO borrower_card(issue_date, expiry_date, stud_prof_id, operator_id) VALUES
+                        (CURDATE(), DATE_ADD(CURDATE(), INTERVAL 3 YEAR), NEW.stud_prof_id, NEW.operator_id);
+	END IF;
+END $$
+DELIMITER ;
+
+
 
 --
 -- Triggers for update
@@ -403,7 +414,44 @@ END $$
 DELIMITER ;
 
 
+DELIMITER $$
+CREATE TRIGGER trig_creating_borrower_card AFTER UPDATE ON student_professor FOR EACH ROW
+BEGIN
+	IF (OLD.approval_status = 'not approved' AND NEW.approval_status = 'approved') THEN
+		INSERT INTO borrower_card(issue_date, expiry_date, stud_prof_id, operator_id) VALUES
+			(CURDATE(), DATE_ADD(CURDATE(), INTERVAL 3 YEAR), OLD.stud_prof_id, OLD.operator_id);
+	END IF;
+END $$
+DELIMITER ;
 
+
+
+--
+-- Events
+--
+
+SET GLOBAL event_scheduler = ON;
+
+DELIMITER $$
+CREATE EVENT IF NOT EXISTS expire_reservations
+ON SCHEDULE EVERY 1 DAY
+DO BEGIN
+	UPDATE reservations
+	SET status = 'expired'
+	WHERE CURDATE() > expiry_date
+	AND status = 'active';
+END $$
+DELIMITER ;
+
+
+
+--
+-- Indexes
+--
+
+CREATE INDEX idx_title ON book(title);
+CREATE INDEX idx_author ON book_authors(author);
+CREATE INDEX idx_category ON book_thematic_categories(thematic_category);
 
 --
 -- View needed for reviews
