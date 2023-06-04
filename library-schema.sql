@@ -124,7 +124,7 @@ CREATE TABLE book_thematic_categories (
   book_id SMALLINT UNSIGNED NOT NULL,
   thematic_category VARCHAR(255) NOT NULL,
   PRIMARY KEY (thematic_category,book_id),
-  CONSTRAINT fk_book_thematic_categories_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_book_thematic_categories_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE book_authors (
   book_id SMALLINT UNSIGNED NOT NULL,
   author VARCHAR(255) NOT NULL,
   PRIMARY KEY (book_id, author),
-  CONSTRAINT fk_book_authors_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_book_authors_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 --
@@ -152,8 +152,8 @@ CREATE TABLE reviews (
   review_text TEXT,
   status ENUM('approved', 'not yet approved', 'denied') DEFAULT 'not yet approved',
   PRIMARY KEY (review_id, book_id, stud_prof_id),
-  CONSTRAINT fk_reviews_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_reviews_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_reviews_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_reviews_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE CASCADE ON UPDATE CASCADE
   -- CONSTRAINT fk_reviews_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -170,8 +170,8 @@ CREATE TABLE reservations (
   expiry_date DATE,
   status ENUM('expired', 'active'),
   PRIMARY KEY (reservation_id, book_id, stud_prof_id),
-  CONSTRAINT fk_reservations_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_reservations_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_reservations_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_reservations_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE CASCADE ON UPDATE CASCADE
   -- CONSTRAINT fk_reservations_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -188,8 +188,8 @@ CREATE TABLE book_borrowing (
   stud_prof_id SMALLINT UNSIGNED NOT NULL,
   -- operator_id SMALLINT UNSIGNED NOT NULL,
   PRIMARY KEY (borrowing_id, book_id, stud_prof_id),
-  CONSTRAINT fk_book_borrowing_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_book_borrowing_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT fk_book_borrowing_book FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_book_borrowing_student_professor_book FOREIGN KEY (stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE CASCADE ON UPDATE CASCADE
   -- CONSTRAINT fk_book_borrowing_operator FOREIGN KEY (operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -374,6 +374,16 @@ DELIMITER ;
 -- QUERIES
 --
 
+CREATE VIEW active_book_borrowings AS
+SELECT bb.borrowing_id, bb.borrowing_date, bb.return_date, bb.actual_return_date, b.title, b.ISBN, sp.fullname AS borrower_name, sp.operator_id
+FROM book_borrowing bb
+JOIN book b ON bb.book_id = b.book_id
+JOIN student_professor sp ON bb.stud_prof_id = sp.stud_prof_id
+WHERE bb.actual_return_date IS NULL;
+
+
+
+
 --
 -- Administrator
 --
@@ -549,6 +559,8 @@ HAVING COUNT(b.book_id) <= (
 -- 3.2.1) All books by Title, Author (Search criteria: title/ category/ author/ copies).
 --
 
+
+
 CREATE VIEW book_info_3_joins AS
 SELECT b.book_id, b.school_id , b.title, GROUP_CONCAT(DISTINCT a.author) AS author, GROUP_CONCAT(DISTINCT c.thematic_category) AS thematic_category, b.available_copies 
 FROM book b
@@ -687,12 +699,13 @@ DELIMITER ;
 -- 
 
 CREATE VIEW overdue_library_book AS
-SELECT br.book_id, br.stud_prof_id, DATEDIFF(CURDATE(), return_date) AS overdue_days, sp.fullname, sp.operator_id
+SELECT br.book_id, br.stud_prof_id, DATEDIFF(CURDATE(), return_date) AS overdue_days, sp.fullname, sp.operator_id, b.title
 FROM book_borrowing br
-JOIN student_professor sp
-ON br.stud_prof_id = sp.stud_prof_id
+JOIN student_professor sp ON br.stud_prof_id = sp.stud_prof_id
+JOIN book b ON br.book_id = b.book_id
 WHERE actual_return_date IS NULL
 AND DATEDIFF(CURDATE(), return_date) > 0;
+
 
 
 DELIMITER $$

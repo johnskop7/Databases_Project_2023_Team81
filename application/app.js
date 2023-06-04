@@ -15,7 +15,7 @@ app.use(flash());
 app.use(session({
     secret: "ThisShouldBeSecret",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: true
 }));
 
 const port = process.env.SERVER_PORT || 3000;

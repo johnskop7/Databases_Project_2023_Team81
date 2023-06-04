@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Average Rating per Borrower and Category</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      margin-top: 50px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Average Rating per Borrower and Category</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Category</th>
+          <th>Average Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% results[0].forEach((avg_rating_borrowers_categories, index) => { %>
+          <tr>
+            <td><%= avg_rating_borrowers_categories.fullname %></td>
+            <td><%= avg_rating_borrowers_categories.thematic_category %></td>
+            <td><%= avg_rating_borrowers_categories.Average_rating %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

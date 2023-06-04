@@ -1,0 +1,45 @@
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+  
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+  
+    th {
+      background-color: #f2f2f2;
+    }
+  
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  
+    tr:hover {
+      background-color: #ddd;
+    }
+  </style>
+
+<h1><%= pageTitle %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Book Title</th>
+      <th>Student/Professor Name</th>
+      <th>Overdue Days</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% borrowers.forEach((overdue_library_book,_) => { %>
+      <tr>
+        <td><%= overdue_library_book.title %></td>
+        <td><%= overdue_library_book.fullname %></td>
+        <td><%= overdue_library_book.overdue_days %></td>
+        
+      </tr>
+    <% }); %>
+  </tbody>
+</table>

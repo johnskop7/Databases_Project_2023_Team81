@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Books of School Unit</title>
+  <style>
+    /* CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f2f2f2;
+    }
+
+    .content {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: none;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      color: #333;
+    }
+
+    td {
+      width: 12%; /* Adjust the percentage value as needed */
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .actions button {
+      transition: background-color 0.3s ease;
+    }
+
+    .edit-button {
+      background-color: #34a853;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .delete-button {
+      background-color: #e35b5b;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .edit-button:hover {
+      background-color: #1e8e3e;
+    }
+
+    .delete-button:hover {
+      background-color: #c43f3f;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Books of School Unit</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Τίτλος</th>
+          <th>Εκδότης</th>
+          <th>ISBN2</th>
+          <th>Συγγραφείς</th>
+          <th>Αριθμός Σελίδων</th>
+          <th>Περίληψη</th>
+          <th>Διαθέσιμα Αντίτυπα</th>
+          <th>Εικόνα</th>
+          <th>Θεματική Κατηγορία</th>
+          <th>Γλώσσα</th>
+          <th>Λέξεις Κλειδιά</th>
+          <th>Ενέργειες</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% books.forEach((book) => { %>
+          <tr>
+            <td><%= book.title %></td>
+            <td><%= book.publisher %></td>
+            <td><%= book.ISBN %></td>
+            <td><%= book.author %></td>
+            <td><%= book.number_of_pages %></td>
+            <td><%= book.summary %></td>
+            <td><%= book.available_copies %></td>
+            <td><img src="<%= book.image %>"></td>
+            <td><%= book.thematic_category %></td>
+            <td><%= book.language %></td>
+            <td><%= book.key_words %></td>
+            <td class="actions">
+              <button class="edit-button" onclick="openBookDetails('<%= book.book_id %>')">Edit</button>
+              <form method="POST" action='/delete_book/<%= book.book_id %>'>
+                <button class="delete-button">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    function openBookDetails(bookId) {
+      const url = `/update_books?book_id=${bookId}`;
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>
