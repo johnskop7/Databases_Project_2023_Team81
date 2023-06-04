@@ -75,15 +75,6 @@ exports.handleLogin_member = (req, res) => {
     const phonenumber = req.body.phoneNumber;
     const date_of_birth = req.body.dob;
     const role = req.body.role;
-    console.log(role);
-    console.log(school_id) 
-    console.log(fullname) 
-    console.log(username) 
-    console.log(password) 
-    console.log(email)
-    console.log(phonenumber) 
-    console.log(date_of_birth) 
-   
     pool.getConnection((err, conn) => {
         var sqlQuery = `INSERT INTO student_professor(fullname,username,password,email,phone_number,date_of_birth,role,approval_status, operator_id) VALUES (?,?,?,?,?,?,?,'not approved',?)`;
 

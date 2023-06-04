@@ -374,6 +374,52 @@ DELIMITER ;
 -- QUERIES
 --
 
+CREATE VIEW active_book_borrowings AS
+SELECT bb.borrowing_id, bb.borrowing_date, bb.return_date, bb.actual_return_date, b.title, b.ISBN, sp.fullname AS borrower_name, sp.operator_id
+FROM book_borrowing bb
+JOIN book b ON bb.book_id = b.book_id
+JOIN student_professor sp ON bb.stud_prof_id = sp.stud_prof_id
+WHERE bb.actual_return_date IS NULL;
+
+CREATE VIEW old_book_borrowings AS
+SELECT sp.fullname AS borrower_name, bb.borrowing_date, bb.actual_return_date, b.title, sp.operator_id
+FROM book_borrowing bb
+JOIN student_professor sp ON bb.stud_prof_id = sp.stud_prof_id
+JOIN book b ON bb.book_id = b.book_id
+WHERE bb.actual_return_date IS NOT NULL;
+
+CREATE VIEW get_approved_reviews AS
+SELECT o.operator_id, sp.fullname, b.title, r.rating, r.review_text
+FROM reviews r
+JOIN student_professor sp ON r.stud_prof_id = sp.stud_prof_id
+JOIN book b ON r.book_id = b.book_id
+JOIN operator o ON sp.operator_id = o.operator_id
+WHERE r.status = 'approved';
+
+CREATE VIEW get_denied_reviews AS
+SELECT o.operator_id, sp.fullname, b.title, r.rating, r.review_text
+FROM reviews r
+JOIN student_professor sp ON r.stud_prof_id = sp.stud_prof_id
+JOIN book b ON r.book_id = b.book_id
+JOIN operator o ON sp.operator_id = o.operator_id
+WHERE r.status = 'denied';
+
+CREATE VIEW get_notyetapproved_reviews AS
+SELECT r.review_id, o.operator_id, sp.fullname, b.title, r.rating, r.review_text
+FROM reviews r
+JOIN student_professor sp ON r.stud_prof_id = sp.stud_prof_id
+JOIN book b ON r.book_id = b.book_id
+JOIN operator o ON sp.operator_id = o.operator_id
+WHERE r.status = 'not yet approved';
+
+CREATE VIEW get_active_reservations AS 
+SELECT r.reservation_date, r.reservation_id, r.book_id, r.stud_prof_id, r.expiry_date, b.title AS book_title, sp.fullname, sp.operator_id
+FROM reservations r
+JOIN book b ON r.book_id = b.book_id
+JOIN student_professor sp ON r.stud_prof_id = sp.stud_prof_id
+WHERE r.status = 'active';
+
+
 --
 -- Administrator
 --
