@@ -40,7 +40,7 @@
             margin-top: 10px;
         }
 
-        .return-button {
+        .accept-button {
             padding: 5px 10px;
             background-color: #4CAF50;
             color: white;
@@ -50,8 +50,20 @@
             border-radius: 3px;
         }
 
-        .return-button:hover {
-            background-color: #45a049;
+        .deny-button {
+            padding: 5px 10px;
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 3px;
+        }
+
+        .button-cell {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     </style>
 </head>
@@ -68,10 +80,9 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>ISBN</th>
-                <th>Borrower Name</th>
-                <th>Borrowing Date</th>
-                <th>Return Date</th>
+                <th>Rating</th>
+                <th>Reviewer</th>
+                <th>Review Text</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -79,14 +90,17 @@
             <% users.forEach(function(user) { %>
                 <tr>
                     <td><%= user.title %></td>
-                    <td><%= user.ISBN %></td>
+                    <td><%= user.rating %></td>
                     <td><%= user.borrower_name %></td>
-                    <td><%= user.borrowing_date.toISOString().slice(0, 10) %></td>
-                    <td><%= user.return_date.toISOString().slice(0, 10) %></td>
-                    <td>
-                        <form action="/book_returned" method="POST">
-                            <input type="hidden" name="borrowingId" value="<%= user.borrowingId %>">
-                            <button class="return-button" type="submit">Book Returned</button>
+                    <td><%= user.review_text %></td>
+                    <td class="button-cell">
+                        <form action="/accept_review" method="POST">
+                            <input type="hidden" name="reviewId" value="<%= user.reviewId %>">
+                            <button class="accept-button" type="submit">Accept</button>
+                        </form>
+                        <form action="/deny_review" method="POST">
+                            <input type="hidden" name="reviewId" value="<%= user.reviewId %>">
+                            <button class="deny-button" type="submit">Deny</button>
                         </form>
                     </td>
                 </tr>

@@ -20,6 +20,19 @@ router.get('/add_book',operator_login.getAddBookPage);
 router.post('/add_book',operator_login.AddNewBook);
 router.get('/all_users',operator_login.getAllUsersPage);
 router.post('/delete_user/:id',operator_login.postDeleteUser);
+router.get('/active_borrowings',operator_login.getAllActiveBorrowingsPage);
+router.post('/book_returned',operator_login.postBookReturned);
+router.get('/old_borrowings',operator_login.getOldBorrowingsPage);
+router.get('/add_borrowing',operator_login.getNewBorrowingsPage);
+router.post('/add_borrowing',operator_login.AddNewBorrowing);
+router.get('/published_reviews',operator_login.getPublishedReviewsPage);
+router.get('/denied_reviews',operator_login.getDeniedReviewsPage);
+router.get('/notapproved_reviews',operator_login.getNotApprovedReviewsPage);
+router.post('/accept_review',operator_login.postReviewAccepted);
+router.post('/deny_review',operator_login.postReviewDeny);
+router.get('/reservations',operator_login.getReservationsPage);
+router.post('/upgrade_to_borrowing',operator_login.UpgradetoBorrowing);
+router.get('/library_registration',operator_login.getLibraryRegistration);
 
 
 module.exports = router;

@@ -66,6 +66,7 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+
     }
     
     input[type="text"],
@@ -169,9 +170,7 @@
   <div class="menubar">
     <button onclick="location.href='/school_books';">View all the books of the school</button>
     <button onclick="location.href='/add_book';">Add a new book</button>
-    <button onclick="location.href='/member_login';">Get back to the main page</button>
     <button onclick="location.href='/operator_password';">Change password</button>
-    <button onclick="location.href='/all_users';">View all the school library members</button>
     <div class="dropdown">
         <button class="dropbtn">Borrowings</button>
         <div class="dropdown-content">
@@ -180,7 +179,17 @@
             <button onclick="location.href='/add_borrowing';">Add New Borrowing</button>
         </div>
     </div>
+    <button onclick="location.href='/reservations';">Reservations</button>
+    <div class="dropdown">
+      <button class="dropbtn">Reviews</button>
+      <div class="dropdown-content">
+          <button onclick="location.href='/published_reviews';">Published Reviews</button>
+          <button onclick="location.href='/notapproved_reviews';">Not yet approved reviews</button>
+          <button onclick="location.href='/denied_reviews';">Denied reviews</button>
+      </div>
+    </div>
     <button onclick="location.href='/all_users';">View all the school library members</button>
+    <button onclick="location.href='/member_login';">Logout</button>
 </div>
 
   <div class="container-wrapper">

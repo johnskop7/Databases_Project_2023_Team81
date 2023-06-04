@@ -39,20 +39,6 @@
             color: red;
             margin-top: 10px;
         }
-
-        .return-button {
-            padding: 5px 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            border-radius: 3px;
-        }
-
-        .return-button:hover {
-            background-color: #45a049;
-        }
     </style>
 </head>
 <body>
@@ -67,28 +53,19 @@
     <table>
         <thead>
             <tr>
-                <th>Title</th>
-                <th>ISBN</th>
                 <th>Borrower Name</th>
                 <th>Borrowing Date</th>
-                <th>Return Date</th>
-                <th>Action</th>
+                <th>Actual Return Date</th>
+                <th>Book Title</th>
             </tr>
         </thead>
         <tbody>
             <% users.forEach(function(user) { %>
                 <tr>
-                    <td><%= user.title %></td>
-                    <td><%= user.ISBN %></td>
                     <td><%= user.borrower_name %></td>
                     <td><%= user.borrowing_date.toISOString().slice(0, 10) %></td>
-                    <td><%= user.return_date.toISOString().slice(0, 10) %></td>
-                    <td>
-                        <form action="/book_returned" method="POST">
-                            <input type="hidden" name="borrowingId" value="<%= user.borrowingId %>">
-                            <button class="return-button" type="submit">Book Returned</button>
-                        </form>
-                    </td>
+                    <td><%= user.actual_return_date.toISOString().slice(0, 10) %></td>
+                    <td><%= user.title %></td>
                 </tr>
             <% }); %>
         </tbody>

@@ -120,26 +120,26 @@ exports.getLateReturns = (req, res) => {
       
       
 exports.getAvgRating = (req, res) => {
-        const studentName = req.query.studentName;
-        const category = req.query.category;
+        const fullname = req.query.studentName;
+        let category = req.query.category;
         const operatorId = req.session.operatorId;
-        //console.log(operatorId);
-        // console.log(genre);
-        // Query the database with the genre parameter
+        if (category === '') {
+          category = null;
+        }
         pool.getConnection((err, conn) => {
           if (err) {
             console.error(err);
             return res.status(500).send('Internal Server Error');
           }
           conn.promise()
-          .query('CALL avg_rating_borrowers_categories(?,?,?)', [operatorId ,studentName,category])
+          .query('CALL avg_rating_borrowers_categories(?,?,?)', [operatorId ,fullname,category])
           .then(([results]) => {
                  // Render the view with both sets of results
                   res.render('average_rating.ejs', {
                   pageTitle: "Query 3.2.3",
                   results: results,
                 });
-                //console.log(results)
+                console.log(results)
               })
               .then(() => pool.releaseConnection(conn))
               .catch(err => console.log(err))
@@ -538,3 +538,439 @@ exports.getAvgRating = (req, res) => {
           });
       };
       
+
+      exports.getAllActiveBorrowingsPage = (req, res, next) => {
+        const operatorId = req.session.operatorId;
+        
+        pool.getConnection((err, conn) => {
+          var sqlQuery = `SELECT * FROM active_book_borrowings WHERE operator_id = ${operatorId}`;
+          conn.promise()
+            .query(sqlQuery)
+            .then(([results]) => {
+              pool.releaseConnection(conn);
+      
+              const filteredResults = results.map((results) => ({
+                borrowingId:results.borrowing_id,
+                borrower_name:results.borrower_name,
+                borrowing_date:results.borrowing_date,
+                ISBN: results.ISBN,
+                return_date: results.return_date,
+                title: results.title  
+              }));
+      
+              res.render('active_borrowings.ejs', {
+                pageTitle: 'Active book borrowings',
+                users: filteredResults,
+                messages: [],
+              });
+      
+              console.log(filteredResults);
+            })
+            .catch((err) => {
+              console.log(err);
+              req.flash('messages', {
+                type: 'error',
+                value: 'Something went wrong, Executive could not be updated.',
+              });
+              res.redirect('/operator_mainpage');
+            });
+        });
+      };
+
+
+      exports.postBookReturned = (req, res, next) => {
+        const borrowingId = req.body.borrowingId;
+        const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in YYYY-MM-DD format
+        console.log(borrowingId);
+        pool.getConnection((err, conn) => {
+            var sqlQuery = `UPDATE book_borrowing SET actual_return_date = '${currentDate}' WHERE borrowing_id = ${borrowingId}`;
+    
+            conn.promise().query(sqlQuery)
+                .then(() => {
+                    pool.releaseConnection(conn);
+                    req.flash('messages', { type: 'success', value: "Book returned successfully!" });
+                    res.render('operator_mainpage.ejs')
+                })
+                .catch(err => {
+                    req.flash('messages', { type: 'error', value: "Something went wrong, book could not be returned." });
+                    res.redirect('/active_borrowings');
+                });
+        });
+    };
+    
+
+
+    exports.getOldBorrowingsPage = (req, res, next) => {
+      const operatorId = req.session.operatorId;
+      
+      pool.getConnection((err, conn) => {
+        var sqlQuery = `SELECT * FROM old_book_borrowings WHERE operator_id = ${operatorId};`;
+        conn.promise()
+          .query(sqlQuery)
+          .then(([results]) => {
+            pool.releaseConnection(conn);
+    
+            const filteredResults = results.map((results) => ({
+              borrower_name:results.borrower_name,
+              borrowing_date:results.borrowing_date,
+              actual_return_date: results.actual_return_date,
+              title: results.title  
+            }));
+    
+            res.render('old_borrowings.ejs', {
+              pageTitle: 'Old book borrowings',
+              users: filteredResults,
+              messages: [],
+            });
+    
+            console.log(filteredResults);
+          })
+          .catch((err) => {
+            console.log(err);
+            req.flash('messages', {
+              type: 'error',
+              value: 'Something went wrong, Executive could not be updated.',
+            });
+            res.redirect('/operator_mainpage');
+          });
+      });
+    };
+
+
+    exports.getNewBorrowingsPage = (req, res, next) => {
+          res.render('add_borrowing.ejs', {
+          pageTitle: 'New book borrowing',
+          messages: [],
+            });
+    };
+
+    
+    exports.AddNewBorrowing = (req, res, next) => {
+      // Retrieve the book data from the request body
+      const { title, isbn, fullname, phonenumber } = req.body;
+      const operatorId = req.session.operatorId;
+      console.log(title);
+      console.log(isbn);
+      console.log(fullname);
+      console.log(phonenumber);
+      pool.getConnection((err, conn) => {
+          if (err) {
+              console.log(err);
+              req.flash('messages', { type: 'error', value: 'Something went wrong.' });
+              res.render('add_borrowing.ejs');
+              return;
+          }
+  
+          // Find the book_id using the title and ISBN
+          const findBookQuery = `SELECT book_id FROM book WHERE title = ? AND ISBN = ? AND school_id = ${operatorId}`;
+          conn.query(findBookQuery, [title, isbn], (err, bookResult) => {
+              if (err) {
+                  console.log(err);
+                  req.flash('messages', { type: 'error', value: 'Error finding the book.' });
+                  res.render('add_borrowing.ejs');
+                  return;
+              }
+  
+              if (bookResult.length === 0) {
+                  req.flash('messages', { type: 'error', value: 'Book not found.' });
+                  res.render('add_borrowing.ejs');
+                  return;
+              }
+  
+              const bookId = bookResult[0].book_id;
+  
+              // Find the stud_prof_id using the fullname and phonenumber
+              const findStudentQuery = `SELECT stud_prof_id FROM student_professor WHERE fullname = ? AND phone_number = ? AND operator_id = ${operatorId}`;
+              conn.query(findStudentQuery, [fullname, phonenumber], (err, studentResult) => {
+                  if (err) {
+                      console.log(err);
+                      req.flash('messages', { type: 'error', value: 'Error finding the student/professor.' });
+                      res.render('add_borrowing.ejs');
+                      return;
+                  }
+  
+                  if (studentResult.length === 0) {
+                      req.flash('messages', { type: 'error', value: 'Student/Professor not found.' });
+                      res.render('add_borrowing.ejs');
+                      return;
+                  }
+  
+                  const studProfId = studentResult[0].stud_prof_id;
+  
+                  // Get the current date
+                  const currentDate = new Date();
+  
+                  // Calculate the return date (current date + 7 days)
+                  const returnDate = new Date();
+                  returnDate.setDate(currentDate.getDate() + 7);
+  
+                  // Insert the new borrowing into the book_borrowing table
+                  const insertBorrowingQuery = `INSERT INTO book_borrowing (borrowing_date, return_date, actual_return_date, book_id, stud_prof_id) VALUES (?, ?, NULL, ?, ?)`;
+                  conn.query(
+                      insertBorrowingQuery,
+                      [currentDate, returnDate, bookId, studProfId],
+                      (err, insertResult) => {
+                          if (err) {
+                              console.log(err);
+                              req.flash('messages', { type: 'error', value: 'Error adding the new borrowing.' });
+                              res.render('add_borrowing.ejs');
+                              return;
+                          }
+                          console.log(currentDate);
+  
+                          req.flash('messages', { type: 'success', value: 'Borrowing added successfully.' });
+                          res.render('operator_mainpage.ejs');
+                      }
+                  );
+              });
+          });
+      });
+  };
+  
+
+
+  
+    exports.getPublishedReviewsPage = (req, res, next) => {
+      const operatorId = req.session.operatorId;
+      
+      pool.getConnection((err, conn) => {
+        var sqlQuery = `SELECT * FROM get_approved_reviews WHERE operator_id = ${operatorId};`;
+        conn.promise()
+          .query(sqlQuery)
+          .then(([results]) => {
+            pool.releaseConnection(conn);
+    
+            const filteredResults = results.map((results) => ({
+              borrower_name:results.fullname,
+              title: results.title ,
+              rating:results.rating,
+              review_text: results.review_text, 
+            }));
+    
+            res.render('published_reviews.ejs', {
+              pageTitle: 'Published Reviews',
+              users: filteredResults,
+              messages: [],
+            });
+    
+            console.log(filteredResults);
+          })
+          .catch((err) => {
+            console.log(err);
+            req.flash('messages', {
+              type: 'error',
+              value: 'Something went wrong, Executive could not be updated.',
+            });
+            res.redirect('/operator_mainpage');
+          });
+      });
+    };
+
+
+    exports.getDeniedReviewsPage = (req, res, next) => {
+      const operatorId = req.session.operatorId;
+      
+      pool.getConnection((err, conn) => {
+        var sqlQuery = `SELECT * FROM get_denied_reviews WHERE operator_id = ${operatorId};`;
+        conn.promise()
+          .query(sqlQuery)
+          .then(([results]) => {
+            pool.releaseConnection(conn);
+    
+            const filteredResults = results.map((results) => ({
+              borrower_name:results.fullname,
+              title: results.title ,
+              rating:results.rating,
+              review_text: results.review_text, 
+            }));
+    
+            res.render('denied_reviews.ejs', {
+              pageTitle: 'Denied Reviews',
+              users: filteredResults,
+              messages: [],
+            });
+    
+            console.log(filteredResults);
+          })
+          .catch((err) => {
+            console.log(err);
+            req.flash('messages', {
+              type: 'error',
+              value: 'Something went wrong, Executive could not be updated.',
+            });
+            res.redirect('/operator_mainpage');
+          });
+      });
+    };
+
+
+    exports.getNotApprovedReviewsPage = (req, res, next) => {
+      const operatorId = req.session.operatorId;
+      
+      pool.getConnection((err, conn) => {
+        var sqlQuery = `SELECT * FROM get_notyetapproved_reviews WHERE operator_id = ${operatorId};`;
+        conn.promise()
+          .query(sqlQuery)
+          .then(([results]) => {
+            pool.releaseConnection(conn);
+    
+            const filteredResults = results.map((results) => ({
+              reviewId:results.review_id,
+              borrower_name:results.fullname,
+              title: results.title ,
+              rating:results.rating,
+              review_text: results.review_text, 
+            }));
+    
+            res.render('notapproved_reviews.ejs', {
+              pageTitle: 'Reviews that have not been approved yet',
+              users: filteredResults,
+              messages: [],
+            });
+    
+            //console.log(filteredResults);
+          })
+          .catch((err) => {
+            console.log(err);
+            req.flash('messages', {
+              type: 'error',
+            });
+            res.redirect('/operator_mainpage');
+          });
+      });
+    };
+
+    exports.postReviewAccepted = (req, res, next) => {
+      const reviewId = req.body.reviewId;
+      console.log(reviewId);
+      pool.getConnection((err, conn) => {
+          var sqlQuery = `UPDATE reviews SET status = 'approved' WHERE review_id = ${reviewId}`;
+  
+          conn.promise().query(sqlQuery)
+              .then(() => {
+                  pool.releaseConnection(conn);
+                  res.render('operator_mainpage.ejs')
+              })
+              .catch(err => {
+                  req.flash('messages', { type: 'error', value: "Something went wrong, book could not be returned." });
+                  res.redirect('/accept_review');
+              });
+      });
+  };
+  
+
+  exports.postReviewDeny = (req, res, next) => {
+    const reviewId = req.body.reviewId;
+    console.log(reviewId);
+    pool.getConnection((err, conn) => {
+        var sqlQuery = `UPDATE reviews SET status = 'denied' WHERE review_id = ${reviewId}`;
+
+        conn.promise().query(sqlQuery)
+            .then(() => {
+                pool.releaseConnection(conn);
+                res.render('operator_mainpage.ejs')
+            })
+            .catch(err => {
+                req.flash('messages', { type: 'error', value: "Something went wrong, book could not be returned." });
+                res.redirect('/accept_review');
+            });
+    });
+};
+
+exports.getReservationsPage = (req, res, next) => {
+  const operatorId = req.session.operatorId;
+  
+  pool.getConnection((err, conn) => {
+    var sqlQuery = `SELECT * FROM get_active_reservations WHERE operator_id = ${operatorId};`;
+    conn.promise()
+      .query(sqlQuery)
+      .then(([results]) => {
+        pool.releaseConnection(conn);
+
+        const filteredResults = results.map((results) => ({
+          reservation_date:results.reservation_date,
+          expiry_date:results.expiry_date,
+          reservationId:results.reservation_id,
+          bookId:results.book_id,
+          stud_prof_id:results.stud_prof_id,
+          name:results.fullname,
+          title: results.book_title
+        }));
+       
+        res.render('reservations.ejs', {
+          pageTitle: 'Active Reservations',
+          users: filteredResults,
+          messages: [],
+        });
+
+        //console.log(results);
+      })
+      .catch((err) => {
+        console.log(err);
+        req.flash('messages', {
+          type: 'error',
+        });
+        res.redirect('/operator_mainpage');
+      });
+  });
+};
+
+
+exports.getNewBorrowingsPage = (req, res, next) => {
+  res.render('add_borrowing.ejs', {
+  pageTitle: 'New book borrowing',
+  messages: [],
+    });
+};
+
+
+exports.UpgradetoBorrowing = (req, res, next) => {
+      // Retrieve the book data from the request body
+        const operatorId = req.session.operatorId;
+        const bookId = req.body.bookId;
+        const stud_prof_id = req.body.stud_prof_id;
+        console.log(bookId);
+        pool.getConnection((err, conn) => {
+        if (err) {
+          console.log(err);
+          req.flash('messages', { type: 'error', value: 'Something went wrong.' });
+          res.render('reservations.ejs');
+          return;
+      }
+
+          // Get the current date
+          const currentDate = new Date();
+
+          // Calculate the return date (current date + 7 days)
+          const returnDate = new Date();
+          returnDate.setDate(currentDate.getDate() + 7);
+
+          // Insert the new borrowing into the book_borrowing table
+          
+          const insertBorrowingQuery = `INSERT INTO book_borrowing (borrowing_date, return_date, actual_return_date, book_id, stud_prof_id) VALUES (?, ?, NULL, ?, ?)`;
+          conn.query(
+              insertBorrowingQuery,
+              [currentDate, returnDate, bookId, stud_prof_id],
+              (err, insertResult) => {
+                  if (err) {
+                      console.log(err);
+                      req.flash('messages', { type: 'error', value: 'Error adding the new borrowing.' });
+                      res.render('reservations.ejs');
+                      return;
+                  }
+                  console.log(currentDate);
+
+                  req.flash('messages', { type: 'success', value: 'Borrowing added successfully.' });
+                  res.render('operator_mainpage.ejs');
+              }
+          );
+      });
+  }
+
+
+  exports.getLibraryRegistration= (req, res, next) => {
+    res.render('library_registration.ejs', {
+    pageTitle: 'New Library Registration',
+    messages: [],
+      });
+  };

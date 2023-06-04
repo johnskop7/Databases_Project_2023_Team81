@@ -35,12 +35,7 @@
             background-color: #f9f9f9;
         }
 
-        .message {
-            color: red;
-            margin-top: 10px;
-        }
-
-        .return-button {
+        .upgrade-button {
             padding: 5px 10px;
             background-color: #4CAF50;
             color: white;
@@ -50,43 +45,36 @@
             border-radius: 3px;
         }
 
-        .return-button:hover {
+        .upgrade-button:hover {
             background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <h1><%= pageTitle %></h1>
-
-    <% if (messages && messages.length > 0) { %>
-        <% messages.forEach(function(message) { %>
-            <div class="message"><%= message.value %></div>
-        <% }); %>
-    <% } %>
-
     <table>
         <thead>
             <tr>
+                <th>Full Name</th>
                 <th>Title</th>
-                <th>ISBN</th>
-                <th>Borrower Name</th>
-                <th>Borrowing Date</th>
-                <th>Return Date</th>
+                <th>Reservation Date</th>
+                <th>Expiry Date</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <% users.forEach(function(user) { %>
                 <tr>
+                    <td><%= user.name %></td>
                     <td><%= user.title %></td>
-                    <td><%= user.ISBN %></td>
-                    <td><%= user.borrower_name %></td>
-                    <td><%= user.borrowing_date.toISOString().slice(0, 10) %></td>
-                    <td><%= user.return_date.toISOString().slice(0, 10) %></td>
+                    <td><%= user.reservation_date.toISOString().slice(0, 10) %></td>
+                    <td><%= user.expiry_date.toISOString().slice(0, 10) %></td>
                     <td>
-                        <form action="/book_returned" method="POST">
-                            <input type="hidden" name="borrowingId" value="<%= user.borrowingId %>">
-                            <button class="return-button" type="submit">Book Returned</button>
+                        <form action="/upgrade_to_borrowing" method="POST">
+                            <input type="hidden" name="reservationId" value="<%= user.reservationId %>">
+                            <input type="hidden" name="bookId" value="<%= user.bookId %>">
+                            <input type="hidden" name="stud_prof_id" value="<%= user.stud_prof_id %>">
+                            <button class="upgrade-button" type="submit">Upgrade to Borrowing</button>
                         </form>
                     </td>
                 </tr>
