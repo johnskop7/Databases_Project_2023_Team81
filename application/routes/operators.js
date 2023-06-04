@@ -33,6 +33,6 @@ router.post('/deny_review',operator_login.postReviewDeny);
 router.get('/reservations',operator_login.getReservationsPage);
 router.post('/upgrade_to_borrowing',operator_login.UpgradetoBorrowing);
 router.get('/library_registration',operator_login.getLibraryRegistration);
-
+router.post('/submit_library',operator_login.postRegisterSchool);
 
 module.exports = router;

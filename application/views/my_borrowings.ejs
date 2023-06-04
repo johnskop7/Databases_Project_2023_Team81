@@ -1,0 +1,70 @@
+<!-- my_borrowings.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Borrowings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Borrowings</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Borrowing Date</th>
+                <th>Return Date</th>
+                <th>Actual Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% borrowings.forEach(borrowing => { %>
+                <tr>
+                    <td><%= borrowing.title %></td>
+                    <td><%= borrowing.borrowing_date ? borrowing.borrowing_date.toISOString().split('T')[0] : '' %></td>
+                    <td><%= borrowing.return_date ? borrowing.return_date.toISOString().split('T')[0] : '' %></td>
+                    <td><%= borrowing.actual_return_date ? borrowing.actual_return_date.toISOString().split('T')[0] : '' %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

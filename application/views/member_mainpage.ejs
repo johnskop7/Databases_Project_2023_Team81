@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Book</title>
+    <style>
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .container input[type="text"],
+        .container select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .menu-bar {
+            background-color: #333;
+            padding: 10px;
+        }
+        
+        .menu-bar .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .menu-bar .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            padding: 10px;
+        }
+        
+        .menu-bar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .menu-bar .dropdown-content a {
+            display: block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+        
+        .menu-bar .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        
+        .menu-bar button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .menu-bar button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-bar">
+        <div class="dropdown">
+            <button class="dropbtn">Reviews</button>
+            <div class="dropdown-content">
+                <a href="/my_reviews">My Reviews</a>
+                <a href="/add_review">Add Review</a>
+                <a href="/review_stats">Review Statistics</a>
+            </div>
+        </div>
+        <button onclick="location.href='/my_borrowings';">My Borrowings</button>
+        <button onclick="location.href='/member_login';">Log Out</button>
+    </div>
+    <div class="container">
+        <h2>Ερώτημα 3.3.1 (To see all the books of your school unit leave all the fields empty and press 'search for book')</h2>
+        <form action="/search_book" method="POST">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title">
+
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author">
+
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="">Select Category</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Romance">Romance</option>
+                <option value="Science Fiction">Science Fiction</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Horror">Horror</option>
+                <option value="Biography">Biography</option>
+                <option value="Self-Help">Self-Help</option>
+                <option value="Crime">Crime</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Drama">Drama</option>
+                <option value="Poetry">Poetry</option>
+                <option value="Action">Action</option>
+                <option value="Graphic Novel">Graphic Novel</option>
+            </select>
+
+            <button type="submit">Search for book</button>
+        </form>
+    </div>
+    <script>
+        // Dropdown functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            dropdown.addEventListener('click', function () {
+                dropdownContent.classList.toggle('show');
+            });
+
+            window.onclick = function (event) {
+                if (!event.target.matches('.dropbtn')) {
+                    if (dropdownContent.classList.contains('show')) {
+                        dropdownContent.classList.remove('show');
+                    }
+                }
+            };
+        });
+    </script>
+</body>
+</html>

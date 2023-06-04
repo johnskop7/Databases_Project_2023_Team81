@@ -16,6 +16,9 @@ router.get('/borrowings_per_school',admin_route.BorrowingsPerSchool),
 router.get('/admin_profile',admin_route.getAdminProfilePage),
 router.post('/admin_profile',admin_route.UpdateAdminPassword),
 router.get('/member_login',admin_route.getBacktotheMainPage);
+router.get('/applications_for_libraries',admin_route.getApplicationsPage);
+router.post('/dismiss_application',admin_route.postDismissLibrary);
+router.post('/accept_application',admin_route.postAcceptLibrary);
 
 
 module.exports = router;

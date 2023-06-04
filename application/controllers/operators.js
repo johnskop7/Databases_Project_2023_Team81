@@ -29,7 +29,7 @@ exports.handleLogin_operator = (req, res) => {
       }
   
       conn.promise()
-        .query('SELECT * FROM operator WHERE username = ? AND password = ?', [username, password])
+        .query("SELECT * FROM operator WHERE status = 'approved' AND username = ? AND password = ?", [username, password])
         .then(([results]) => {
             if (results.length === 0) {
                 res.redirect('/operator_login')
@@ -974,3 +974,38 @@ exports.UpgradetoBorrowing = (req, res, next) => {
     messages: [],
       });
   };
+
+
+  exports.postRegisterSchool = (req, res, next) => {
+    const school_name = req.body.schoolName;
+    const address = req.body.address;
+    const city = req.body.city;
+    const director_full_name = req.body.directorFullName;
+    const school_email = req.body.schoolEmail;
+    const school_phone_number = req.body.schoolPhoneNumber;
+    const library_operator_fullname = req.body.libraryOperatorFullName;
+    const username = req.body.operatorUsername;
+    const password = req.body.operatorPassword;
+    const email = req.body.operatorEmail;
+    const phonenumber = req.body.operatorPhoneNumber;
+    console.log(school_email);
+    pool.getConnection((err, conn) => {
+        var schoolUnitQuery = `INSERT INTO school_unit(school_name, address, city , school_director_full_name , library_operator_full_name, email , phone_number,status,administrator_id ) VALUES (?,?,?,?,?,?,?,'not approved',1)`;
+      
+        var operatorQuery = `INSERT INTO operator(fullname,username, password, operator_email, operator_phone_number, status, school_id, administrator_id) VALUES (?,?,?,?,?,?,?,1)`;
+      
+        conn.promise().query(schoolUnitQuery, [school_name, address, city, director_full_name, library_operator_fullname, school_email, school_phone_number])
+            .then(([result]) => {
+                const school_id = result.insertId;
+                return conn.promise().query(operatorQuery, [library_operator_fullname,username, password, email, phonenumber, 'not approved', school_id]);
+            })
+            .then(() => {
+                pool.releaseConnection(conn);
+                res.render('member_login.ejs');
+            })
+            .catch(err => {
+                console.error('Error executing query:', err);
+                res.redirect('library_registration');
+            });
+    });
+};

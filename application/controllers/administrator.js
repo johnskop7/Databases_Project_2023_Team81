@@ -270,4 +270,118 @@ exports.getBacktotheMainPage= (req, res, next) => {
     });
 }
 
+exports.getApplicationsPage = (req, res, next) => {
+  pool.getConnection((err, conn) => {
+    const sqlQuery = `
+      SELECT *
+      FROM school_unit
+      INNER JOIN operator ON school_unit.school_id = operator.school_id
+      WHERE school_unit.status = 'not approved'
+    `;
+
+    conn.promise().query(sqlQuery)
+      .then(([rows]) => {
+        pool.releaseConnection(conn);
+        res.render('applications_for_libraries.ejs', {
+          pageTitle: 'Applications for new libraries and operators',
+          applications: rows,
+          messages: [] // You can pass any desired messages to display on the applications page
+        });
+      })
+      .catch(err => {
+        console.error('Error executing query:', err);
+        res.render('applications_for_libraries.ejs', {
+          pageTitle: 'Applications for new libraries and operators',
+          applications: [],
+          messages: ['Error retrieving applications'] // An error message if the query fails
+        });
+      });
+  });
+};
+
+exports.postDismissLibrary = (req, res, next) => {
+  // Get id from URL params
+  const id = req.body.operator_id;
+  console.log(id);
+  // Create the connection, execute the query, flash respective message, and redirect to the operator_mainpage route
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error('Error getting database connection:', err);
+      return res.redirect('/admin_mainpage');
+    }
+
+    var sqlQuery = `
+      UPDATE operator
+      SET status='denied'
+      WHERE operator_id = ${id}`;
+
+    conn.query(sqlQuery, (err, result) => {
+      if (err) {
+        conn.release();
+        console.error('Error executing query:', err);
+        return res.redirect('/admin_mainpage');
+      }
+
+      var sqlQuery2 = `
+        UPDATE school_unit
+        SET status='denied'
+        WHERE school_id = ${id}`;
+
+      conn.query(sqlQuery2, (err, result) => {
+        conn.release();
+
+        if (err) {
+          console.error('Error executing query:', err);
+          return res.redirect('/admin_mainpage');
+        }
+
+        req.flash('messages', { type: 'success', value: "Successfully dismissed executive and operator!" });
+        res.render('admin_mainpage.ejs');
+      });
+    });
+  });
+};
+
+exports.postAcceptLibrary = (req, res, next) => {
+  // Get id from URL params
+  const id = req.body.operator_id;
+  console.log(id);
+  // Create the connection, execute the query, flash respective message, and redirect to the operator_mainpage route
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error('Error getting database connection:', err);
+      return res.redirect('/admin_mainpage');
+    }
+
+    var sqlQuery = `
+      UPDATE operator
+      SET status='approved'
+      WHERE operator_id = ${id}`;
+
+    conn.query(sqlQuery, (err, result) => {
+      if (err) {
+        conn.release();
+        console.error('Error executing query:', err);
+        return res.redirect('/admin_mainpage');
+      }
+
+      var sqlQuery2 = `
+        UPDATE school_unit
+        SET status='approved'
+        WHERE school_id = ${id}`;
+
+      conn.query(sqlQuery2, (err, result) => {
+        conn.release();
+
+        if (err) {
+          console.error('Error executing query:', err);
+          return res.redirect('/admin_mainpage');
+        }
+
+        req.flash('messages', { type: 'success', value: "Successfully approved executive and operator!" });
+        res.render('admin_mainpage.ejs');
+      });
+    });
+  });
+};
 

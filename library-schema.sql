@@ -36,6 +36,7 @@ CREATE TABLE school_unit(
     library_operator_full_name VARCHAR(45) NOT NULL,
     email VARCHAR(45) NOT NULL,
     phone_number VARCHAR(45) NOT NULL,
+    status enum('approved','not approved','denied') NOT NULL,
     administrator_id SMALLINT UNSIGNED NOT NULL,
     PRIMARY KEY(school_id),
     CONSTRAINT fk_school_unit_administrator FOREIGN KEY(administrator_id) REFERENCES administrator(administrator_id) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -50,8 +51,9 @@ CREATE TABLE operator(
     username VARCHAR(45) NOT NULL,
     password VARCHAR(45) NOT NULL,
     fullname VARCHAR(45) NOT NULL,
-    email VARCHAR(45) NOT NULL,
-    phone_number VARCHAR(45) NOT NULL,
+    operator_email VARCHAR(45) NOT NULL,
+    operator_phone_number VARCHAR(45) NOT NULL,
+    status enum ('approved','not approved','denied') NOT NULL,
     school_id SMALLINT UNSIGNED NOT NULL,
     administrator_id SMALLINT UNSIGNED NOT NULL,
     PRIMARY KEY(operator_id),
@@ -74,10 +76,9 @@ CREATE TABLE student_professor(
 	role ENUM ("student", "professor") NOT NULL,
 	approval_status ENUM ('approved','not approved') DEFAULT 'not approved',
 	operator_id SMALLINT UNSIGNED NOT NULL, 
-    -- school_id SMALLINT UNSIGNED NOT NULL,
 	PRIMARY KEY(stud_prof_id),
-	CONSTRAINT fk_student_professor_operator FOREIGN KEY(operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
-	-- CONSTRAINT fk_student_school_unit FOREIGN KEY(school_id) REFERENCES school_unit(school_id) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT fk_student_professor_operator FOREIGN KEY(operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE 
+	
 
 );
 
@@ -598,7 +599,7 @@ HAVING COUNT(b.book_id) <= (
 
 
 CREATE VIEW book_info_3_joins AS
-SELECT b.book_id, b.school_id , b.title, GROUP_CONCAT(DISTINCT a.author) AS author, GROUP_CONCAT(DISTINCT c.thematic_category) AS thematic_category, b.available_copies 
+SELECT b.book_id, b.school_id , b.title, GROUP_CONCAT(DISTINCT a.author) AS author, GROUP_CONCAT(DISTINCT c.thematic_category) AS thematic_category, b.available_copies , b.summary , b.image
 FROM book b
 JOIN book_authors a
 ON b.book_id = a.book_id
@@ -852,40 +853,40 @@ BEGIN
 	IF title_ IS NULL AND author_ IS NULL AND category_ IS NULL THEN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'At least one field is required';
 	ELSEIF title_ IS NOT NULL AND author_ IS NULL AND category_ IS NULL THEN 
-		SELECT title 
+		SELECT title , book_id,author, thematic_category, available_copies ,summary , image
 		FROM book_info_3_joins
 		WHERE (title LIKE CONCAT('%', title_, '%'))
 		AND school_id = school_id_;
 	ELSEIF title_ IS NULL AND author_ IS NOT NULL AND category_ IS NULL THEN
-		SELECT title
+		SELECT title,book_id,author, thematic_category, available_copies,summary, image
 		FROM book_info_3_joins
 		WHERE (author LIKE CONCAT('%', author_, '%'))
                 AND school_id = school_id_;
 	ELSEIF title_ IS NULL AND author_ IS NULL AND category_ IS NOT NULL THEN
-	       SELECT title
+	       SELECT title, book_id,author, thematic_category, available_copies,summary, image
 	       FROM book_info_3_joins
 	       WHERE (thematic_category LIKE CONCAT('%', category_, '%'))
                AND school_id = school_id_;	
 	ELSEIF title_ IS NOT NULL AND author_ IS NOT NULL AND category_ IS NULL THEN
-		SELECT title
+		SELECT title, book_id,author, thematic_category, available_copies,summary, image
 		FROM book_info_3_joins
 		WHERE (title LIKE CONCAT('%', title_, '%'))
 		AND (author LIKE CONCAT('%', author_, '%'))
 		AND school_id = school_id_;
 	ELSEIF title_ IS NULL AND author_ IS NOT NULL AND category_ IS NOT NULL THEN
-	       SELECT title
+	       SELECT title, book_id,author, thematic_category, available_copies,summary, image
                FROM book_info_3_joins
                WHERE (author LIKE CONCAT('%', author_, '%'))
 	       AND (thematic_category LIKE CONCAT('%', category_, '%'))
 	       AND school_id = school_id_;
 	ELSEIF title_ IS NOT NULL AND author_ IS NULL AND category_ IS NOT NULL THEN
-		SELECT title
+		SELECT title, book_id,author, thematic_category, available_copies,summary, image
                 FROM book_info_3_joins
 		WHERE (title LIKE CONCAT('%', title_, '%'))
 		AND (thematic_category LIKE CONCAT('%', category_, '%'))
 		AND school_id = school_id_;
 	ELSE 
-		SELECT title
+		SELECT title, book_id,author, thematic_category, available_copies,summary, image
                 FROM book_info_3_joins
 		WHERE (title LIKE CONCAT('%', title_, '%'))
 		AND (author LIKE CONCAT('%', author_, '%'))

@@ -1,0 +1,119 @@
+<!-- applications_for_libraries.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Applications for New Libraries and Operators</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .buttons button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .accept-button {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .dismiss-button {
+      background-color: #f44336;
+      color: white;
+    }
+    .no-applications {
+      text-align: center;
+      margin-top: 20px;
+      color: #888;
+    }
+    .back-button {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Applications for New Libraries and Operators</h2>
+    <% if (applications.length > 0) { %>
+    <table>
+      <tr>
+        <th>School Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>School Director</th>
+        <th>Library Operator</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Operator Username</th>
+        <th>Operator Email</th>
+        <th>Operator Phone Number</th>
+        <th>Accept</th>
+        <th>Dismiss</th>
+      </tr>
+      <% applications.forEach(function(application) { %>
+      <tr>
+        <td><%= application.school_name %></td>
+        <td><%= application.address %></td>
+        <td><%= application.city %></td>
+        <td><%= application.school_director_full_name %></td>
+        <td><%= application.fullname %></td>
+        <td><%= application.email %></td>
+        <td><%= application.phone_number %></td>
+        <td><%= application.username %></td>
+        <td><%= application.operator_email %></td>
+        <td><%= application.operator_phone_number %></td>
+        <td>
+          <form method="POST" action="/accept_application">
+            <input type="hidden" name="operator_id" value="<%= application.operator_id %>">
+            <button class="accept-button">Accept</button>
+          </form>
+        </td>
+        <td>
+          <form method="POST" action="/dismiss_application">
+            <input type="hidden" name="operator_id" value="<%= application.operator_id %>">
+            <button class="dismiss-button">Dismiss</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </table>
+    <% } else { %>
+    <p class="no-applications">No applications found.</p>
+    <% } %>
+  </div>
+</body>
+</html>

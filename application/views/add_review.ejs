@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Review</title>
+    <style>
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .container input[type="text"],
+        .container textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .container select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("down-arrow.svg");
+            background-repeat: no-repeat;
+            background-position: right center;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Review</h2>
+        <form action="/submit_review" method="POST">
+            <label for="bookTitle">Book Title:</label>
+            <input type="text" id="bookTitle" name="title" required>
+
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" name="ISBN" required>
+
+            <label for="reviewText">Review Text:</label>
+            <textarea id="reviewText" name="reviewText" rows="4" required></textarea>
+
+            <label for="rating">Rating:</label>
+            <select id="rating" name="rating" required>
+                <option value="">How good was the book</option>
+                <option value="1">Unsatisfactory</option>
+                <option value="2">Below Average</option>
+                <option value="3">Average</option>
+                <option value="4">Enjoyable</option>
+                <option value="5"> Exceptional</option>
+            </select>
+
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -25,35 +25,35 @@ ALTER TABLE `reviews` auto_increment = 1;
 --
 -- Insert 8 school_operators
 --
-INSERT INTO operator(fullname,username,password,email,phone_number,school_id,administrator_id) VALUES
-        ('Dora Panteli', 'kristin60', '12', 'romerolance@example.org','(870)747-9717','1','1'),
-        ('Panagiotis Giadikiaroglou', 'jhill', '123', 'dennisrusso@example.com','9671127828','2','1'),
-        ('Alexandros Emmanouilidis', 'eatonjonathan', '@0_I%ywv7T', 'kristiadams@example.net','342-283-3779x424','3','1'),
-        ('Thomas Walkup', 'qfernandez', 'r+QKo2wP*0', 'msanders@example.com','349-301-8402x47751','4','1'),
-        ('George Pappas', 'patelbrad', 'J$$kD1WBDp', 'bennettreginald@example.org','(327)763-2867x2635','5','1'),
-        ('Kaiti Provia', 'kristin93', '$A9eYCi@r9', 'danielgregory@example.org','948.817.1472','6','1'),
-        ('Michael Velalopoulos', 'brendan21', 'L8rZU*Gz_d', 'tinawong@example.com','(459)206-5360x5928','7','1'),
-        ('Beril Mckissic', 'jclark', '!@VaDTqC2z', 'danielruiz@example.org','077.982.3338','8','1');
+INSERT INTO operator(fullname,username,password,operator_email,operator_phone_number,status,school_id,administrator_id) VALUES
+        ('Dora Panteli', 'kristin60', '12', 'romerolance@example.org','(870)747-9717','approved','1','1'),
+        ('Panagiotis Giadikiaroglou', 'jhill', '123', 'dennisrusso@example.com','9671127828','approved','2','1'),
+        ('Alexandros Emmanouilidis', 'eatonjonathan', '@0_I%ywv7T', 'kristiadams@example.net','342-283-3779x424','approved','3','1'),
+        ('Thomas Walkup', 'qfernandez', 'r+QKo2wP*0', 'msanders@example.com','349-301-8402x47751','approved','4','1'),
+        ('George Pappas', 'patelbrad', 'J$$kD1WBDp', 'bennettreginald@example.org','(327)763-2867x2635','approved','5','1'),
+        ('Kaiti Provia', 'kristin93', '$A9eYCi@r9', 'danielgregory@example.org','948.817.1472','approved','6','1'),
+        ('Michael Velalopoulos', 'brendan21', 'L8rZU*Gz_d', 'tinawong@example.com','(459)206-5360x5928','approved','7','1'),
+        ('Beril Mckissic', 'jclark', '!@VaDTqC2z', 'danielruiz@example.org','077.982.3338','approved','8','1');
 
 --
 -- Insert 8 school_units
 --
-INSERT INTO school_unit(school_name, address, city , school_director_full_name , library_operator_full_name, email , phone_number,administrator_id ) VALUES
-    ('Peparithio','Doulidou 3','Skopelos','Philipos Lemonis','Dora Panteli','apro56@otenet.gr' ,'2424022172',1 ),                       	#1
-    ('Dimokrito' , 'Ermou 2', 'Drama' , 'Samaras Giorgos','Panagiotis Giadikiaroglou','aktel@gmail.com', '2421023567' ,1),	       		#2
-    ('Krifo Sxolio' , 'Georgiou 25', 'Kastoria' ,'Efthimiou Nikos','Alexandros Emmanouilidis' ,'atp@yahoo.gr','2467086595' ,1),    		#3
-    ('Mantoulidi','Chrisipou 20','Zografou', 'Askounis Vaggelis','Thomas Walkup','awq@hotmail.gr','2356056793',1),	            		#4
-    ('Saint-Joseph','Egnatia 34', 'Thessaloniki','Kostas Sloukas','George Pappas','larentzakis@kobra.gr','2421045678',1),			#5
-    ('MIT' , 'Omonoias 45' ,'Kamatero','Giorgos Papagiannis','Kaiti Provia','bochou@gmail.com','2356089725',1 ),				#6
-    ('UCLA','Filis 21','Tinos','Pipis Remoundos','Michael Velalopoulos','pip@otenet.gr','2423028953',1),					#7
-    ('Princeton','Papagou 7','Ioannina','Charitos Giorgos','Beril Mckissic','ntats@gmail.com','2521057430',1);					#8	
+INSERT INTO school_unit(school_name, address, city , school_director_full_name , library_operator_full_name, email , phone_number,status,administrator_id ) VALUES
+    ('Peparithio','Doulidou 3','Skopelos','Philipos Lemonis','Dora Panteli','apro56@otenet.gr' ,'2424022172','approved',1 ),                       	#1
+    ('Dimokrito' , 'Ermou 2', 'Drama' , 'Samaras Giorgos','Panagiotis Giadikiaroglou','aktel@gmail.com', '2421023567' ,'approved',1),	       		#2
+    ('Krifo Sxolio' , 'Georgiou 25', 'Kastoria' ,'Efthimiou Nikos','Alexandros Emmanouilidis' ,'atp@yahoo.gr','2467086595' ,'approved',1),    		#3
+    ('Mantoulidi','Chrisipou 20','Zografou', 'Askounis Vaggelis','Thomas Walkup','awq@hotmail.gr','2356056793','approved',1),	            		#4
+    ('Saint-Joseph','Egnatia 34', 'Thessaloniki','Kostas Sloukas','George Pappas','larentzakis@kobra.gr','2421045678','approved',1),			#5
+    ('MIT' , 'Omonoias 45' ,'Kamatero','Giorgos Papagiannis','Kaiti Provia','bochou@gmail.com','2356089725','approved',1 ),				#6
+    ('UCLA','Filis 21','Tinos','Pipis Remoundos','Michael Velalopoulos','pip@otenet.gr','2423028953','approved',1),					#7
+    ('Princeton','Papagou 7','Ioannina','Charitos Giorgos','Beril Mckissic','ntats@gmail.com','2521057430','approved',1);					#8	
  
 --
 -- Insert 24 professors and 64 students 
 --
 
 INSERT INTO student_professor(fullname,username,password,email,phone_number,date_of_birth,role,approval_status, operator_id) VALUES
-	('Brian Maldonado', 'manderson', 'DD6NEYXoS*', 'ashleyharrison@example.org','167.215.9976x955','1972-08-07','professor','approved','1'),            #1
+	('Brian Maldonado', 'manderson', '123', 'ashleyharrison@example.org','167.215.9976x955','1972-08-07','professor','approved','1'),            #1
 	('Sherry Ford', 'danielle21', ')BE5+uLs4A', 'sanchezjohn@example.net','001-032-001-9715x93734','1969-11-09','professor','approved','1'),            #2
 	('Jaime Riley', 'jesse15', ')d9+LU*s3c', 'vbrown@example.org','696.293.3561x297','1987-02-28','professor','approved','1'),                          #3
 	('Valerie Owens', 'kvalentine', 'b&x0#Tp9(*', 'jeffreysnyder@example.com','(184)822-9465','1975-03-05','professor','approved','2'),                 #4
@@ -1171,6 +1171,56 @@ INSERT INTO book_borrowing(borrowing_date,return_date,actual_return_date,book_id
 ('2021-04-17', '2021-04-24', '2021-04-30', 142, 82);
 
 
+INSERT INTO reviews(stud_prof_id, rating,review_date, review_text, status, book_id) VALUES
+(1,5,'2022-04-28','review 1','approved',5),               #1
+(2,4,'2022-04-28','review 2','approved',2),               #2
+(2,1,'2023-04-09','review 3','not yet approved',5),      #3
+(3,5,'2021-11-22','review 4','denied',15),                #4
+(25,4,'2022-01-13','review 5','approved',9),              #5
+(28,1,'2022-12-17','review 6','approved',9),               #6
+(28,2,'2020-03-18','review 7','approved',3),              #7
+(31,4,'2023-04-09','review 8','approved',7),               #8
+(32,3,'2023-04-09','review 9','approved',4),               #9
+(5,3,'2022-05-04','review 10','approved',32),              #10
+(5,2,'2021-12-09','review 11','approved',33),              #11
+(37,1,'2021-03-05','review 12','approved',33),              #12
+(37,5,'2023-06-15','review 13','approved',31),              #13
+(38,3,'2023-04-08','review 14','approved',19),              #14
+(3,4,'2021-05-25','review 15','approved',15),             #15
+(8,4,'2022-05-02','review 16','not yet approved',50),     #16
+(9,3,'2023-04-10','review 17','approved',37),             #17
+(41,5,'2023-01-15','review 18','denied',47),               #18
+(41,1,'2022-06-20','review 19','approved',46),            #19
+(44,2,'2020-03-07','review 20','approved',39),             #20
+(47,3,'2022-02-08','review 21','approved',42),            #21
+(48,4,'2023-05-09','review 22','denied',45),              #22
+(11,2,'2022-05-02','review 23','approved',69),            #23
+(12,3,'2022-04-29','review 24','denied',64),              #24
+(53,5,'2023-05-31','review 25','approved',53),            #25
+(51,3,'2021-02-01','review 26','approved',60),             #26
+(49,2,'2023-01-14','review 27','approved',68),             #27
+(56,3,'2023-04-09','review 28','approved',61),             #28
+(15,4,'2023-04-09','review 29','approved',74),             #29
+(14,2,'2021-12-09','review 30','approved',80),             #30
+(15,4,'2022-04-29','review 31','denied',83),              #31
+(58,1,'2022-02-03','review 32','not yet approved',80),    #32
+(58,5,'2023-04-09','review 33','approved',75),            #33
+(60,2,'2020-03-09','review 34','denied',80),              #34
+(61,3,'2023-05-30','review 35','approved',79),            #35
+(62,2,'2023-05-29','review 36','denied',72),              #36
+(18,5,'2023-04-29','review 37','not yet approved',99),    #37
+(18,4,'2023-04-09','review 38','denied',101),              #38
+(68, 3, '2020-03-07', 'review 39', 'approved', 105),       #39
+(18, 1, '2020-12-14', 'review 40', 'approved', 93),       #40
+(18, 2, '2023-04-09', 'review 41', 'approved', 92),        #41
+(21, 3, '2022-04-25', 'review 42', 'approved', 119),        #42
+(80, 4, '2023-04-09', 'review 43', 'approved', 118),        #43
+(79, 1, '2023-04-09', 'review 44', 'approved', 119),        #44
+(23, 5, '2021-12-01', 'review 45', 'approved', 135),        #45
+(24,4,'2020-07-15','review 46','not yet approved',148),    #46
+(84, 5, '2020-03-09', 'review 47', 'approved', 145),       #47
+(86, 2, '2023-05-30', 'review 48', 'denied', 137),         #48
+(82, 1, '2020-03-07', 'review 49', 'approved', 135);       #49
 
 
 
@@ -1230,60 +1280,4 @@ INSERT INTO reservations(book_id, stud_prof_id, reservation_date, expiry_date, s
 (146, 87, '2023-05-31', '2023-06-07', 'active'),
 (147, 88, '2023-05-31', '2023-06-07', 'active'),
 (149, 24, '2023-05-31', '2023-06-07', 'active');
-
-
-
-
-
-
-INSERT INTO reviews(stud_prof_id, rating,review_date, review_text, status, book_id) VALUES
-(1,5,'2022-04-28','review 1','approved',5),               #1
-(2,4,'2022-04-28','review 2','approved',2),               #2
-(2,1,'2023-04-09','review 3','not yet approved',5),      #3
-(3,5,'2021-11-22','review 4','denied',15),                #4
-(25,4,'2022-01-13','review 5','approved',9),              #5
-(28,1,'2022-12-17','review 6','approved',9),               #6
-(28,2,'2020-03-18','review 7','approved',3),              #7
-(31,4,'2023-04-09','review 8','approved',7),               #8
-(32,3,'2023-04-09','review 9','approved',4),               #9
-(5,3,'2022-05-04','review 10','approved',32),              #10
-(5,2,'2021-12-09','review 11','approved',33),              #11
-(37,1,'2021-03-05','review 12','approved',33),              #12
-(37,5,'2023-06-15','review 13','approved',31),              #13
-(38,3,'2023-04-08','review 14','approved',19),              #14
-(3,4,'2021-05-25','review 15','approved',15),             #15
-(8,4,'2022-05-02','review 16','not yet approved',50),     #16
-(9,3,'2023-04-10','review 17','approved',37),             #17
-(41,5,'2023-01-15','review 18','denied',47),               #18
-(41,1,'2022-06-20','review 19','approved',46),            #19
-(44,2,'2020-03-07','review 20','approved',39),             #20
-(47,3,'2022-02-08','review 21','approved',42),            #21
-(48,4,'2023-05-09','review 22','denied',45),              #22
-(11,2,'2022-05-02','review 23','approved',69),            #23
-(12,3,'2022-04-29','review 24','denied',64),              #24
-(53,5,'2023-05-31','review 25','approved',53),            #25
-(51,3,'2021-02-01','review 26','approved',60),             #26
-(49,2,'2023-01-14','review 27','approved',68),             #27
-(56,3,'2023-04-09','review 28','approved',61),             #28
-(15,4,'2023-04-09','review 29','approved',74),             #29
-(14,2,'2021-12-09','review 30','approved',80),             #30
-(15,4,'2022-04-29','review 31','denied',83),              #31
-(58,1,'2022-02-03','review 32','not yet approved',80),    #32
-(58,5,'2023-04-09','review 33','approved',75),            #33
-(60,2,'2020-03-09','review 34','denied',80),              #34
-(61,3,'2023-05-30','review 35','approved',79),            #35
-(62,2,'2023-05-29','review 36','denied',72),              #36
-(18,5,'2023-04-29','review 37','not yet approved',99),    #37
-(18,4,'2023-04-09','review 38','denied',101),              #38
-(68, 3, '2020-03-07', 'review 39', 'approved', 105),       #39
-(18, 1, '2020-12-14', 'review 40', 'approved', 93),       #40
-(18, 2, '2023-04-09', 'review 41', 'approved', 92),        #41
-(21, 3, '2022-04-25', 'review 42', 'approved', 119),        #42
-(80, 4, '2023-04-09', 'review 43', 'approved', 118),        #43
-(79, 1, '2023-04-09', 'review 44', 'approved', 119),        #44
-(23, 5, '2021-12-01', 'review 45', 'approved', 135),        #45
-(24,4,'2020-07-15','review 46','not yet approved',148),    #46
-(84, 5, '2020-03-09', 'review 47', 'approved', 145),       #47
-(86, 2, '2023-05-30', 'review 48', 'denied', 137),         #48
-(82, 1, '2020-03-07', 'review 49', 'approved', 135);       #49
 
