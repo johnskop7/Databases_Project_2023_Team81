@@ -632,7 +632,7 @@ INSERT INTO book_thematic_categories(thematic_category,book_id) VALUES
 -- Insert an administrator
 --
 INSERT INTO administrator(username, password) VALUES 
-('Spanoulis', 'SKOPELOS2001');  #1
+('admin', '123');  #1
 
 
 --

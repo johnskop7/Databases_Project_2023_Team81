@@ -30,11 +30,12 @@ exports.handleLogin_admin = (req, res ) => {
         .query('SELECT * FROM administrator WHERE username = ? AND password = ?', [username, password])
         .then(([results]) => {
             if (results.length === 0) {
-
+              
               res.redirect('/admin_login')
               req.flash('messages', { type: 'error', value: 'Invalid username or password' });
           }
           else{
+            req.session.administratorId = results[0].administrator_id;
             res.render('admin_mainpage.ejs', {
                 pageTitle: 'Administrator Main Page',
                 messages: [] // You can pass any desired messages to display on the admin login page
@@ -241,9 +242,10 @@ exports.handleLogin_admin = (req, res ) => {
 exports.UpdateAdminPassword = (req, res, next) => {
 
   /* get necessary data sent */
+  const administratorId = req.session.administratorId
   const password = req.body.newPassword;
   pool.getConnection((err, conn) => {
-      var sqlQuery = `UPDATE administrator SET password = ? WHERE username = 'Spanoulis' `;
+      var sqlQuery = `UPDATE administrator SET password = ? WHERE administrator_id = ${administratorId} `;
 
       conn.promise().query(sqlQuery, [password])
       .then(() => {
