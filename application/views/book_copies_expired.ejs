@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Reservation Limit Reached</title>
+    <title>Cannot add borrowing</title>
     <style>
         .container {
             width: 400px;
@@ -19,7 +19,6 @@
 
         .container p {
             text-align: center;
-            font-size: 18px;
             margin-bottom: 20px;
         }
 
@@ -40,8 +39,9 @@
 </head>
 <body>
     <div class="container">
-        <h2>You are not allowed to make the reservation!</h2>
-        <button onclick="goBack()">Back</button>
+        <h2>Not available book copies</h2>
+        <p>There are no available copies for the book you want to loan!!!</p>
+        <button onclick="goBack()">Go Back</button>
     </div>
 
     <script>

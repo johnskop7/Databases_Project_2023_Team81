@@ -74,7 +74,7 @@ CREATE TABLE student_professor(
     phone_number VARCHAR(45) NOT NULL,
     date_of_birth DATE,
 	role ENUM ("student", "professor") NOT NULL,
-	approval_status ENUM ('approved','not approved') DEFAULT 'not approved',
+	approval_status ENUM ('approved','not approved',"deactivated") DEFAULT 'not approved',
 	operator_id SMALLINT UNSIGNED NOT NULL, 
 	PRIMARY KEY(stud_prof_id),
 	CONSTRAINT fk_student_professor_operator FOREIGN KEY(operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE 
@@ -409,7 +409,7 @@ DELIMITER ;
 -- View needed for reviews
 --
 CREATE VIEW show_all_reviews AS
-SELECT r.stud_prof_id, sp.fullname, b.book_id, b.title, r.rating, r.review_date, r.review_text, sp.operator_id
+SELECT r.stud_prof_id, sp.fullname, b.book_id, b.title, r.rating, r.review_date, r.review_text, sp.operator_id, b.image
 FROM reviews r
 JOIN student_professor sp
 ON r.stud_prof_id = sp.stud_prof_id

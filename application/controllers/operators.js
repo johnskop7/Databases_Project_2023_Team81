@@ -537,7 +537,33 @@ exports.getAvgRating = (req, res) => {
               });
           });
       };
-      
+      exports.postDeactivateUser = (req, res, next) => {
+        // Get id from URL params
+        const id = req.params.id;
+    
+        // Create the connection, execute the query, flash respective message, and redirect to the operator_mainpage route
+        pool.getConnection((err, conn) => {
+            if (err) {
+                console.error('Error getting database connection:', err);
+                req.flash('messages', { type: 'error', value: "Something went wrong, Executive could not be deleted." });
+                return res.redirect('/operator_mainpage');
+            }
+    
+            var sqlQuery = `UPDATE student_professor SET approval_status = 'deactivated' WHERE stud_prof_id = ${id}`;
+            conn.query(sqlQuery, [id], (err, result) => {
+                conn.release();
+    
+                if (err) {
+                    console.error('Error executing query:', err);
+                    return res.redirect('/operator_mainpage');
+                }
+    
+                req.flash('messages', { type: 'success', value: "Successfully deactivated executive!" });
+                res.render('operator_mainpage.ejs');
+            });
+        });
+    };
+
 
       exports.getAllActiveBorrowingsPage = (req, res, next) => {
         const operatorId = req.session.operatorId;
@@ -925,47 +951,57 @@ exports.getNewBorrowingsPage = (req, res, next) => {
 
 
 exports.UpgradetoBorrowing = (req, res, next) => {
-      // Retrieve the book data from the request body
-        const operatorId = req.session.operatorId;
-        const bookId = req.body.bookId;
-        const stud_prof_id = req.body.stud_prof_id;
-        console.log(bookId);
-        pool.getConnection((err, conn) => {
-        if (err) {
-          console.log(err);
-          req.flash('messages', { type: 'error', value: 'Something went wrong.' });
-          res.render('reservations.ejs');
-          return;
+  const operatorId = req.session.operatorId;
+  const bookId = req.body.bookId;
+  const stud_prof_id = req.body.stud_prof_id;
+  console.log(bookId);
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.log(err);
+      req.flash('messages', { type: 'error', value: 'Something went wrong.' });
+      res.render('reservations.ejs');
+      return;
+    }
+
+    // Delete the existing reservation with the given book_id
+    const deleteReservationQuery = `DELETE FROM reservations WHERE book_id = ?`;
+    conn.query(deleteReservationQuery, [bookId], (err, deleteResult) => {
+      if (err) {
+        console.log(err);
+        req.flash('messages', { type: 'error', value: 'Error deleting the reservation.' });
+        res.render('reservations.ejs');
+        return;
       }
 
-          // Get the current date
-          const currentDate = new Date();
+      // Get the current date
+      const currentDate = new Date();
 
-          // Calculate the return date (current date + 7 days)
-          const returnDate = new Date();
-          returnDate.setDate(currentDate.getDate() + 7);
+      // Calculate the return date (current date + 7 days)
+      const returnDate = new Date();
+      returnDate.setDate(currentDate.getDate() + 7);
 
-          // Insert the new borrowing into the book_borrowing table
-          
-          const insertBorrowingQuery = `INSERT INTO book_borrowing (borrowing_date, return_date, actual_return_date, book_id, stud_prof_id) VALUES (?, ?, NULL, ?, ?)`;
-          conn.query(
-              insertBorrowingQuery,
-              [currentDate, returnDate, bookId, stud_prof_id],
-              (err, insertResult) => {
-                  if (err) {
-                      console.log(err);
-                      req.flash('messages', { type: 'error', value: 'Error adding the new borrowing.' });
-                      res.render('reservations.ejs');
-                      return;
-                  }
-                  console.log(currentDate);
+      // Insert the new borrowing into the book_borrowing table
+      const insertBorrowingQuery = `INSERT INTO book_borrowing (borrowing_date, return_date, actual_return_date, book_id, stud_prof_id) VALUES (?, ?, NULL, ?, ?)`;
+      conn.query(
+        insertBorrowingQuery,
+        [currentDate, returnDate, bookId, stud_prof_id],
+        (err, insertResult) => {
+          if (err) {
+            console.log(err);
+            req.flash('messages', { type: 'error', value: 'Error adding the new borrowing.' });
+            res.render('book_copies_expired.ejs');
+            return;
+          }
+          console.log(currentDate);
 
-                  req.flash('messages', { type: 'success', value: 'Borrowing added successfully.' });
-                  res.render('operator_mainpage.ejs');
-              }
-          );
-      });
-  }
+          req.flash('messages', { type: 'success', value: 'Borrowing added successfully.' });
+          res.render('operator_mainpage.ejs');
+        }
+      );
+    });
+  });
+};
+
 
 
   exports.getLibraryRegistration= (req, res, next) => {
@@ -1009,3 +1045,85 @@ exports.UpgradetoBorrowing = (req, res, next) => {
             });
     });
 };
+
+
+exports.getApplicationsPage = (req, res, next) => {
+  pool.getConnection((err, conn) => {
+    const sqlQuery = `
+      SELECT *
+      FROM student_professor
+      WHERE student_professor.approval_status = 'not approved'
+    `;
+
+    conn.promise().query(sqlQuery)
+      .then(([rows]) => {
+        pool.releaseConnection(conn);
+        res.render('new_member_applications.ejs', {
+          pageTitle: 'Users Registration Applications ',
+          applications: rows,
+        });
+      })
+      .catch(err => {
+        console.error('Error executing query:', err);
+        res.render('new_member_applications.ejs', {
+          pageTitle: 'Applications for new libraries and operators',
+          applications: [],
+          messages: ['Error retrieving applications'] // An error message if the query fails
+        });
+      });
+  });
+};
+
+
+exports.postAcceptMember = (req, res, next) => {
+  // Get id from URL params
+  const id = req.body.stud_prof_id;
+  console.log(id);
+  // Create the connection, execute the query, flash respective message, and redirect to the operator_mainpage route
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error('Error getting database connection:', err);
+      return res.redirect('/operator_mainpage');
+    }
+
+    var sqlQuery = `
+      UPDATE student_professor
+      SET approval_status='approved'
+      WHERE stud_prof_id = ${id}`;
+
+    conn.query(sqlQuery, (err, result) => {
+      if (err) {
+        conn.release();
+        console.error('Error executing query:', err);
+        return res.redirect('/admin_mainpage');
+      }
+        req.flash('messages', { type: 'success', value: "Successfully approved user!" });
+        res.render('operator_mainpage.ejs');
+      });
+    });
+  }
+
+  exports.postDismissMember = (req, res, next) => {
+    // Get id from URL params
+    const id = req.body.stud_prof_id;
+    console.log(id);
+    // Create the connection, execute the query, flash respective message, and redirect to the operator_mainpage route
+    pool.getConnection((err, conn) => {
+      if (err) {
+        console.error('Error getting database connection:', err);
+        return res.redirect('/operator_mainpage');
+      }
+  
+      var sqlQuery = `DELETE FROM student_professor WHERE stud_prof_id = ${id}`;
+  
+      conn.query(sqlQuery, (err, result) => {
+        if (err) {
+          conn.release();
+          console.error('Error executing query:', err);
+          return res.redirect('/operator_mainpage');
+        }
+          req.flash('messages', { type: 'success', value: "Successfully approved user!" });
+          res.render('operator_mainpage.ejs');
+        });
+      });
+    }

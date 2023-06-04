@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Reviews</title>
+    <style>
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+        }
+
+        .review {
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .review-title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .review-details {
+            margin-top: 10px;
+        }
+
+        .review-details p {
+            margin: 0;
+        }
+
+        .review-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Reviews</h2>
+
+        <div class="reviews-grid">
+            <% reviews.forEach(review => { %>
+                <div class="review">
+                    <div class="review-title"><%= review.title %></div>
+                    <div class="review-details">
+                        <p><strong>Borrower's name:</strong> <%= review.fullname %></p>
+                        <p><strong>Rating:</strong> <%= review.rating %></p>
+                        <p><strong>Review Text:</strong> <%= review.review_text %></p>
+                    </div>
+                    <img class="review-image" src="<%= review.image %>" alt="Book Cover">
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>

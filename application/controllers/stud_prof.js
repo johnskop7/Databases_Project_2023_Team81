@@ -20,7 +20,7 @@ exports.handleLogin_member = (req, res) => {
       }
   
       conn.promise()
-        .query('SELECT * FROM student_professor WHERE username = ? AND password = ?', [username, password])
+        .query("SELECT * FROM student_professor WHERE username = ? AND password = ? AND approval_status = 'approved'", [username, password])
         .then(([results]) => {
           if (results.length === 0) {
             //console.log('Reached query!')
@@ -83,15 +83,12 @@ exports.handleLogin_member = (req, res) => {
             .then(() => {
               if (err) {
                 console.error('Error executing query:', err);
-                req.flash('messages', { type: 'error', value: "Something went wrong, Executive could not be deleted." });
                 return res.redirect('/operator_mainpage');
             }
                 pool.releaseConnection(conn);
-                req.flash('messages', { type: 'success', value: "Book returned successfully!" });
                 res.render('member_login.ejs')
             })
             .catch(err => {
-                req.flash('messages', { type: 'error', value: "Something went wrong, book could not be returned." });
                 res.redirect('new_member_registration');
             });
     });
@@ -379,6 +376,180 @@ exports.postDeleteReservation = (req, res, next) => {
               return res.redirect('/member_mainpage');
           }
           res.render('member_mainpage.ejs');
+      });
+  });
+};
+
+
+exports.getAllReviews = (req, res) => {
+  const stud_prof_id = req.session.stud_prof_id;
+
+  // Query to retrieve the operator_id based on the student_id
+  const operatorIdQuery = `SELECT operator_id FROM student_professor WHERE stud_prof_id = ${stud_prof_id}`;
+
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    conn.promise()
+      .query(operatorIdQuery)
+      .then(([operatorIdResult]) => {
+        const operatorId = operatorIdResult[0]?.operator_id;
+
+        if (!operatorId) {
+          throw new Error('Operator ID not found');
+        }
+
+        // Query to fetch all reviews with the specific operator_id
+        const sqlQuery = `SELECT * FROM show_all_reviews WHERE operator_id = ${operatorId}`;
+
+        return conn.promise().query(sqlQuery);
+      })
+      .then(([results]) => {
+        console.log(results);
+        // Render the view with the reviews
+        res.render('see_all_the_reviews.ejs', {
+          pageTitle: 'All the reviews',
+          reviews: results,
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+      })
+      .finally(() => {
+        pool.releaseConnection(conn);
+      });
+  });
+};
+
+exports.getMemberPassword= (req, res, next) => {
+  res.render('member_password.ejs', {
+      pageTitle: 'Change Password',
+      messages: [] // You can pass any desired messages to display on the admin login page
+    });
+}
+
+
+exports.UpdateMemberPassword = (req, res, next) => {
+
+  /* get necessary data sent */
+  const stud_prof_id =req.session.stud_prof_id;
+  const password = req.body.newPassword;
+  pool.getConnection((err, conn) => {
+      var sqlQuery = `UPDATE student_professor SET password = ? WHERE stud_prof_id = ${stud_prof_id} `;
+
+      conn.promise().query(sqlQuery, [password])
+      .then(() => {
+          console.log(sqlQuery);
+          pool.releaseConnection(conn);
+          res.render('member_mainpage.ejs', {
+            pageTitle: 'Member Main Page',
+            messages: [] // You can pass any desired messages to display on the admin login page
+          });
+      })
+      .catch(err => {
+          console.log(err);
+          res.redirect('/admin_mainpage');
+      })
+  })
+}
+
+exports.getProfilePage = (req, res, next) => {
+  const stud_prof_id = req.session.stud_prof_id;
+
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    // Fetch role from student_professor table
+    const roleQuery = `SELECT role FROM student_professor WHERE stud_prof_id = ${stud_prof_id}`;
+
+    conn.promise()
+      .query(roleQuery)
+      .then(([roleResults]) => {
+        if (roleResults.length === 0) {
+          return res.status(404).send('Role not found');
+        }
+
+        const role = roleResults[0].role;
+
+        // Fetch profile info based on role
+        let profileQuery;
+        let profilePageTitle;
+        console.log(role);
+
+        if (role === 'student') {
+          profileQuery = `SELECT * FROM student_professor WHERE stud_prof_id = ${stud_prof_id}`;
+          profilePageTitle = 'Student Profile Page';
+        } else if (role === 'professor') {
+          profileQuery = `SELECT * FROM student_professor WHERE stud_prof_id = ${stud_prof_id}`;
+          profilePageTitle = 'Professor Profile Page';
+        } else {
+          return res.status(400).send('Invalid role');
+        }
+
+        return conn.promise().query(profileQuery)
+          .then(([profileResults]) => {
+            if (profileResults.length === 0) {
+              return res.status(404).send('Profile not found');
+            }
+
+            // Render the corresponding profile page with profile info
+            if (role === 'student') {
+              res.render('student_profile_page.ejs', {
+                pageTitle: profilePageTitle,
+                profile: profileResults[0],
+              });
+            } else if (role === 'professor') {
+              res.render('professor_profile_page.ejs', {
+                pageTitle: profilePageTitle,
+                profile: profileResults[0],
+              });
+            }
+          });
+      })
+      .then(() => pool.releaseConnection(conn))
+      .catch(err => {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
+      });
+  });
+};
+
+
+exports.updateProfile = (req, res) => {
+  const stud_prof_id = req.body.stud_prof_id;
+  const fullname = req.body.fullname;
+  const username = req.body.username;
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const dob = req.body.dob;
+
+  // Update the student_professor table in the database
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
+    const sqlQuery = `UPDATE student_professor
+                      SET fullname = ?, username = ?, email = ?, phone_number = ?, date_of_birth = ?
+                      WHERE stud_prof_id = ?`;
+    const values = [fullname, username, email, phone, dob, stud_prof_id];
+
+    conn.promise()
+      .query(sqlQuery, values)
+      .then(() => {
+        res.render('member_mainpage.ejs');
+      })
+      .then(() => pool.releaseConnection(conn))
+      .catch(err => {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
       });
   });
 };

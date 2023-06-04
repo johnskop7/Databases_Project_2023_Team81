@@ -16,6 +16,11 @@ router.get('/add_review',member_login.getAddReviewPage);
 router.post('/submit_review',member_login.postReview);
 router.get('/my_reservations',member_login.getMyReservations);
 router.post('/delete_reservation', member_login.postDeleteReservation);
+router.get('/see_all_the_reviews', member_login.getAllReviews);
+router.get('/member_password',member_login.getMemberPassword);
+router.post('/member_password',member_login.UpdateMemberPassword);
+router.get('/my_profile',member_login.getProfilePage);
+router.post('/update_professor_profile', member_login.updateProfile);
 
 
 module.exports = router;

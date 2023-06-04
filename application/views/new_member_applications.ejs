@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applications for New Libraries and Operators</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .application {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .application-info {
+            margin-bottom: 15px;
+        }
+
+        .application-info strong {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .application-buttons {
+            text-align: right;
+        }
+
+        .application-buttons button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .application-buttons button:first-child {
+            background-color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Applications for New Libraries and Operators</h2>
+
+        <% applications.forEach(application => { %>
+            <div class="application">
+                <div class="application-info">
+                    <strong>Fullname:</strong> <%= application.fullname %><br>
+                    <strong>Username:</strong> <%= application.username %><br>
+                    <strong>Email:</strong> <%= application.email %><br>
+                    <strong>Phone Number:</strong> <%= application.phone_number %><br>
+                    <strong>Date of Birth:</strong> <%= application.date_of_birth %><br>
+                    <strong>Role:</strong> <%= application.role %>
+                </div>
+                <div class="application-buttons">
+                    <form action="/update_application" method="POST">
+                        <input type="hidden" name="stud_prof_id" value="<%= application.stud_prof_id %>">
+                        <button type="submit">Accept</button>
+                    </form>
+                    <form action="/dismiss_application" method="POST">
+                        <input type="hidden" name="stud_prof_id" value="<%= application.stud_prof_id %>">
+                        <button type="submit">Dismiss</button>
+                    </form>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>

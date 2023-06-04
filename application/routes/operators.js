@@ -34,5 +34,9 @@ router.get('/reservations',operator_login.getReservationsPage);
 router.post('/upgrade_to_borrowing',operator_login.UpgradetoBorrowing);
 router.get('/library_registration',operator_login.getLibraryRegistration);
 router.post('/submit_library',operator_login.postRegisterSchool);
+router.get('/new_member_applications',operator_login.getApplicationsPage);
+router.post('/update_application',operator_login.postAcceptMember);
+router.post('/dismiss_application',operator_login.postDismissMember);
+router.post('/deactivate_user/:id',operator_login.postDeactivateUser);
 
 module.exports = router;

@@ -102,7 +102,7 @@
                             <button type="submit" class="delete-button">Delete</button>
                         </form>
                         
-                        <form action="/deactivate_user" method="POST">
+                        <form action="/deactivate_user/<%= user.stud_prof_id %>" method="POST">
                             <input type="hidden" name="userId" value="<%= user.stud_prof_id %>">
                             <button type="submit">Deactivate</button>
                         </form>
