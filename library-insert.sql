@@ -140,7 +140,45 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 	('Theodore Gibson', 'knappsarah', 'N*at2vI0qs', 'wilsonwilliam@example.net','+1-065-547-5999x87842','2006-10-23','student','approved','8'),         #85
 	('Bryan Anthony', 'kjohnson', 'W5$GMU@p+c', 'robyndixon@example.net','001-799-844-7776x6014','2007-05-21','student','approved','8'),                #86
 	('Anthony Stephenson', 'michaelreyes', 'Q&h5Uv4!zl', 'jonathanpatrick@example.org','126-952-6552x27945','2005-08-02','student','approved','8'),     #87
-	('Debra Williams', 'annahicks', '$19I!vphV_', 'james32@example.com','337-208-4511','2006-04-27','student','approved','8');                          #88
+	('Debra Williams', 'annahicks', '$19I!vphV_', 'james32@example.com','337-208-4511','2006-04-27','student','approved','8'),                          #88
+
+
+
+	('Sar Jaskevicious', 'mandaersona', 'DaD6NEYXoS*', 'ashleyharrison@example.org', '167.215.9976x955', '1972-08-07', 'professor', 'approved', '1'),   #89
+	('Dimitris Itoudis', 'efoster', 'Gv9saC4!p', 'emilyfoster@example.org', '532.624.9815x246', '1985-02-12', 'professor', 'approved', '1'),            #90
+	('Daniel Hayes', 'dhayes', 'QWE8fjg@2', 'danielhayes@example.org', '628.837.4927x129', '1990-06-19', 'professor', 'approved', '2'),                 #91
+	('Olivia Thompson', 'othompson', 'mRj1a7K*p!', 'oliviathompson@example.org', '751.482.0159x374', '1989-11-25', 'professor', 'approved', '2'),       #92
+	('Ethan Richardson', 'erichardson', 'b7CnHt2^s$', 'ethanrichardson@example.org', '917.580.7236x512', '1982-04-30', 'professor', 'approved', '3'),   #93
+	('Sophia Mitchell', 'smitchell', 'Vt4zKeG#6!', 'sophiamitchell@example.org', '376.975.3084x623', '1987-09-14', 'professor', 'approved', '3'),       #94
+	('Michael Sanchez', 'msanchez', 'F8Mk2xd@7!', 'michaelsanchez@example.org', '624.309.7825x794', '1986-07-23', 'professor', 'approved', '4'),        #95
+	('Ava Ramirez', 'aramirez', 'J3vLyXq$9*', 'avaramirez@example.org', '213.617.4982x935', '1991-03-06', 'professor', 'approved', '4'),                #96
+	('Matthew Cooper', 'mcooper', 'Kj9fXeB$4!', 'matthewcooper@example.org', '489.725.1367x276', '1984-12-18', 'professor', 'approved', '5'),           #97
+	('Charlotte Torres', 'ctorres', 'Yh6NwD1#p!', 'charlottetorres@example.org', '829.461.0523x742', '1983-10-01', 'professor', 'approved', '5'),       #98
+	('James Patterson', 'jpatterson', 'Rv5LnG6@q!', 'jamespatterson@example.org', '215.874.3920x567', '1980-05-15', 'professor', 'approved', '6'),      #99
+	('Amelia Hughes', 'ahughes', 'D5HtCw7%j!', 'ameliahughes@example.org', '647.283.9041x398', '1988-01-29', 'professor', 'approved', '6'),             #100
+	('Benjamin Russell', 'brussell', 'N1VcK3d@f!', 'benjaminrussell@example.org', '736.519.2346x785', '1993-08-11', 'professor', 'approved', '7'),      #101
+	('Mia Collins', 'mcollins', 'U8qGzJ2$b!', 'miacollins@example.org', '512.637.1984x469', '1992-06-25', 'professor', 'approved', '7'),                #102
+	('Alexander Martop', 'amartinez', 'T7PmD2s$n!', 'alexandermartinez@example.org', '826.491.7358x853', '1979-03-09', 'professor', 'approved', '8'),   #103
+
+
+	('Emma Johnson', 'ejohnson', 'L9XbS6R@j!', 'emmajohnson@example.org', '376.215.3098x637', '2000-09-01', 'student', 'approved', '1'),                #104
+	('Noah Davis', 'ndavis', 'C6PzH7X#g!', 'noahdavis@example.org', '529.174.6253x469', '2001-04-15', 'student', 'approved', '1'),                      #105
+	('Oliver Wilson', 'owilson', 'F7RmK3S#j!', 'oliverwilson@example.org', '629.853.1742x718', '1999-11-30', 'student', 'approved', '2'),               #106
+	('Sophia Thompson', 'sthompson', 'B8XnH4J$p!', 'sophiathompson@example.org', '738.509.3621x852', '2000-08-14', 'student', 'approved', '2'),         #107
+	('Isabella Martinez', 'imartinez', 'K6MhJ9F#n!', 'isabellamartinez@example.org', '913.429.1760x394', '1999-03-28', 'student', 'approved', '3'),     #108
+	('Liam Anderson', 'landerson', 'D3TyQ6V@h!', 'liamanderson@example.org', '542.930.1847x672', '2000-02-12', 'student', 'approved', '3'),             #109
+	('Charlotte Wilson', 'cwilson', 'P5BsD6F!r#', 'charlottewilson@example.org', '316.740.2958x257', '2001-07-26', 'student', 'approved', '4'),         #110
+	('Mason Roberts', 'mroberts', 'W9FrJ4B#g!', 'masonroberts@example.org', '453.918.5607x932', '2000-06-10', 'student', 'approved', '4'),              #111
+	('Amelia Smith', 'asmith', 'R7PvW3B#k!', 'ameliasmith@example.org', '629.401.8257x346', '1999-01-24', 'student', 'approved', '5'),                  #112
+	('Elijah Johnson', 'ejohnson', 'S6NjE8V@l!', 'elijahjohnson@example.org', '534.197.3284x579', '2000-10-08', 'student', 'approved', '5'),            #113
+	('Ava Wilson', 'awilson', 'Q5HtM7R#j!', 'avawilson@example.org', '826.613.4257x856', '2001-05-22', 'student', 'approved', '6'),                     #114
+	('Olivia Taylor', 'otaylor', 'E8VhN2M#p!', 'oliviataylor@example.org', '489.736.2051x713', '2000-04-06', 'student', 'approved', '6'),               #115
+	('Sophia Davis', 'sdavis', 'W4DqJ5S#l!', 'sophiadavis@example.org', '639.428.1570x294', '2001-09-20', 'student', 'approved', '7'),                  #116
+	('Jackson Wilson', 'jwilson', 'L5TsN9G#c!', 'jacksonwilson@example.org', '416.520.8379x628', '2000-08-04', 'student', 'approved', '8'),             #117
+	('Aiden Anderson', 'aanderson', 'G4FrP6K#n!', 'aidenanderson@example.org', '538.624.9730x412', '2001-01-18', 'student', 'approved', '8'),           #118
+	('Pablo Escobar', 'pescobar', 'E4BcK9P@e!', 'pabloescobar@example.org', '713.582.9471x234', '1999-12-01', 'student', 'approved', '3'),              #119
+	('Leonardo DiCaprio', 'ldicaprio', 'D7RjT6L@o!', 'leonardodicaprio@example.org', '521.946.7382x975', '1974-11-11', 'student', 'approved', '3');     #120
+
     
     
     
@@ -1171,9 +1209,13 @@ INSERT INTO book_borrowing(borrowing_date,return_date,actual_return_date,book_id
 ('2021-04-17', '2021-04-24', '2021-04-30', 142, 82);
 
 
+--
+-- Insert 49 reviews data
+--
+
 INSERT INTO reviews(stud_prof_id, rating,review_date, review_text, status, book_id) VALUES
 (1,5,'2022-04-28','review 1','approved',5),               #1
-(2,4,'2022-04-28','review 2','approved',2),               #2
+(2,4,'2022-04-28','review 2','approved',8),               #2
 (2,1,'2023-04-09','review 3','not yet approved',5),      #3
 (3,5,'2021-11-22','review 4','denied',15),                #4
 (25,4,'2022-01-13','review 5','approved',9),              #5
@@ -1224,60 +1266,61 @@ INSERT INTO reviews(stud_prof_id, rating,review_date, review_text, status, book_
 
 
 
+
+
 --
 -- Insert 50 reservation data 
 --
 
 INSERT INTO reservations(book_id, stud_prof_id, reservation_date, expiry_date, status) VALUES
 (1, 29, '2023-05-31', '2023-06-07', 'active'), 
-(6, 29, '2023-05-31', '2023-06-07', 'active'),
-(7, 32, '2023-05-31', '2023-06-07', 'active'),
-(8, 32, '2023-05-31', '2023-06-07', 'active'),
-(10, 25, '2023-05-31', '2023-06-07', 'active'),
-(12, 26, '2023-05-31', '2023-06-07', 'active'),
-(14, 31, '2023-05-31', '2023-06-07', 'active'),
-(17, 33, '2023-05-31', '2023-06-07', 'active'),
-(19, 34, '2023-05-31', '2023-06-07', 'active'),
-(22, 35, '2023-05-31', '2023-06-07', 'active'),
-(26, 36, '2023-05-31', '2023-06-07', 'active'),
-(29, 37, '2023-05-31', '2023-06-07', 'active'),
-(33, 38, '2023-05-31', '2023-06-07', 'active'),
-(36, 41, '2023-05-31', '2023-06-07', 'active'),
-(38, 42, '2023-05-31', '2023-06-07', 'active'),
-(39, 43, '2023-05-31', '2023-06-07', 'active'),
-(44, 44, '2023-05-31', '2023-06-07', 'active'),
-(48, 45, '2023-05-31', '2023-06-07', 'active'),
-(50, 46, '2023-05-31', '2023-06-07', 'active'),
-(53, 49, '2023-05-31', '2023-06-07', 'active'),
-(55, 51, '2023-05-31', '2023-06-07', 'active'),
-(60, 50, '2023-05-31', '2023-06-07', 'active'),
-(61, 52, '2023-05-31', '2023-06-07', 'active'),
-(63, 53, '2023-05-31', '2023-06-07', 'active'),
-(68, 54, '2023-05-31', '2023-06-07', 'active'),
+(6, 105, '2023-05-31', '2023-06-07', 'active'),
+(7, 89, '2023-05-31', '2023-06-07', 'active'),
+(8, 90, '2023-05-31', '2023-06-07', 'active'),
+(10, 104, '2023-05-31', '2023-06-07', 'active'),
+(12, 104, '2023-05-31', '2023-06-07', 'active'),
+(14, 105, '2023-05-31', '2023-06-07', 'active'),
+(17, 91, '2023-05-31', '2023-06-07', 'active'),
+(19, 92, '2023-05-31', '2023-06-07', 'active'),
+(22, 106, '2023-05-31', '2023-06-07', 'active'),
+(26, 106, '2023-05-31', '2023-06-07', 'active'),
+(29, 107, '2023-05-31', '2023-06-07', 'active'),
+(33, 107, '2023-05-31', '2023-06-07', 'active'),
+(36, 93, '2023-05-31', '2023-06-07', 'active'),
+(38, 94, '2023-05-31', '2023-06-07', 'active'),
+(39, 108, '2023-05-31', '2023-06-07', 'active'),
+(44, 108, '2023-05-31', '2023-06-07', 'active'),
+(48, 109, '2023-05-31', '2023-06-07', 'active'),
+(50, 109, '2023-05-31', '2023-06-07', 'active'),
+(53, 95, '2023-05-31', '2023-06-07', 'active'),
+(55, 96, '2023-05-31', '2023-06-07', 'active'),
+(60, 110, '2023-05-31', '2023-06-07', 'active'),
+(61, 110, '2023-05-31', '2023-06-07', 'active'),
+(63, 111, '2023-05-31', '2023-06-07', 'active'),
+(68, 111, '2023-05-31', '2023-06-07', 'active'),
 (71, 55, '2023-05-31', '2023-06-07', 'active'),
-(73, 57, '2023-05-31', '2023-06-07', 'active'),
-(78, 58, '2023-05-31', '2023-06-07', 'active'),
-(81, 59, '2023-05-31', '2023-06-07', 'active'),
-(84, 60, '2023-05-31', '2023-06-07', 'active'),
-(86, 61, '2023-05-31', '2023-06-07', 'active'),
-(89, 62, '2023-05-31', '2023-06-07', 'active'),
-(92, 65, '2023-05-31', '2023-06-07', 'active'),
-(95, 66, '2023-05-31', '2023-06-07', 'active'),
-(96, 67, '2023-05-31', '2023-06-07', 'active'),
-(97, 68, '2023-05-31', '2023-06-07', 'active'),
-(98, 69, '2023-05-31', '2023-06-07', 'active'),
-(107, 70, '2023-05-31', '2023-06-07', 'active'),
-(117, 73, '2023-05-31', '2023-06-07', 'active'),
-(120, 74, '2023-05-31', '2023-06-07', 'active'),
-(121, 76, '2023-05-31', '2023-06-07', 'active'),
-(125, 75, '2023-05-31', '2023-06-07', 'active'),
-(132, 81, '2023-05-31', '2023-06-07', 'active'),
-(133, 82, '2023-05-31', '2023-06-07', 'active'),
-(134, 84, '2023-05-31', '2023-06-07', 'active'),
-(137, 83, '2023-05-31', '2023-06-07', 'active'),
-(140, 85, '2023-05-31', '2023-06-07', 'active'),
-(143, 86, '2023-05-31', '2023-06-07', 'active'),
-(146, 87, '2023-05-31', '2023-06-07', 'active'),
-(147, 88, '2023-05-31', '2023-06-07', 'active'),
-(149, 24, '2023-05-31', '2023-06-07', 'active');
-
+(73, 97, '2023-05-31', '2023-06-07', 'active'),
+(78, 98, '2023-05-31', '2023-06-07', 'active'),
+(81, 112, '2023-05-31', '2023-06-07', 'active'),
+(84, 112, '2023-05-31', '2023-06-07', 'active'),
+(86, 113, '2023-05-31', '2023-06-07', 'active'),
+(89, 113, '2023-05-31', '2023-06-07', 'active'),
+(92, 99, '2023-05-31', '2023-06-07', 'active'),
+(95, 100, '2023-05-31', '2023-06-07', 'active'),
+(96, 114, '2023-05-31', '2023-06-07', 'active'),
+(97, 114, '2023-05-31', '2023-06-07', 'active'),
+(98, 115, '2023-05-31', '2023-06-07', 'active'),
+(107, 115, '2023-05-31', '2023-06-07', 'active'),
+(117, 101, '2023-05-31', '2023-06-07', 'active'),
+(120, 102, '2023-05-31', '2023-06-07', 'active'),
+(121, 116, '2023-05-31', '2023-06-07', 'active'),
+(125, 116, '2023-05-31', '2023-06-07', 'active'),
+(132, 103, '2023-05-31', '2023-06-07', 'active'),
+(133, 118, '2023-05-31', '2023-06-07', 'active'),
+(134, 118, '2023-05-31', '2023-06-07', 'active'),
+(137, 117, '2023-05-31', '2023-06-07', 'active'),
+(140, 117, '2023-05-31', '2023-06-07', 'active'),
+(143, 119, '2023-05-31', '2023-06-07', 'active'),
+(146, 119, '2023-05-31', '2023-06-07', 'active'),
+(147, 120, '2023-05-31', '2023-06-07', 'active'),
+(149, 120, '2023-05-31', '2023-06-07', 'active');

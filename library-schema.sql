@@ -212,7 +212,7 @@ BEGIN
              WHERE stud_prof_id = stud_prof_id_
              AND CURDATE() BETWEEN  borrowing_date AND return_date) >= 1
              AND CURDATE() BETWEEN borrowing_date_ AND return_date_) THEN
-      		SET error_message = CONCAT('You have reached your limit of 1 borrowing per week. stud_prof_id: ', stud_prof_id_, ' ', borrowing_date_,' ', return_date_);
+      		SET error_message = 'You have reached your limit of 1 borrowing per week.';
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;	
 	ELSEIF
   	  	((SELECT COUNT(stud_prof_id)
@@ -220,19 +220,20 @@ BEGIN
       	 	WHERE stud_prof_id = stud_prof_id_
         	AND actual_return_date IS NULL
         	AND CURDATE() > return_date) >= 1 AND DATEDIFF(CURDATE(), borrowing_date_) <= 7) THEN
-		    SET error_message = CONCAT('Oops, You have an overdue book. stud_prof_id: ', stud_prof_id_, ' ', borrowing_date_,' ', return_date_, ' ', book_id_);
+		    SET error_message = 'Oops, You have an overdue book.';
 		    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
 	ELSEIF
         	((SELECT available_copies
         	FROM book
         	WHERE book_id = book_id_) = 0 AND DATEDIFF(CURDATE(), borrowing_date_) <= 7) THEN
-        	SET error_message = CONCAT('The selected book is not available.', stud_prof_id_, ' ', borrowing_date_,' ', return_date_);
+        	SET error_message = 'The selected book is not available.';
         	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
 	ELSEIF
 		book_id_ IN (SELECT book_id FROM book_borrowing WHERE stud_prof_id = stud_prof_id_ AND CURDATE() BETWEEN borrowing_date AND return_date) THEN
-	        SET error_message = CONCAT('You are not allowed to borrow an already borrowed book.', stud_prof_id_, ' ', borrowing_date_,' ', return_date_);
+	        SET error_message = 'You are not allowed to borrow an already borrowed book.';
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;	
-	ELSE
+	ELSEIF
+		actual_return_date_ IS NULL THEN
 		UPDATE book SET available_copies = available_copies - 1 WHERE book_id = book_id_ AND available_copies > 0;
         END IF;
 END $$
@@ -248,7 +249,7 @@ BEGIN
              WHERE stud_prof_id = stud_prof_id_
              AND CURDATE() BETWEEN  borrowing_date AND return_date) >= 2
              AND CURDATE() BETWEEN borrowing_date_ AND return_date_) THEN
-                SET error_message = CONCAT('You have reached your limit of 2 borrowings per week. stud_prof_id: ', stud_prof_id_, ' ', borrowing_date_,' ', return_date_);
+                SET error_message = 'You have reached your limit of 2 borrowings per week.';
                 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
         ELSEIF
                 ((SELECT COUNT(stud_prof_id)
@@ -256,19 +257,20 @@ BEGIN
                 WHERE stud_prof_id = stud_prof_id_
                 AND actual_return_date IS NULL
                 AND CURDATE() > return_date) >= 1 AND DATEDIFF(CURDATE(), borrowing_date_) <= 7) THEN
-                    SET error_message = CONCAT('Oops, You have an overdue book. stud_prof_id: ', stud_prof_id_, ' ', borrowing_date_,' ', return_date_, ' ', book_id_);
+                    SET error_message = 'Oops, You have an overdue book.';
                     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
         ELSEIF
                 ((SELECT available_copies
                 FROM book
                 WHERE book_id = book_id_) = 0 AND DATEDIFF(CURDATE(), borrowing_date_) <= 7) THEN
-                SET error_message = CONCAT('The selected book is not available.', stud_prof_id_, ' ', borrowing_date_,' ', return_date_);
+                SET error_message = 'The selected book is not available.';
                 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
 	ELSEIF
                 book_id_ IN (SELECT book_id FROM book_borrowing WHERE stud_prof_id = stud_prof_id_ AND CURDATE() BETWEEN borrowing_date AND return_date) THEN               
-                SET error_message = CONCAT('You are not allowed to borrow an already borrowed book', stud_prof_id_, ' ', borrowing_date_,' ', return_date_);
+                SET error_message = 'You are not allowed to borrow an already borrowed book';
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
-	ELSE 
+	ELSEIF
+	        actual_return_date_ IS NULL THEN  	
 		UPDATE book SET available_copies = available_copies - 1 WHERE book_id = book_id_ AND available_copies > 0;
 
         END IF;
@@ -286,7 +288,7 @@ BEGIN
 	     AND status = 'active'
              AND CURDATE() BETWEEN  reservation_date AND expiry_date) >= 1
              AND CURDATE() BETWEEN reservation_date_ AND expiry_date_) THEN
-                SET error_message = CONCAT('You have reached your limit of 1 reservation per week. stud_prof_id: ', stud_prof_id_, ' ', reservation_date_,' ', expiry_date_);
+                SET error_message = 'You have reached your limit of 1 reservation per week.';
                 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
         ELSEIF
                 (SELECT COUNT(stud_prof_id)
@@ -294,11 +296,11 @@ BEGIN
                 WHERE stud_prof_id = stud_prof_id_
                 AND actual_return_date IS NULL
                 AND CURDATE() > return_date) >= 1 THEN
-                    SET error_message = CONCAT('Oops, You have an overdue book. stud_prof_id: ', stud_prof_id_, ' ', reservation_date_,' ', expiry_date_, ' ', book_id_);
+                    SET error_message = 'Oops, You have an overdue book.';
                     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
         ELSEIF
                 book_id_ IN (SELECT book_id FROM book_borrowing WHERE stud_prof_id = stud_prof_id_ AND CURDATE() BETWEEN borrowing_date AND return_date) THEN
-                SET error_message = CONCAT('You are not allowed to reserve an already borrowed book.', stud_prof_id_, ' ', borrowing_date_,' ', return_date_);
+                SET error_message = 'You are not allowed to reserve an already borrowed book.';
                 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
         END IF;
 END $$
@@ -315,7 +317,7 @@ BEGIN
 	     AND status = 'active'
              AND CURDATE() BETWEEN  reservation_date AND expiry_date) >= 2
              AND CURDATE() BETWEEN reservation_date_ AND expiry_date_) THEN
-                SET error_message = CONCAT('You have reached your limit of 2 reservation per week. stud_prof_id: ', stud_prof_id_, ' ', reservation_date_,' ', expiry_date_);
+                SET error_message = 'You have reached your limit of 2 reservation per week.';
                 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
         ELSEIF
                 (SELECT COUNT(stud_prof_id)
@@ -323,26 +325,20 @@ BEGIN
                 WHERE stud_prof_id = stud_prof_id_
                 AND actual_return_date IS NULL
                 AND CURDATE() > return_date) >= 1 THEN
-                    SET error_message = CONCAT('Oops, You have an overdue book. stud_prof_id: ', stud_prof_id_, ' ', reservation_date_,' ', expiry_date_, ' ', book_id_);
+                    SET error_message = 'Oops, You have an overdue book. stud_prof_id: ';
                     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
         ELSEIF
                 book_id_ IN (SELECT book_id FROM book_borrowing WHERE stud_prof_id = stud_prof_id_ AND CURDATE() BETWEEN borrowing_date AND return_date) THEN
-                SET error_message = CONCAT('You are not allowed to reserve an already borrowed book.', stud_prof_id_, ' ', borrowing_date_,' ', return_date_);
+                SET error_message = 'You are not allowed to reserve an already borrowed book.';
                 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
         END IF;
 END $$
 DELIMITER ;
 
 
-
-
-
-
 --
 -- Triggers for INSERT
 --
-
-
 
 DELIMITER $$
 CREATE TRIGGER trig_book_borrowing_limitations BEFORE INSERT ON book_borrowing FOR EACH ROW
@@ -367,6 +363,72 @@ BEGIN
 	END IF;
 END $$
 DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER trig_operator_to_school_unit BEFORE INSERT ON operator FOR EACH ROW
+BEGIN
+	IF NEW.fullname IN (SELECT fullname FROM operator) THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There is already an operator with the same fullname';
+	ELSEIF 
+		NEW.school_id IN (SELECT school_id FROM operator) THEN 
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There is already an operator, who operates the same school unit ';
+	END IF;
+END $$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER trig_reviews_check BEFORE INSERT ON reviews FOR EACH ROW
+BEGIN
+	IF NEW.book_id NOT IN (SELECT book_id FROM book_borrowing WHERE stud_prof_id = NEW.stud_prof_id) THEN 
+			SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'You cannot review a book that you have never borrowed';
+	END IF;
+END $$
+DELIMITER ;
+
+
+
+--
+-- Triggers for update
+--
+
+DELIMITER $$
+CREATE TRIGGER trig_book_returned AFTER UPDATE ON book_borrowing FOR EACH ROW
+BEGIN
+	IF (OLD.actual_return_date IS NULL AND NEW.actual_return_date IS NOT NULL) THEN
+		UPDATE book SET available_copies = available_copies + 1 WHERE book_id = OLD.book_id;
+	END IF;
+END $$
+DELIMITER ;
+
+
+
+
+--
+-- View needed for reviews
+--
+CREATE VIEW show_all_reviews AS
+SELECT r.stud_prof_id, sp.fullname, b.book_id, b.title, r.rating, r.review_date, r.review_text, sp.operator_id
+FROM reviews r
+JOIN student_professor sp
+ON r.stud_prof_id = sp.stud_prof_id
+JOIN book b
+ON b.book_id = r.book_id
+WHERE r.status = 'approved';
+
+--
+-- Procedure needed for reviews
+--
+DELIMITER $$
+CREATE PROCEDURE show_reviews_school_unit(IN stud_prof_id_ SMALLINT)
+BEGIN
+	SELECT fullname, title, rating, review_date, review_text
+	FROM show_all_reviews 
+	WHERE operator_id = (SELECT operator_id FROM student_professor WHERE stud_prof_id = stud_prof_id_);
+END $$
+DELIMITER ;
+
 
 
 
@@ -913,3 +975,8 @@ BEGIN
 END $$
 DELIMITER ;
 
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
