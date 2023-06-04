@@ -23,6 +23,19 @@ ALTER TABLE `reservations` auto_increment = 1;
 ALTER TABLE `reviews` auto_increment = 1;
 
 --
+-- Insert 8 school_operators
+--
+INSERT INTO operator(fullname,username,password,email,phone_number,school_id,administrator_id) VALUES
+        ('Dora Panteli', 'kristin60', '12', 'romerolance@example.org','(870)747-9717','1','1'),
+        ('Panagiotis Giadikiaroglou', 'jhill', '123', 'dennisrusso@example.com','9671127828','2','1'),
+        ('Alexandros Emmanouilidis', 'eatonjonathan', '@0_I%ywv7T', 'kristiadams@example.net','342-283-3779x424','3','1'),
+        ('Thomas Walkup', 'qfernandez', 'r+QKo2wP*0', 'msanders@example.com','349-301-8402x47751','4','1'),
+        ('George Pappas', 'patelbrad', 'J$$kD1WBDp', 'bennettreginald@example.org','(327)763-2867x2635','5','1'),
+        ('Kaiti Provia', 'kristin93', '$A9eYCi@r9', 'danielgregory@example.org','948.817.1472','6','1'),
+        ('Michael Velalopoulos', 'brendan21', 'L8rZU*Gz_d', 'tinawong@example.com','(459)206-5360x5928','7','1'),
+        ('Beril Mckissic', 'jclark', '!@VaDTqC2z', 'danielruiz@example.org','077.982.3338','8','1');
+
+--
 -- Insert 8 school_units
 --
 INSERT INTO school_unit(school_name, address, city , school_director_full_name , library_operator_full_name, email , phone_number,administrator_id ) VALUES
@@ -34,21 +47,7 @@ INSERT INTO school_unit(school_name, address, city , school_director_full_name ,
     ('MIT' , 'Omonoias 45' ,'Kamatero','Giorgos Papagiannis','Kaiti Provia','bochou@gmail.com','2356089725',1 ),				#6
     ('UCLA','Filis 21','Tinos','Pipis Remoundos','Michael Velalopoulos','pip@otenet.gr','2423028953',1),					#7
     ('Princeton','Papagou 7','Ioannina','Charitos Giorgos','Beril Mckissic','ntats@gmail.com','2521057430',1);					#8	
-    
-
--- 
--- Insert 8 school_operators
---
-INSERT INTO operator(fullname,username,password,email,phone_number,school_id,administrator_id) VALUES
-	('Dora Panteli', 'kristin60', '12', 'romerolance@example.org','(870)747-9717','1','1'),
-	('Panagiotis Giadikiaroglou', 'jhill', '123', 'dennisrusso@example.com','9671127828','2','1'),
-	('Alexandros Emmanouilidis', 'eatonjonathan', '@0_I%ywv7T', 'kristiadams@example.net','342-283-3779x424','3','1'),
-	('Thomas Walkup', 'qfernandez', 'r+QKo2wP*0', 'msanders@example.com','349-301-8402x47751','4','1'),
-	('George Pappas', 'patelbrad', 'J$$kD1WBDp', 'bennettreginald@example.org','(327)763-2867x2635','5','1'),
-	('Kaiti Provia', 'kristin93', '$A9eYCi@r9', 'danielgregory@example.org','948.817.1472','6','1'),
-	('Michael Velalopoulos', 'brendan21', 'L8rZU*Gz_d', 'tinawong@example.com','(459)206-5360x5928','7','1'),
-	('Beril Mckissic', 'jclark', '!@VaDTqC2z', 'danielruiz@example.org','077.982.3338','8','1');
-
+ 
 --
 -- Insert 24 professors and 64 students 
 --
@@ -150,104 +149,104 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 --
 
 	INSERT INTO book(title,publisher,ISBN,number_of_pages,image,language,available_copies,summary,key_words,school_id) VALUES								
-	('The Enigmatic Conquest', 'Jessica Gray', '978-0-06-907517-1', '249','https://dummyimage.com/977x500','Basque','0','Summary 1','[language, whose, leader]','1'),                       #1   
+	('The Enigmatic Conquest', 'Jessica Gray', '978-0-06-907517-1', '249','https://dummyimage.com/977x500','Basque','1','Summary 1','[language, whose, leader]','1'),                       #1   
 	('Echoes of Destiny', 'Emily Bush', '978-0-347-91921-0', '250','https://picsum.photos/386/141','Chechen','2','Summary 2','[traditional, mother, choose]','1'),			        #2	
 	('The Whispers of Serendipity', 'Nicholas Wright', '978-1-210-19235-8', '409','https://placekitten.com/11/948','Esperanto','4','Summary 3','[usually, team, line]','1'),        	#3
-	('Shadows of Redemption', 'Harry Ramos', '978-0-6488537-8-7', '561','https://placekitten.com/766/866','Tswana','1','Summary 4','[develop, civil, pretty]','1'),				#4	
+	('Shadows of Redemption', 'Harry Ramos', '978-0-6488537-8-7', '561','https://placekitten.com/766/866','Tswana','2','Summary 4','[develop, civil, pretty]','1'),				#4	
 	('The Forgotten Prophecy', 'Savannah Wallace', '978-0-444-60556-6', '499','https://picsum.photos/401/6','Church Slavic','5','Summary 5','[goal, force, about]','1'),			#5
-	('Fragments of Eternity', 'Jerry Ortiz', '978-0-9964128-0-3', '346','https://picsum.photos/164/432','Bihari languages','0','Summary 6','[future, question, much]','1'),			#6	
-	('The Labyrinth of Secrets', 'Vincent James', '978-0-483-55770-3', '352','https://picsum.photos/676/175','Walloon','0','Summary 7','[cold, local, PM]','1'),				#7	
-	('Journey to the Unknown', 'Andrea Glover', '978-0-13-591299-7', '404','https://placekitten.com/679/251','Shona','0','Summary 8','[year, not, play]','1'),                              #8
+	('Fragments of Eternity', 'Jerry Ortiz', '978-0-9964128-0-3', '346','https://picsum.photos/164/432','Bihari languages','1','Summary 6','[future, question, much]','1'),			#6	
+	('The Labyrinth of Secrets', 'Vincent James', '978-0-483-55770-3', '352','https://picsum.photos/676/175','Walloon','1','Summary 7','[cold, local, PM]','1'),				#7	
+	('Journey to the Unknown', 'Andrea Glover', '978-0-13-591299-7', '404','https://placekitten.com/679/251','Shona','1','Summary 8','[year, not, play]','1'),                              #8
 	('Beneath the Starlit Sky', 'Scott Morris', '978-0-86907-875-4', '415','https://dummyimage.com/330x1011','Dzongkha','3','Summary 9','[want, suggest, with]','1'),                       #9
-	('The Silent Legacy', 'Carol Howard', '978-0-14-142329-6', '392','https://dummyimage.com/964x620','Lithuanian','0','Summary 10','[contain, focus, board]','1'),                         #10
+	('The Silent Legacy', 'Carol Howard', '978-0-14-142329-6', '392','https://dummyimage.com/964x620','Lithuanian','1','Summary 10','[contain, focus, board]','1'),                         #10
 	('Chronicles of the Lost Realm', 'Amanda Wang', '978-0-16-823702-9', '371','https://dummyimage.com/984x1008','Uzbek','4','Summary 11','[situation, analysis, stop]','1'),               #11
-	('A Song in the Wind', 'Michelle Bell', '978-0-942043-42-6', '485','https://dummyimage.com/977x762','Dzongkha','0','Summary 12','[memory, compare, value]','1'),                        #12
-	('The Captives Dilemma', 'Courtney Roberts', '978-0-267-25793-5', '348','https://placekitten.com/879/844','North Ndebele','5','Summary 13','[travel, energy, our]','1'),                #13
-	('Mysteries of the Unseen', 'Dawn Scott', '978-0-565-71777-3', '498','https://dummyimage.com/131x512','Kirghiz','0','Summary 14','[arrive, fund, among]','1'),                          #14
+	('A Song in the Wind', 'Michelle Bell', '978-0-942043-42-6', '485','https://dummyimage.com/977x762','Dzongkha','1','Summary 12','[memory, compare, value]','1'),                        #12
+	('The Captives Dilemma', 'Courtney Roberts', '978-0-267-25793-5', '348','https://placekitten.com/879/844','North Ndebele','4','Summary 13','[travel, energy, our]','1'),                #13
+	('Mysteries of the Unseen', 'Dawn Scott', '978-0-565-71777-3', '498','https://dummyimage.com/131x512','Kirghiz','1','Summary 14','[arrive, fund, among]','1'),                          #14
 	('The Last Voyage', 'John Rivers', '978-1-75588-762-7', '243','https://placekitten.com/510/965','French','4','Summary 15','[evidence, general, policy]','1'),                           #15
 	('The Crimson Crown', 'Kimberly Martin', '978-0-9596228-3-6', '395','https://placekitten.com/196/822','Sotho, Southern','4','Summary 16','[the, wait, fire]','1'),                      #16
-	('Whispers in the Dark', 'Gwendolyn King', '978-0-927030-95-3', '302','https://placekitten.com/547/442','Kurdish','0','Summary 17','[wide, surface, evidence]','2'),                    #17
+	('Whispers in the Dark', 'Gwendolyn King', '978-0-927030-95-3', '302','https://placekitten.com/547/442','Kurdish','1','Summary 17','[wide, surface, evidence]','2'),                    #17
 	('Sands of Time', 'Omar Bowman', '978-1-329-09305-8', '515','https://dummyimage.com/771x23','Tsonga','3','Summary 18','[close, into, food]','2'),                                       #18
-	('The Cursed Talisman', 'Renee Miller', '978-1-370-65788-9', '536','https://dummyimage.com/493x33','Czech','0','Summary 19','[everything, series, consider]','2'),                      #19
+	('The Cursed Talisman', 'Renee Miller', '978-1-370-65788-9', '536','https://dummyimage.com/493x33','Czech','1','Summary 19','[everything, series, consider]','2'),                      #19
 	('Echoes from the Abyss', 'Angela Gonzales', '978-0-413-83026-5', '203','https://placekitten.com/467/769','Kongo','3','Summary 20','[that, term, box]','2'),                            #20
 	('The Enchanted Forest', 'Deanna Hood', '978-1-60375-783-6', '282','https://picsum.photos/271/932','Bihari languages','2','Summary 21','[change, condition, into]','2'),                #21
-	('The Crystal Key', 'Mary Baker', '978-1-284-24911-8', '221','https://picsum.photos/246/486','Korean','0','Summary 22','[task, worry, continue]','2'),                                  #22
+	('The Crystal Key', 'Mary Baker', '978-1-284-24911-8', '221','https://picsum.photos/246/486','Korean','1','Summary 22','[task, worry, continue]','2'),                                  #22
 	('The Midnight Chronicles', 'Tracy Stark', '978-0-8303-2913-7', '506','https://placekitten.com/1004/690','Corsican','4','Summary 23','[future, commercial, trouble]','2'),              #23
 	('Secrets of the Forbidden City', 'Pamela Herrera', '978-0-275-57482-6', '231','https://picsum.photos/898/414','South Ndebele','4','Summary 24','[to, fish, their]','2'),               #24
 	('Legends of the Moonstone', 'Lisa French', '978-1-56313-725-9', '153','https://picsum.photos/777/963','Kurdish','5','Summary 25','[number, site, detail]','2'),                        #25
-	('The Stolen Heirloom', 'Andrew Chavez', '978-1-912138-63-0', '324','https://picsum.photos/615/91','Romansh','0','Summary 26','[method, heart, experience]','2'),                       #26
+	('The Stolen Heirloom', 'Andrew Chavez', '978-1-912138-63-0', '324','https://picsum.photos/615/91','Romansh','1','Summary 26','[method, heart, experience]','2'),                       #26
 	('Echoes of the Forgotten', 'Jessica Moore', '978-1-06-085903-6', '594','https://placekitten.com/753/860','Kongo','4','Summary 27','[magazine, evidence, generation]','2'),             #27
 	('The Lost Kingdom', 'Jason Murphy', '978-1-69421-685-4', '323','https://placekitten.com/451/513','Afar','3','Summary 28','[according, computer, time]','2'),                           #28
-	('Whispers of Betrayal', 'Hailey Cook', '978-0-930961-73-2', '187','https://placekitten.com/574/40','Ido','0','Summary 29','[score, recognize, must]','2'),                             #29
+	('Whispers of Betrayal', 'Hailey Cook', '978-0-930961-73-2', '187','https://placekitten.com/574/40','Ido','1','Summary 29','[score, recognize, must]','2'),                             #29
 	('The Ruby Amulet', 'Daniel Powers', '978-1-193-67551-0', '365','https://picsum.photos/936/461','Sango','4','Summary 30','[move, check, news]','2'),                                    #30
 	('The Vanishing', 'Heather Patterson', '978-0-532-32904-6', '125','https://picsum.photos/849/621','Kikuyu','4','Summary 31','[dark, probably, break]','2'),                             #31
 	('The Hidden Path', 'Jason Mueller', '978-0-943794-64-8', '123','https://dummyimage.com/43x157','Swahili','4','Summary 32','[care, old, require]','2'),                                 #32
-	('Sins of the Past', 'Travis Wilson', '978-0-15-903002-8', '122','https://placekitten.com/145/273','Nauru','0','Summary 33','[number, important, stand]','2'),                          #33
+	('Sins of the Past', 'Travis Wilson', '978-0-15-903002-8', '122','https://placekitten.com/145/273','Nauru','1','Summary 33','[number, important, stand]','2'),                          #33
 	('The Shattered Mirror', 'Kimberly Sparks', '978-1-02-533213-0', '251','https://dummyimage.com/914x810','Armenian','5','Summary 34','[public, world, can]','2'),                        #34
 	('The Dark Prophecy', 'Michael Anderson', '978-1-64207-421-5', '318','https://dummyimage.com/809x255','Kirghiz','3','Summary 35','[end, open, capital]','3'),                           #35
-	('The Secret Society', 'Carla Price', '978-0-589-05008-5', '329','https://picsum.photos/196/487','Persian','0','Summary 36','[majority, brother, bring]','3'),                          #36
+	('The Secret Society', 'Carla Price', '978-0-589-05008-5', '329','https://picsum.photos/196/487','Persian','1','Summary 36','[majority, brother, bring]','3'),                          #36
 	('The Isle of Whispers', 'Selena Williams', '978-1-4058-8810-3', '450','https://dummyimage.com/634x434','Northern Sami','5','Summary 37','[clearly, film, figure]','3'),                #37
-	('The Forsaken Tower', 'Matthew Wong', '978-0-15-373721-3', '314','https://picsum.photos/453/622','Maori','0','Summary 38','[surface, same, type]','3'),                                #38
-	('Echoes of the Past', 'Melinda Torres', '978-0-642-10758-9', '457','https://dummyimage.com/667x204','Ukrainian','0','Summary 39','[seek, second, where]','3'),                         #39
+	('The Forsaken Tower', 'Matthew Wong', '978-0-15-373721-3', '314','https://picsum.photos/453/622','Maori','1','Summary 38','[surface, same, type]','3'),                                #38
+	('Echoes of the Past', 'Melinda Torres', '978-0-642-10758-9', '457','https://dummyimage.com/667x204','Ukrainian','1','Summary 39','[seek, second, where]','3'),                         #39
 	('The Cursed Relic', 'Lynn Hicks', '978-0-87157-993-5', '366','https://dummyimage.com/636x134','Pali','1','Summary 40','[technology, movie, guy]','3'),                                 #40
 	('Whispers in the Mist', 'Mark Ray', '978-1-993507-70-7', '146','https://placekitten.com/468/571','Arabic','2','Summary 41','[magazine, class, hospital]','3'),                         #41
 	('The Shadows Embrace', 'Olivia Hughes', '978-1-5106-7905-4', '226','https://dummyimage.com/90x0','Norwegian','4','Summary 42','[business, develop, car]','3'),                         #42
 	('The Emerald Crown', 'Alexander Wright', '978-0-9622937-9-5', '467','https://placekitten.com/861/565','Ndonga','4','Summary 43','[gun, born, could]','3'),                             #43
-	('The Enigma of Time', 'Crystal Dickerson', '978-0-269-70812-1', '483','https://dummyimage.com/795x600','Kuanyama','0','Summary 44','[human, art, as]','3'),                            #44
+	('The Enigma of Time', 'Crystal Dickerson', '978-0-269-70812-1', '483','https://dummyimage.com/795x600','Kuanyama','1','Summary 44','[human, art, as]','3'),                            #44
 	('The Silent Sentinel', 'Kaitlyn Salinas', '978-0-87884-792-1', '401','https://placekitten.com/639/617','Guarani','3','Summary 45','[save, vote, deep]','3'),                           #45
 	('Secrets of the Crystal Cave', 'John Jones', '978-0-09-329820-1', '586','https://dummyimage.com/51x131','Ndonga','4','Summary 46','[cut, explain, little]','3'),                       #46
 	('The Chosen One', 'Nicole Wolf', '978-0-442-23609-0', '379','https://placekitten.com/899/739','Italian','5','Summary 47','[save, view, could]','3'),                                   #47
-	('The Forgotten City', 'Marcus Carrillo', '978-0-633-65851-9', '424','https://picsum.photos/735/594','Malay','0','Summary 48','[west, three, entire]','3'),                             #48
+	('The Forgotten City', 'Marcus Carrillo', '978-0-633-65851-9', '424','https://picsum.photos/735/594','Malay','1','Summary 48','[west, three, entire]','3'),                             #48
 	('The Veil of Secrets', 'Hayley Hernandez', '978-0-9895823-4-6', '207','https://placekitten.com/268/688','Maori','3','Summary 49','[cause, compare, as]','3'),                          #49
-	('The Hidden Scroll', 'Rebecca Smith', '978-1-4061-4742-1', '229','https://picsum.photos/863/985','North Ndebele','0','Summary 50','[change, raise, hard]','3'),                        #50
+	('The Hidden Scroll', 'Rebecca Smith', '978-1-4061-4742-1', '229','https://picsum.photos/863/985','North Ndebele','1','Summary 50','[change, raise, hard]','3'),                        #50
 	('The Lost Chronicles', 'Bonnie Aguilar', '978-1-107-05031-0', '501','https://picsum.photos/112/272','Inupiaq','2','Summary 51','[point, personal, enter]','3'),                        #51
 	('Echoes from Beyond', 'Michael Acevedo', '978-1-294-97686-8', '111','https://placekitten.com/857/272','Western Frisian','5','Summary 52','[job, protect, something]','3'),             #52
-	('The Phantoms Curse', 'Franklin Henry', '978-1-948906-39-5', '206','https://picsum.photos/903/95','Nauru','0','Summary 53','[discuss, industry, commercial]','4'),                     #53
+	('The Phantoms Curse', 'Franklin Henry', '978-1-948906-39-5', '206','https://picsum.photos/903/95','Nauru','1','Summary 53','[discuss, industry, commercial]','4'),                     #53
 	('The Enchanted Manuscript', 'Belinda Spencer', '978-0-8041-4171-0', '322','https://dummyimage.com/686x115','Norwegian Nynorsk','5','Summary 54','[system, name, trade]','4'),          #54
-	('Whispers of the Heart', 'David Brooks', '978-1-933024-97-4', '339','https://placekitten.com/406/85','Gujarati','0','Summary 55','[boy, choose, within]','4'),                         #55
+	('Whispers of the Heart', 'David Brooks', '978-1-933024-97-4', '339','https://placekitten.com/406/85','Gujarati','1','Summary 55','[boy, choose, within]','4'),                         #55
 	('The Timekeepers Legacy', 'John Taylor', '978-0-17-926641-4', '493','https://dummyimage.com/461x512','Ojibwa','5','Summary 56','[reason, stuff, since]','4'),                          #56
 	('The Forgotten Land', 'Brianna Williams', '978-1-4954-1113-7', '565','https://picsum.photos/212/217','Russian','3','Summary 57','[heavy, catch, after]','4'),                          #57
 	('The Crystal Labyrinth', 'Jeremy Evans', '978-1-4542-9742-0', '523','https://dummyimage.com/725x20','Fijian','5','Summary 58','[point, action, course]','4'),                          #58
 	('The Crimson Rose', 'James Anderson', '978-1-4717-8771-3', '543','https://picsum.photos/270/537','Sardinian','3','Summary 59','[need, think, event]','4'),                             #59
-	('The Ghost of Avalon', 'Anna Anderson', '978-0-680-46309-8', '146','https://placekitten.com/157/76','Gujarati','0','Summary 60','[crime, blue, more]','4'),                            #60
-	('The Guardians Quest', 'Jeremy Hurley', '978-1-214-72869-0', '426','https://dummyimage.com/383x623','Slovak','0','Summary 61','[rest, small, draw]','4'),                              #61
+	('The Ghost of Avalon', 'Anna Anderson', '978-0-680-46309-8', '146','https://placekitten.com/157/76','Gujarati','1','Summary 60','[crime, blue, more]','4'),                            #60
+	('The Guardians Quest', 'Jeremy Hurley', '978-1-214-72869-0', '426','https://dummyimage.com/383x623','Slovak','1','Summary 61','[rest, small, draw]','4'),                              #61
 	('The Lost Prophecies', 'Sarah Guerrero', '978-1-77507-417-5', '535','https://placekitten.com/408/956','Norwegian','2','Summary 62','[lot, day, either]','4'),                          #62
-	('Echoes of the Enchanter', 'Colleen Garcia', '978-0-9802512-2-7', '281','https://picsum.photos/328/278','Hausa','0','Summary 63','[wait, star, sign]','4'),                            #63
+	('Echoes of the Enchanter', 'Colleen Garcia', '978-0-9802512-2-7', '281','https://picsum.photos/328/278','Hausa','1','Summary 63','[wait, star, sign]','4'),                            #63
 	('The Whispering Woods', 'Michelle Fry', '978-1-367-37527-7', '492','https://picsum.photos/879/906','Serbian','5','Summary 64','[action, develop, mind]','4'),                          #64
 	('The Oracles Secret', 'Paul Harris', '978-0-9702698-4-3', '394','https://picsum.photos/373/330','Malay','4','Summary 65','[should, go, game]','4'),                                    #65
 	('The Haunting of Blackstone Manor', 'Anthony Smith', '978-0-01-567910-1', '181','https://placekitten.com/905/244','Tonga','2','Summary 66','[choice, happy, south]','4'),              #66
 	('The Mystics Tale', 'Keith Clarke', '978-1-69195-844-3', '376','https://dummyimage.com/11x667','Gaelic','5','Summary 67','[market, role, source]','4'),                                #67
-	('The Enchanted Kingdom', 'Mary Mcdowell', '978-0-440-16839-3', '368','https://placekitten.com/255/27','Navajo','0','Summary 68','[alone, make, future]','4'),                          #68
+	('The Enchanted Kingdom', 'Mary Mcdowell', '978-0-440-16839-3', '368','https://placekitten.com/255/27','Navajo','1','Summary 68','[alone, make, future]','4'),                          #68
 	('The Cursed Forest', 'Karen Berry', '978-0-405-76269-7', '216','https://dummyimage.com/49x509','Thai','5','Summary 69','[action, eye, agent]','4'),                                    #69
 	('The Forgotten Tome', 'Kenneth Morgan', '978-1-85344-164-6', '153','https://picsum.photos/244/692','Fulah','1','Summary 70','[form, allow, lot]','4'),                                 #70
-	('The Silent Scribe', 'Krystal Hunt', '978-1-903896-87-7', '304','https://picsum.photos/180/225','Japanese','0','Summary 71','[maintain, which, board]','4'),                           #71
+	('The Silent Scribe', 'Krystal Hunt', '978-1-903896-87-7', '304','https://picsum.photos/180/225','Japanese','1','Summary 71','[maintain, which, board]','4'),                           #71
 	('Whispers in the Shadows', 'Joshua Martinez', '978-1-136-08604-5', '350','https://dummyimage.com/681x546','Belarusian','1','Summary 72','[resource, nothing, foreign]','5'),           #72
-	('The Serpents Kiss', 'Colton Green', '978-1-83458-019-7', '377','https://placekitten.com/637/586','Albanian','0','Summary 73','[create, kitchen, police]','5'),                        #73
+	('The Serpents Kiss', 'Colton Green', '978-1-83458-019-7', '377','https://placekitten.com/637/586','Albanian','1','Summary 73','[create, kitchen, police]','5'),                        #73
 	('The Elixir of Life', 'Linda Middleton', '978-1-100-50591-6', '547','https://placekitten.com/999/825','Greek','2','Summary 74','[available, floor, including]','5'),                   #74
 	('The Lost Relic', 'Gary Weber', '978-0-00-324603-2', '356','https://placekitten.com/938/446','Serbian','5','Summary 75','[Mrs, change, small]','5'),                                   #75
 	('The Secret Alchemy', 'Deborah Hopkins', '978-0-354-82915-1', '584','https://dummyimage.com/797x644','Gaelic','5','Summary 76','[class, occur, enough]','5'),                          #76
 	('The Crimson Eye', 'Alex Elliott', '978-0-7696-1483-0', '193','https://dummyimage.com/390x616','Estonian','2','Summary 77','[individual, meet, enter]','5'),                           #77
-	('The Enigmas Riddle', 'Arthur Ryan', '978-1-62440-238-8', '295','https://picsum.photos/476/620','Walloon','0','Summary 78','[law, both, simply]','5'),                                 #78
+	('The Enigmas Riddle', 'Arthur Ryan', '978-1-62440-238-8', '295','https://picsum.photos/476/620','Walloon','1','Summary 78','[law, both, simply]','5'),                                 #78
 	('The Vanished Heiress', 'Jody Scott', '978-0-655-13545-6', '561','https://picsum.photos/16/701','Belarusian','4','Summary 79','[discuss, spring, member]','5'),                        #79
 	('The Forgotten Spell', 'Kim Alexander', '978-0-547-96884-1', '181','https://placekitten.com/841/157','Fijian','4','Summary 80','[fish, fund, majority]','5'),                          #80
-	('Echoes of Desolation', 'Angela Mccann', '978-0-9891930-0-9', '560','https://placekitten.com/612/655','Xhosa','0','Summary 81','[send, degree, another]','5'),                         #81
+	('Echoes of Desolation', 'Angela Mccann', '978-0-9891930-0-9', '560','https://placekitten.com/612/655','Xhosa','1','Summary 81','[send, degree, another]','5'),                         #81
 	('The Ivory Tower', 'James Ramsey', '978-1-5309-8156-4', '523','https://picsum.photos/78/371','Malagasy','1','Summary 82','[simple, until, station]','5'),                              #82
 	('The Hidden Chamber', 'Francisco Hendrix', '978-0-393-79576-9', '159','https://dummyimage.com/515x560','Fijian','5','Summary 83','[truth, thus, phone]','5'),                          #83
-	('The Forbidden Tome', 'Anna Lee', '978-0-911388-30-5', '291','https://placekitten.com/622/706','Maltese','0','Summary 84','[item, party, girl]','5'),                                  #84
+	('The Forbidden Tome', 'Anna Lee', '978-0-911388-30-5', '291','https://placekitten.com/622/706','Maltese','1','Summary 84','[item, party, girl]','5'),                                  #84
 	('The Lost Symphony', 'Mark Cooley', '978-1-4648-0993-4', '583','https://dummyimage.com/455x190','Catalan','1','Summary 85','[hit, hospital, which]','5'),                              #85
-	('Whispers of Wisdom', 'Jordan Perez', '978-1-927831-41-0', '424','https://placekitten.com/947/583','Samoan','0','Summary 86','[ten, in, phone]','5'),                                  #86
+	('Whispers of Wisdom', 'Jordan Perez', '978-1-927831-41-0', '424','https://placekitten.com/947/583','Samoan','1','Summary 86','[ten, in, phone]','5'),                                  #86
 	('The Haunted Manor', 'Johnny Walsh', '978-0-17-841274-4', '457','https://placekitten.com/806/733','Portuguese','5','Summary 87','[data, room, pretty]','5'),                           #87
 	('The Chalice of Secrets', 'Matthew Thomas', '978-1-72460-134-6', '140','https://picsum.photos/609/935','Esperanto','5','Summary 88','[responsibility, less, alone]','5'),              #88
-	('The Mirrors Edge', 'Matthew Stephens', '978-0-216-21360-9', '211','https://picsum.photos/114/918','Inupiaq','0','Summary 89','[federal, pattern, anything]','5'),                     #89
+	('The Mirrors Edge', 'Matthew Stephens', '978-0-216-21360-9', '211','https://picsum.photos/114/918','Inupiaq','1','Summary 89','[federal, pattern, anything]','5'),                     #89
 	('The Silent Cavern', 'Judy Clark', '978-0-04-072377-0', '185','https://placekitten.com/392/103','Tatar','5','Summary 90','[strong, better, any]','5'),                                 #90
 	('The Shrouded Enigma', 'Adrienne Hernandez', '978-1-4733-0435-2', '289','https://dummyimage.com/127x95','Sanskrit','4','Summary 91','[cold, religious, somebody]','6'),                #91
-	('The Enchanted Isle', 'Sharon Nelson', '978-1-128-23077-7', '212','https://picsum.photos/126/113','Ossetian','0','Summary 92','[property, five, conference]','6'),                     #92
+	('The Enchanted Isle', 'Sharon Nelson', '978-1-128-23077-7', '212','https://picsum.photos/126/113','Ossetian','1','Summary 92','[property, five, conference]','6'),                     #92
 	('The Phantoms Embrace', 'Katherine Caldwell', '978-0-325-89250-4', '385','https://placekitten.com/48/1000','Central Khmer','5','Summary 93','[wind, modern, analysis]','6'),           #93
 	('The Forgotten Empire', 'Jennifer Campbell', '978-1-69655-493-0', '405','https://dummyimage.com/643x534','Urdu','3','Summary 94','[above, spend, left]','6'),                          #94
-	('The Cursed Curse', 'Denise Moore', '978-1-5040-4043-3', '358','https://picsum.photos/709/147','Oromo','0','Summary 95','[painting, forward, member]','6'),                            #95
-	('Whispers in the Moonlight', 'Ricky Watson', '978-0-581-28105-0', '154','https://picsum.photos/640/397','Lingala','0','Summary 96','[peace, people, discussion]','6'),                 #96
-	('The Shadowed Legacy', 'Corey Kim', '978-1-05-379185-5', '121','https://placekitten.com/47/501','Uzbek','0','Summary 97','[likely, look, finally]','6'),                               #97
-	('The Mystics Prophecy', 'Justin Smith', '978-1-232-27397-4', '306','https://placekitten.com/830/296','Slovenian','0','Summary 98','[just, no, program]','6'),                          #98
+	('The Cursed Curse', 'Denise Moore', '978-1-5040-4043-3', '358','https://picsum.photos/709/147','Oromo','1','Summary 95','[painting, forward, member]','6'),                            #95
+	('Whispers in the Moonlight', 'Ricky Watson', '978-0-581-28105-0', '154','https://picsum.photos/640/397','Lingala','1','Summary 96','[peace, people, discussion]','6'),                 #96
+	('The Shadowed Legacy', 'Corey Kim', '978-1-05-379185-5', '121','https://placekitten.com/47/501','Uzbek','1','Summary 97','[likely, look, finally]','6'),                               #97
+	('The Mystics Prophecy', 'Justin Smith', '978-1-232-27397-4', '306','https://placekitten.com/830/296','Slovenian','1','Summary 98','[just, no, program]','6'),                          #98
 	('The Vanishing Spell', 'Jason Espinoza', '978-1-00-787817-5', '211','https://placekitten.com/605/535','Bosnian','4','Summary 99','[consider, role, news]','6'),                        #99
 	('The Forbidden Scroll', 'Deborah Sanchez', '978-0-7628-7347-0', '460','https://picsum.photos/296/298','Italian','4','Summary 100','[last, all, western]','6'),                         #100
         ('The Iliad', 'Danielle Montgomery', '978-1-86116-860-3', '579','https://placekitten.com/595/311','Italian','1','Summary 101','[only, health, take]','6'),                              #101
@@ -256,7 +255,7 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 	('1984', 'Veronica Pitts', '978-0-457-14463-2', '104','https://placekitten.com/979/904','Latvian','5','Summary 104','[popular, ahead, book]','6'),                                      #104
 	('Pride and Prejudice', 'Roger Adams', '978-0-284-49466-5', '564','https://placekitten.com/779/918','Yoruba','4','Summary 105','[allow, opportunity, call]','6'),                       #105
 	('The Catcher in the Rye', 'Erik Guerra', '978-0-596-10233-3', '403','https://placekitten.com/208/433','Croatian','3','Summary 106','[particular, crime, design]','6'),                 #106
-	('The Lord of the Rings', 'Jeffrey Suarez', '978-0-591-47926-3', '227','https://picsum.photos/332/692','Luxembourgish','0','Summary 107','[morning, the, follow]','6'),                 #107
+	('The Lord of the Rings', 'Jeffrey Suarez', '978-0-591-47926-3', '227','https://picsum.photos/332/692','Luxembourgish','1','Summary 107','[morning, the, follow]','6'),                 #107
 	('Harry Potter and the Sorcerers Stone', 'Kristy Thomas', '978-1-61944-159-0', '339','https://picsum.photos/909/492','Gujarati','5','Summary 108','[material, during, give]','6'),      #108
 	('The Chronicles of Narnia', 'Diana Sweeney', '978-0-8089-7801-5', '112','https://picsum.photos/895/255','Sinhala','3','Summary 109','[around, million, all]','6'),                     #109
 	('Moby-Dick', 'Eric Baker', '978-1-9831-5247-4', '104','https://dummyimage.com/83x480','Telugu','5','Summary 110','[all, scene, consumer]','6'),                                        #110
@@ -266,39 +265,39 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 	('Brave New World', 'Stephanie Gibson', '978-0-405-57558-7', '493','https://placekitten.com/799/1019','Marathi','4','Summary 114','[human, two, dark]','7'),                            #114
 	('Animal Farm', 'Elizabeth Holt', '978-1-75838-466-6', '193','https://dummyimage.com/851x487','Tamil','2','Summary 115','[fear, themselves, every]','7'),                               #115
 	('Gone with the Wind', 'Natasha Griffin', '978-0-8319-2975-6', '488','https://picsum.photos/414/464','Armenian','4','Summary 116','[beyond, Mrs, color]','7'),                          #116
-	('The Hunger Games', 'Miss Jennifer Sanchez', '978-0-18-558257-7', '325','https://placekitten.com/593/874','Maori','0','Summary 117','[huge, goal, certainly]','7'),                    #117
+	('The Hunger Games', 'Miss Jennifer Sanchez', '978-0-18-558257-7', '325','https://placekitten.com/593/874','Maori','1','Summary 117','[huge, goal, certainly]','7'),                    #117
 	('The Da Vinci Code', 'David Lawson', '978-0-9766801-9-2', '428','https://dummyimage.com/780x516','Croatian','2','Summary 118','[what, evening, experience]','7'),                      #118
 	('The Hitchhikers Guide to the Galaxy', 'Stephanie Chang', '978-0-679-56923-7', '531','https://dummyimage.com/422x608','Azerbaijani','4','Summary 119','[I, easy, among]','7'),         #119
-	('The Shining', 'Kimberly Vaughn', '978-0-7212-8432-3', '140','https://dummyimage.com/232x776','Javanese','0','Summary 120','[democratic, guy, move]','7'),                             #120
-	('The Picture of Dorian Gray', 'Kathleen Nguyen', '978-0-237-34038-4', '170','https://placekitten.com/543/466','Aragonese','0','Summary 121','[project, fund, set]','7'),               #121
+	('The Shining', 'Kimberly Vaughn', '978-0-7212-8432-3', '140','https://dummyimage.com/232x776','Javanese','1','Summary 120','[democratic, guy, move]','7'),                             #120
+	('The Picture of Dorian Gray', 'Kathleen Nguyen', '978-0-237-34038-4', '170','https://placekitten.com/543/466','Aragonese','1','Summary 121','[project, fund, set]','7'),               #121
 	('Fahrenheit 451', 'Sara Gibson', '978-0-384-08996-9', '451','https://picsum.photos/559/167','Yiddish','5','Summary 122','[style, choice, nature]','7'),                                #122
 	('Jane Eyre', 'Dr. Briana Love', '978-0-269-44981-9', '587','https://dummyimage.com/888x15','Amharic','3','Summary 123','[peace, might, lot]','7'),                                     #123
 	('The Odyssey', 'Alicia Ball', '978-1-313-08987-6', '212','https://placekitten.com/623/880','Kikuyu','2','Summary 124','[always, technology, fire]','7'),                               #124
-	('The Divine Comedy', 'Michael Fisher', '978-1-158-90730-4', '245','https://placekitten.com/349/270','Tsonga','0','Summary 125','[money, carry, near]','7'),                            #125
+	('The Divine Comedy', 'Michael Fisher', '978-1-158-90730-4', '245','https://placekitten.com/349/270','Tsonga','1','Summary 125','[money, carry, near]','7'),                            #125
 	('The Girl with the Dragon Tattoo', 'Tracy Warren', '978-0-7036-9928-2', '242','https://placekitten.com/679/968','Kuanyama','5','Summary 126','[lot, today, way]','7'),                 #126
 	('The Kite Runner', 'John Dixon', '978-0-926850-14-9', '229','https://picsum.photos/628/36','Kinyarwanda','3','Summary 127','[rule, appear, manage]','7'),                              #127
 	('The Handmaids Tale', 'Kelly Sharp', '978-1-946517-33-3', '571','https://placekitten.com/912/939','Albanian','3','Summary 128','[result, anything, middle]','7'),                      #128
 	('The Book Thief', 'Robert Bell', '978-1-5041-3274-9', '385','https://placekitten.com/583/977','Croatian','3','Summary 129','[despite, vote, for]','7'),                                #129
 	('The Color Purple', 'Anthony Lawson', '978-0-86530-743-8', '104','https://placekitten.com/286/67','Afar','5','Summary 130','[their, key, certain]','7'),                               #130
 	('The Sun Also Rises', 'Thomas Nelson', '978-1-82429-852-1', '208','https://dummyimage.com/830x48','Tswana','2','Summary 131','[matter, nation, food]','8'),                            #131
-	('Catch-22', 'Dustin Castillo', '978-0-535-02311-8', '240','https://placekitten.com/607/323','Breton','0','Summary 132','[notice, I, walk]','8'),                                       #132
-	('The Adventures of Huckleberry Finn', 'Jeff Cruz', '978-1-09-161877-0', '241','https://placekitten.com/988/689','Avaric','0','Summary 133','[doctor, than, bag]','8'),                 #133
-	('One Hundred Years of Solitude', 'Joseph Merritt', '978-1-268-21158-2', '275','https://placekitten.com/107/455','Wolof','0','Summary 134','[surface, article, church]','8'),           #134
+	('Catch-22', 'Dustin Castillo', '978-0-535-02311-8', '240','https://placekitten.com/607/323','Breton','1','Summary 132','[notice, I, walk]','8'),                                       #132
+	('The Adventures of Huckleberry Finn', 'Jeff Cruz', '978-1-09-161877-0', '241','https://placekitten.com/988/689','Avaric','1','Summary 133','[doctor, than, bag]','8'),                 #133
+	('One Hundred Years of Solitude', 'Joseph Merritt', '978-1-268-21158-2', '275','https://placekitten.com/107/455','Wolof','1','Summary 134','[surface, article, church]','8'),           #134
 	('Beloved', 'Michael Mccormick', '978-0-8112-5953-8', '102','https://picsum.photos/813/654','Ganda','4','Summary 135','[chance, conference, instead]','8'),                             #135
 	('Frankenstein', 'Susan Martin', '978-1-03-751378-7', '429','https://placekitten.com/814/301','Galician','1','Summary 136','[tend, possible, economy]','8'),                            #136
-	('The Scarlet Letter', 'Angel Cross', '978-1-86683-146-5', '222','https://picsum.photos/886/149','Bislama','0','Summary 137','[after, response, institution]','8'),                     #137
+	('The Scarlet Letter', 'Angel Cross', '978-1-86683-146-5', '222','https://picsum.photos/886/149','Bislama','1','Summary 137','[after, response, institution]','8'),                     #137
 	('The Grapes of Wrath', 'Derek Snow', '978-1-208-38579-3', '474','https://placekitten.com/1013/92','Cree','4','Summary 138','[education, organization, without]','8'),                  #138
 	('War and Peace', 'Lucas Nicholson', '978-0-624-60307-8', '382','https://placekitten.com/207/465','Pushto','2','Summary 139','[entire, scientist, structure]','8'),                     #139
-	('The Count of Monte Cristo', 'Haley Chavez', '978-1-05-092821-6', '145','https://dummyimage.com/102x70','Korean','0','Summary 140','[scene, PM, sign]','8'),                           #140
+	('The Count of Monte Cristo', 'Haley Chavez', '978-1-05-092821-6', '145','https://dummyimage.com/102x70','Korean','1','Summary 140','[scene, PM, sign]','8'),                           #140
 	('Pride and Prejudice', 'Patricia Harris', '978-1-04-383414-2', '298','https://placekitten.com/846/742','Indonesian','4','Summary 141','[story, idea, south]','8'),                     #141
 	('Don Quixote', 'Douglas Parsons', '978-1-195-03759-0', '299','https://placekitten.com/289/530','Pali','4','Summary 142','[itself, conference, I]','8'),                                #142
-	('Wuthering Heights', 'Monique Fernandez', '978-1-5422-0689-1', '371','https://placekitten.com/584/622','North Ndebele','0','Summary 143','[full, various, write]','8'),                #143
+	('Wuthering Heights', 'Monique Fernandez', '978-1-5422-0689-1', '371','https://placekitten.com/584/622','North Ndebele','1','Summary 143','[full, various, write]','8'),                #143
 	('The Lord of the Flies', 'Richard Jackson', '978-1-7339787-0-5', '595','https://picsum.photos/18/751','Afrikaans','1','Summary 144','[ball, something, carry]','8'),                   #144
 	('The Outsiders', 'Tonya Walton', '978-1-205-20605-3', '273','https://dummyimage.com/702x86','Haitian','5','Summary 145','[simply, memory, let]','8'),                                  #145
-	('A Tale of Two Cities', 'Larry House', '978-1-69524-770-3', '535','https://picsum.photos/251/725','Norwegian','0','Summary 146','[heavy, realize, dinner]','8'),                       #146
-	('The Secret Garden', 'Nicholas Turner', '978-0-219-06219-8', '578','https://placekitten.com/294/5','Basque','0','Summary 147','[tough, media, entire]','8'),                           #147
+	('A Tale of Two Cities', 'Larry House', '978-1-69524-770-3', '535','https://picsum.photos/251/725','Norwegian','1','Summary 146','[heavy, realize, dinner]','8'),                       #146
+	('The Secret Garden', 'Nicholas Turner', '978-0-219-06219-8', '578','https://placekitten.com/294/5','Basque','1','Summary 147','[tough, media, entire]','8'),                           #147
 	('The Little Prince', 'Martin Chang', '978-0-291-44742-5', '140','https://dummyimage.com/534x919','Ndonga','4','Summary 148','[race, special, music]','8'),                             #148
-	('Les Misérables', 'Robert Durham', '978-1-334-82090-8', '350','https://placekitten.com/998/831','Fulah','0','Summary 149','[accept, throughout, own]','8'),                            #149
+	('Les Misérables', 'Robert Durham', '978-1-334-82090-8', '350','https://placekitten.com/998/831','Fulah','1','Summary 149','[accept, throughout, own]','8'),                            #149
 	('The Iliad', 'Benjamin Ramirez', '978-0-15-159300-2', '119','https://dummyimage.com/837x647','Persian','3','Summary 150','[condition, car, sport]','8');                               #150
 
 
@@ -918,13 +917,13 @@ INSERT INTO book_borrowing(borrowing_date,return_date,actual_return_date,book_id
 ('2022-02-02', '2022-02-09', '2022-02-06', 6, 28),
 ('2023-04-20', '2023-04-27', '2023-04-22', 2, 29),
 
-('2023-05-20', '2023-05-27', NULL, 10, 3),
+('2023-05-26', '2023-06-02', NULL, 10, 3),
 ('2023-04-10', '2023-04-17', NULL, 12, 27),
 ('2023-05-24', '2023-05-31', NULL, 1, 30),
 ('2023-05-10', '2023-05-17', NULL, 6, 28),
 ('2023-02-12', '2023-02-19', NULL, 7, 31),
 ('2023-04-03', '2023-04-10', NULL, 8, 2),
-('2023-01-26', '2023-02-02', NULL, 13, 3),
+('2023-05-31', '2023-06-07', NULL, 13, 1),
 ('2023-04-05', '2023-04-12', NULL, 4, 32),
 ('2023-03-09', '2023-03-16', NULL, 14, 26),
 ('2023-02-10', '2023-02-17', NULL, 11, 25),
@@ -1172,15 +1171,18 @@ INSERT INTO book_borrowing(borrowing_date,return_date,actual_return_date,book_id
 ('2021-04-17', '2021-04-24', '2021-04-30', 142, 82);
 
 
+
+
+
 --
 -- Insert 50 reservation data 
 --
 
 INSERT INTO reservations(book_id, stud_prof_id, reservation_date, expiry_date, status) VALUES
-(1, 27, '2023-05-31', '2023-06-07', 'active'), 
+(1, 29, '2023-05-31', '2023-06-07', 'active'), 
 (6, 29, '2023-05-31', '2023-06-07', 'active'),
-(7, 30, '2023-05-31', '2023-06-07', 'active'),
-(8, 28, '2023-05-31', '2023-06-07', 'active'),
+(7, 32, '2023-05-31', '2023-06-07', 'active'),
+(8, 32, '2023-05-31', '2023-06-07', 'active'),
 (10, 25, '2023-05-31', '2023-06-07', 'active'),
 (12, 26, '2023-05-31', '2023-06-07', 'active'),
 (14, 31, '2023-05-31', '2023-06-07', 'active'),
