@@ -295,9 +295,9 @@ exports.postReview = (req, res) => {
         const role = roleResult[0]?.role;
 
         if (role === 'professor') {
-          const status = 'approved'; //the reviews of the professors are published without the approval of the operator
+         status = 'approved'; //the reviews of the professors are published without the approval of the operator
         } else if (role === 'student') {
-          const status = 'not yet approved';
+         status = 'not yet approved';
         }
 
         // Query to retrieve the book_id based on title and ISBN
@@ -316,11 +316,11 @@ exports.postReview = (req, res) => {
       })
       .then(() => {
         // Redirect to a success page or perform any other necessary actions
-        res.redirect('/member_mainpage');
+        res.render('member_mainpage.ejs');
       })
       .catch(err => {
         console.error(err);
-        res.status(500).send('Internal Server Error');
+        res.render('book_not_found.ejs')
       })
       .finally(() => {
         pool.releaseConnection(conn);
@@ -328,3 +328,57 @@ exports.postReview = (req, res) => {
   });
 };
 
+exports.getMyReservations = (req, res) => {
+  // Fetch school units from the database
+  const stud_prof_id = req.session.stud_prof_id;
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
+    var sqlQuery = `SELECT bb.*, b.title
+                    FROM reservations bb
+                    JOIN book b ON bb.book_id = b.book_id
+                    WHERE bb.stud_prof_id = ${stud_prof_id}`;
+    conn.promise()
+      .query(sqlQuery)
+      .then(([results]) => {
+        console.log(results)
+        // Render the view with school units
+        res.render('my_reservations.ejs', {
+          pageTitle: 'My reservations',
+          reservations:results
+        });
+      })
+      .then(() => pool.releaseConnection(conn))
+      .catch(err => {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+      });
+  });
+};
+
+
+exports.postDeleteReservation = (req, res, next) => {
+  const reservation_id = req.body.reservation_id;
+
+  // Create the connection, execute the query, flash respective message, and redirect to the operator_mainpage route
+  pool.getConnection((err, conn) => {
+      if (err) {
+          console.error('Error getting database connection:', err);
+          req.flash('messages', { type: 'error', value: "Something went wrong, Executive could not be deleted." });
+          return res.redirect('/member_mainpage');
+      }
+
+      var sqlQuery = `DELETE FROM reservations WHERE reservation_id = ?`;
+      conn.query(sqlQuery, [reservation_id], (err, result) => {
+          conn.release();
+
+          if (err) {
+              console.error('Error executing query:', err);
+              return res.redirect('/member_mainpage');
+          }
+          res.render('member_mainpage.ejs');
+      });
+  });
+};

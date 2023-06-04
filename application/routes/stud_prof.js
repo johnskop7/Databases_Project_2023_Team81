@@ -14,5 +14,8 @@ router.get('/member_login',member_login.getLoginPage);
 router.get('/my_reviews',member_login.getMyReviewsPage);
 router.get('/add_review',member_login.getAddReviewPage);
 router.post('/submit_review',member_login.postReview);
+router.get('/my_reservations',member_login.getMyReservations);
+router.post('/delete_reservation', member_login.postDeleteReservation);
+
 
 module.exports = router;
