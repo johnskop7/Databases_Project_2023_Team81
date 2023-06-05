@@ -22,6 +22,7 @@ ALTER TABLE `student_professor` auto_increment = 1;
 ALTER TABLE `reservations` auto_increment = 1;
 ALTER TABLE `reviews` auto_increment = 1;
 
+
 --
 -- Insert 8 school_operators
 --
@@ -628,11 +629,11 @@ INSERT INTO book_thematic_categories(thematic_category,book_id) VALUES
 ('Comedy', 150);
 
 
---
--- Insert an administrator
---
-INSERT INTO administrator(username, password) VALUES 
-('admin', '123');  #1
+-- --
+-- -- Insert an administrator
+-- --
+ INSERT INTO administrator(username, password) VALUES 
+	('admin', '123');  #1
 
 
 --

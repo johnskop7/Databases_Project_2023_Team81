@@ -48,7 +48,7 @@ exports.handleLogin_member = (req, res) => {
         return res.status(500).send('Internal Server Error');
       }
       conn.promise()
-        .query('SELECT school_id, school_name FROM school_unit')
+        .query("SELECT school_id, school_name FROM school_unit WHERE status = 'approved' ")
         .then(([results]) => {
           const schoolUnits = results;
           

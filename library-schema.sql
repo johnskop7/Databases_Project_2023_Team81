@@ -924,8 +924,8 @@ BEGIN
 	IF full_name_ IS NULL AND category_ IS NULL THEN 
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'At least one field is required';
 	ELSEIF full_name_ IS NOT NULL AND category_ IS NULL THEN
-		SELECT th.fullname, AVG(th.rating) AS Average_rating
-		FROM (SELECT fullname, rating, operator_id
+		SELECT th.fullname,th.thematic_category, AVG(th.rating) AS Average_rating
+		FROM (SELECT fullname, rating, operator_id , thematic_category
 		      FROM reviews_borrowers_categories
 		      WHERE (fullname LIKE CONCAT('%', full_name_, '%'))
 		      AND operator_id = operator_id_

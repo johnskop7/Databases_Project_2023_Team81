@@ -474,7 +474,7 @@ exports.getAvgRating = (req, res) => {
           const operatorId = req.session.operatorId;
         
           pool.getConnection((err, conn) => {
-            var sqlQuery = `SELECT * FROM student_professor WHERE operator_id = ${operatorId}`;
+            var sqlQuery = `SELECT * FROM student_professor WHERE operator_id = ${operatorId} AND approval_status = 'approved' `;
             conn.promise()
               .query(sqlQuery)
               .then(([results]) => {
@@ -699,7 +699,7 @@ exports.getAvgRating = (req, res) => {
   
               if (bookResult.length === 0) {
                   req.flash('messages', { type: 'error', value: 'Book not found.' });
-                  res.render('add_borrowing.ejs');
+                  res.render('book_not_found_2.ejs');
                   return;
               }
   
@@ -739,7 +739,7 @@ exports.getAvgRating = (req, res) => {
                           if (err) {
                               console.log(err);
                               req.flash('messages', { type: 'error', value: 'Error adding the new borrowing.' });
-                              res.render('add_borrowing.ejs');
+                              res.render('invalid_book_borrowing.ejs');
                               return;
                           }
                           console.log(currentDate);
@@ -963,42 +963,43 @@ exports.UpgradetoBorrowing = (req, res, next) => {
       return;
     }
 
-    // Delete the existing reservation with the given book_id
-    const deleteReservationQuery = `DELETE FROM reservations WHERE book_id = ?`;
-    conn.query(deleteReservationQuery, [bookId], (err, deleteResult) => {
-      if (err) {
-        console.log(err);
-        req.flash('messages', { type: 'error', value: 'Error deleting the reservation.' });
-        res.render('reservations.ejs');
-        return;
-      }
+    // Get the current date
+    const currentDate = new Date();
 
-      // Get the current date
-      const currentDate = new Date();
+    // Calculate the return date (current date + 7 days)
+    const returnDate = new Date();
+    returnDate.setDate(currentDate.getDate() + 7);
 
-      // Calculate the return date (current date + 7 days)
-      const returnDate = new Date();
-      returnDate.setDate(currentDate.getDate() + 7);
+    // Insert the new borrowing into the book_borrowing table
+    const insertBorrowingQuery = `INSERT INTO book_borrowing (borrowing_date, return_date, actual_return_date, book_id, stud_prof_id) VALUES (?, ?, NULL, ?, ?)`;
+    conn.query(
+      insertBorrowingQuery,
+      [currentDate, returnDate, bookId, stud_prof_id],
+      (err, insertResult) => {
+        if (err) {
+          console.log(err);
+          req.flash('messages', { type: 'error', value: 'Error adding the new borrowing.' });
+          res.render('book_copies_expired.ejs');
+          return;
+        }
 
-      // Insert the new borrowing into the book_borrowing table
-      const insertBorrowingQuery = `INSERT INTO book_borrowing (borrowing_date, return_date, actual_return_date, book_id, stud_prof_id) VALUES (?, ?, NULL, ?, ?)`;
-      conn.query(
-        insertBorrowingQuery,
-        [currentDate, returnDate, bookId, stud_prof_id],
-        (err, insertResult) => {
+        // Delete the existing reservation with the given book_id
+        const deleteReservationQuery = `DELETE FROM reservations WHERE book_id = ? AND stud_prof_id = ${stud_prof_id}`;
+        conn.query(deleteReservationQuery, [bookId], (err, deleteResult) => {
           if (err) {
             console.log(err);
-            req.flash('messages', { type: 'error', value: 'Error adding the new borrowing.' });
-            res.render('book_copies_expired.ejs');
+            req.flash('messages', { type: 'error', value: 'Error deleting the reservation.' });
+            res.render('reservations.ejs');
             return;
           }
+
           console.log(currentDate);
 
           req.flash('messages', { type: 'success', value: 'Borrowing added successfully.' });
           res.render('operator_mainpage.ejs');
-        }
-      );
-    });
+        });
+      }
+    );
   });
 };
 
