@@ -94,7 +94,7 @@ INSERT INTO student_professor(fullname,username,password,email,phone_number,date
 	('Wendy Spence', 'victorwalker', 'uu45ID54p!', 'tammy90@example.org','+1-722-578-4375x04436','2015-08-12','student','approved','2'),                #38
 	('Monica Reyes', 'lorilewis', '&lQ5WpJb9p', 'kennedyadam@example.org','513-893-7197','2015-02-14','student','approved','2'),                        #39
 	('Linda Morales', 'cruzashley', '2_Y7hPd+Y@', 'savannah29@example.net','224.206.5675x4917','2015-01-19','student','approved','2'),                  #40
-        ('Theresa Armstrong', 'montoyamichele', '$m80CDGtrt', 'kelly28@example.com','201-783-5672','2008-09-16','student','approved','3'),                  #41
+	('Theresa Armstrong', 'montoyamichele', '$m80CDGtrt', 'kelly28@example.com','201-783-5672','2008-09-16','student','approved','3'),                  #41
 	('Kayla Webster', 'mccarthypatricia', '$(4LNvNzgN', 'nfarrell@example.org','(321)304-1185','2009-09-16','student','approved','3'),                  #42
 	('Douglas Daniel', 'wrightalexander', 'Ba0HFaTFG^', 'qnewman@example.org','(716)849-7102x4073','2008-06-10','student','approved','3'),              #43
 	('Tracey Zimmerman', 'mcneillawrence', 'i4&UTW4f+C', 'imiller@example.org','104-930-5618x977','2010-03-31','student','approved','3'),               #44
