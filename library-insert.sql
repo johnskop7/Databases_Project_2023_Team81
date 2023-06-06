@@ -24,7 +24,7 @@ ALTER TABLE `reviews` auto_increment = 1;
 
 
 --
--- Insert 8 school_operators
+-- Insert 8 approved school_operators and 1 not approved
 --
 INSERT INTO operator(fullname,username,password,operator_email,operator_phone_number,status,school_id,administrator_id) VALUES
         ('Dora Panteli', 'kristin60', '12', 'romerolance@example.org','(870)747-9717','approved','1','1'),
@@ -34,10 +34,11 @@ INSERT INTO operator(fullname,username,password,operator_email,operator_phone_nu
         ('George Pappas', 'patelbrad', 'J$$kD1WBDp', 'bennettreginald@example.org','(327)763-2867x2635','approved','5','1'),
         ('Kaiti Provia', 'kristin93', '$A9eYCi@r9', 'danielgregory@example.org','948.817.1472','approved','6','1'),
         ('Michael Velalopoulos', 'brendan21', 'L8rZU*Gz_d', 'tinawong@example.com','(459)206-5360x5928','approved','7','1'),
-        ('Beril Mckissic', 'jclark', '!@VaDTqC2z', 'danielruiz@example.org','077.982.3338','approved','8','1');
+        ('Beril Mckissic', 'jclark', '!@VaDTqC2z', 'danielruiz@example.org','077.982.3338','approved','8','1'),
+        ('Giannis Papadopoulos', 'gianp', '!@VaDTqC2z', 'danielruiz@example.org','097.982.3338','not approved','9','1');
 
 --
--- Insert 8 school_units
+-- Insert 8 approved school_units and 1 not approved
 --
 INSERT INTO school_unit(school_name, address, city , school_director_full_name , library_operator_full_name, email , phone_number,status,administrator_id ) VALUES
     ('Peparithio','Doulidou 3','Skopelos','Philipos Lemonis','Dora Panteli','apro56@otenet.gr' ,'2424022172','approved',1 ),                       	#1
@@ -47,8 +48,8 @@ INSERT INTO school_unit(school_name, address, city , school_director_full_name ,
     ('Saint-Joseph','Egnatia 34', 'Thessaloniki','Kostas Sloukas','George Pappas','larentzakis@kobra.gr','2421045678','approved',1),			#5
     ('MIT' , 'Omonoias 45' ,'Kamatero','Giorgos Papagiannis','Kaiti Provia','bochou@gmail.com','2356089725','approved',1 ),				#6
     ('UCLA','Filis 21','Tinos','Pipis Remoundos','Michael Velalopoulos','pip@otenet.gr','2423028953','approved',1),					#7
-    ('Princeton','Papagou 7','Ioannina','Charitos Giorgos','Beril Mckissic','ntats@gmail.com','2521057430','approved',1);					#8	
- 
+    ('Princeton','Papagou 7','Ioannina','Charitos Giorgos','Beril Mckissic','ntats@gmail.com','2521057430','approved',1),					#8	
+	('UNC','Papagou 9','Athens','Lelos Giorgos','Giannis Papadopoulos','ginapap@gmail.com','2541057430','not approved',1);					#9
 --
 -- Insert 24 professors and 64 students 
 --

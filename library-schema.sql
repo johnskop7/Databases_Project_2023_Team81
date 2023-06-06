@@ -93,8 +93,8 @@ CREATE TABLE borrower_card(
 	stud_prof_id SMALLINT UNSIGNED NOT NULL,
 	operator_id SMALLINT UNSIGNED NOT NULL,
 	PRIMARY KEY(card_id),
-	CONSTRAINT fk_borrower_card_student_professor FOREIGN KEY(stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-	CONSTRAINT fk_borrower_card_operator FOREIGN KEY(operator_id) REFERENCES operator(operator_id) ON DELETE RESTRICT ON UPDATE CASCADE
+	CONSTRAINT fk_borrower_card_student_professor FOREIGN KEY(stud_prof_id) REFERENCES student_professor(stud_prof_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT fk_borrower_card_operator FOREIGN KEY(operator_id) REFERENCES operator(operator_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 --
@@ -1023,7 +1023,3 @@ BEGIN
 END $$
 DELIMITER ;
 
-
--- SET SQL_MODE=@OLD_SQL_MODE;
--- SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
--- SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
